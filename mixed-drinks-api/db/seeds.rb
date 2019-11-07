@@ -685,7 +685,7 @@ penicillin = Drink.create(
 3⁄4 oz Honey-ginger syrup
 1⁄4 oz Islay single-malt scotch",
     recipe_url: "https://www.liquor.com/recipes/penicillin/#gs.ebsega",
-    additional_notes: ""
+    additional_notes: "The Penicillin is a newer drink, created in 2005."
 )
 
 # # = Drink.create(

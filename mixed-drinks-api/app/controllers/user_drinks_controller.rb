@@ -24,7 +24,7 @@ class UserDrinksController < ApplicationController
     end
 
     def flag_as_favorited
-        user_drink = UserDrink.find_by(user_id: FROM_FRONTEND, drink_id: ALSO_FROM_FRONTEND)
+        user_drink = UserDrink.find_by(user_id: FROM_FRONTEND, drink_id: ALSO_FROM_FRONTEND) #not found => nil
         # If drink exists in UserDrinks already, and is NOT favorited already, then favorite it
         if already_exists?(user_drink) && user_drink.favorited != true
             user_drink.update(favorited: true)

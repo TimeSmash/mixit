@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'sessions/create'
+  # go from most specific to most general
   get 'sessions/destory'
   resources :users
   resources :drinks

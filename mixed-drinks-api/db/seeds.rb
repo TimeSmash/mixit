@@ -32,7 +32,7 @@ brandy = "Brandy"
 cognac = "cognac"
 rum = "Rum"
 absinthe = "Absinthe"
-cachaga = "Cachaça"
+cachaca = "Cachaça"
 scotch = "Scotch"
 vermouth = "Vermouth"
 soju = "Soju"
@@ -164,14 +164,6 @@ kir_royale = Drink.create(
     additional_notes: "The Kir Royale is simply a Kir with champagne used instead of white wine.
     The addition of bubbles gives this drink a slight bite with the addition of bubbles."    
 )
-
-
-
-
-# beer as an alcohol ????
-
-
-
 
 mint_julep = Drink.create(
     name: "Mint Julep",
@@ -688,31 +680,37 @@ penicillin = Drink.create(
     additional_notes: "The Penicillin is a newer drink, created in 2005."
 )
 
-# # = Drink.create(
-# #     name: ,
-# #     alcohols: ,
-# #     flavors: ,
-# #     types: ,
-# #     color: ,
-# #     picture_url: ,
-# #     picture_credit: ,
-# #     recipe: ,
-# #     recipe_url: ,
-# #     additional_notes:
-# # )
+caipirinha = Drink.create(
+    name: "Caipirinha",
+    alcohols: [cachaca],
+    flavors: [sweet, citrus],
+    types: [casual, iba_classic],
+    color: clear,
+    picture_url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/lede-1565357473.png?resize=768:*",
+    picture_credit: "esquire.com",
+    recipe: "2 oz. cachaça
+        1/2 lime
+        2 tsp. sugar",
+    recipe_url: "https://www.esquire.com/food-drink/drinks/recipes/a3884/caipirinha-drink-recipe/",
+    additional_notes: "The Caipirinha is the national drink of Brazil."
+)
 
-# # = Drink.create(
-# #     name: ,
-# #     alcohols: ,
-# #     flavors: ,
-# #     types: ,
-# #     color: ,
-# #     picture_url: ,
-# #     picture_credit: ,
-# #     recipe: ,
-# #     recipe_url: ,
-# #     additional_notes:
-# # )
+french_75 = Drink.create(
+    name: "French 75",
+    alcohols: [champagne, gin],
+    flavors: [citrus, herbal],
+    types: [classic, classy, iba_classic],
+    color: yellow,
+    picture_url: "https://assets.bonappetit.com/photos/57acbe4753e63daf11a4d99a/16:9/w_1280,c_limit/french-75.jpg",
+    picture_credit: "bonappetit.com",
+    recipe: "2 ounces London dry gin
+        ¾ ounce fresh lemon juice
+        ¾ ounce simple syrup
+        2 ounces Champagne
+        Long spiral lemon twist (for serving)",
+    recipe_url: "https://www.bonappetit.com/recipe/french-75-3",
+    additional_notes: 
+)
 
 # # = Drink.create(
 # #     name: ,

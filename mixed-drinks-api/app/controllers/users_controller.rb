@@ -3,7 +3,7 @@ class UsersController < ApplicationController
     
     def create
         @user = User.create(user_params)
-        token = JWT.encode({user_id: @user.id}, ENV["MIXIT_SECRET"])
+        token = JWT.encode({user_id: @user.id}, ENV["MIXIT_SECRET"], 'HS384')
         render json: {token: token, user: @user.name}
     end
     

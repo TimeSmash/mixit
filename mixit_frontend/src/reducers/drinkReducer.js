@@ -5,12 +5,13 @@ import {obtainAll} from "../actions/drink-actions"
 // reducer should see type of action, if it is type obtainAll, should set state.allDrinks = fetched Drink.all
 // 
 
-function drinkReducer(emptyArray = [], action) {
+function drinkReducer(state = [], action) {
+    // debugger
     switch(action.type) {
         case obtainAll:
             return action.allDrinks
         default:
-            return emptyArray
+            return state
     }
 }
 

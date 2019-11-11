@@ -7,8 +7,8 @@ import {combineReducers} from 'redux'
 const rootReducer = combineReducers({
     example: exampleReducer, //set the state of color to be whatever reducer returns
     allDrinks: drinkReducer,
-    BACKEND_URL: pseudoUrlReducer,
-    showProps: showPropsReducer
+    BACKEND_URL: pseudoUrlReducer, // Only used to establish key for preloadedState
+    showProps: showPropsReducer // Only used to establish key for preloadedState
 });
 
 export default rootReducer

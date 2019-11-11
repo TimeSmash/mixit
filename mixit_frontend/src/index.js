@@ -3,15 +3,24 @@ import ReactDOM from 'react-dom';
 import {BrowserRouter} from 'react-router-dom';
 import { Provider } from 'react-redux';
 import {createStore} from 'redux';
+
+import rootReducer from './reducers/rootReducer'
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+let showProps = (component) => {
+    console.log(`${component.constructor.name} component props`, component.props)
+  }
+
+
 let initialStore = {
-    BACKEND_URL: "http://localhost:3005"
+    BACKEND_URL: "http://localhost:3005",
+    showProps: showProps,
+    allDrinks: []
 };
 
-const rootReducer = () => {return "HEY"}
+// const rootReducer = () => {return "HEY"}
 
 //create the store using rootReducer(has many reducers in it) and initialize with initialStore (preloadedState)
 const store = createStore(rootReducer, initialStore);

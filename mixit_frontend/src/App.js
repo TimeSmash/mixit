@@ -2,7 +2,7 @@ import React from 'react';
 import './css/App.css';
 import {Route, Switch} from 'react-router-dom';
 import { connect } from 'react-redux';
-
+ 
 
 // COMPONENTS //
 import Welcome from './components/Welcome.js';
@@ -126,8 +126,7 @@ exampleProps = "I got this sentence from App"
             {/* <Login submitHandler={this.login}/> */}
             {/* <SignUp submitHandler={this.signUp}/> */}
           
-            <Route path ='/drinks' render={() => <DrinksContainer 
-              nothing={"nothing"}/>
+            <Route path ='/drinks' render={() => <DrinksContainer/>
               }
             />
 
@@ -146,7 +145,7 @@ exampleProps = "I got this sentence from App"
 }
 
 function mapStateToProps(state){
-  return {BACKEND_URL: state.BACKEND_URL}
+  return {BACKEND_URL: state.BACKEND_URL, showProps: state.showProps}
 }
 
 // function mapDispatchToProps(dispatch) { 	   

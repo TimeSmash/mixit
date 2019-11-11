@@ -1,7 +1,7 @@
 class DrinksController < ApplicationController
 
     def index
-        @drinks = Drink.all
+        @drinks = Drink.all.order('name ASC')
         serialized_data = DrinkSerializer.new(@drinks).serialized_json
         render json: serialized_data
         # Returned in the format of {data: [{id: #, type: "drink", attributes: {name: "Kir", alcohols: [],...} }, {}]

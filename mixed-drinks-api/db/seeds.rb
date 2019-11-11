@@ -58,8 +58,6 @@ sake = "sake"
 # ??????
 
 # APERTIFS
-apertif = "Apertif" 
-digestif = "Digestif"
 aperol = "Aperol" 
 ouzo = "Ouzo"
 raki = "Raki"
@@ -69,6 +67,7 @@ liquer = "Liquer"
 chambord = "Chambord" 
 amaretto = "Amaretto Liqueur" 
 coffee_liqueur = "Coffee Liqueur"
+maraschino_
 creme_de_cassis = "Crème de cassis"
 creme_de_cacao = "Crème de cacao"
 creme_de_menthe = "Crème de menthe"
@@ -118,6 +117,8 @@ themed = "Themed"
 iba_unforgettable = "IBA Unforgettables"
 iba_classic = "IBA Contemporary Classics"
 iba_new = "IBA New Era"
+apertif = "Apertif" 
+digestif = "Digestif"
 
 #  COLORS
 
@@ -709,21 +710,21 @@ french_75 = Drink.create(
         2 ounces Champagne
         Long spiral lemon twist (for serving)",
     recipe_url: "https://www.bonappetit.com/recipe/french-75-3",
-    additional_notes: 
+    additional_notes: "The French 75 is named after a particular artillery gun from France due to its powerful punch"
 )
 
-# # = Drink.create(
-# #     name: ,
-# #     alcohols: ,
-# #     flavors: ,
-# #     types: ,
-# #     color: ,
-# #     picture_url: ,
-# #     picture_credit: ,
-# #     recipe: ,
-# #     recipe_url: ,
-# #     additional_notes:
-# # )
+casino = Drink.create(
+    name: "Casino",
+    alcohols: ,
+    flavors: ,
+    types: ,
+    color: ,
+    picture_url: ,
+    picture_credit: ,
+    recipe: ,
+    recipe_url: ,
+    additional_notes:
+)
 
 # # = Drink.create(
 # #     name: ,

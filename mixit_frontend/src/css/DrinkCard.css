@@ -1,0 +1,47 @@
+/* div{
+    border: 1px solid black;
+    width: 250px;
+    
+} */
+
+/* img {
+    width: 75px;
+    height: 75px;
+} */
+
+/* a:hover{
+    cursor:pointer;
+} */
+
+.card-img-top {
+    width: 100%;
+    height: 10rem;
+    object-fit: cover;
+}
+
+.card{
+    margin-top:2em;
+}
+
+.card-deck{
+    margin-left:2vw;
+}
+
+.card-text{
+    /* opacity:0.6; */
+    color:black;
+}
+
+/* The use of transition and opacity gives a fade-in effect */
+
+.card:hover{
+    transition: 0.3s;
+    /* opacity:1; */
+    background:#F0F0F0;
+    
+}
+
+.card-img-top:hover{
+    transition: 0.3s;
+    opacity:0.6;
+}

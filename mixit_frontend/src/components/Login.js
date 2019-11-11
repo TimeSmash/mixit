@@ -30,7 +30,7 @@ class Login extends Component {
                 <button onClick={() => this.props.showProps(this)}>Console.log props</button>
                 <p>
                     Not a member? 
-                {/* <Link id='to-signup' to='/signup' style={{"textDecoration": "none"}}>Sign Up!</Link> */}
+                <Link id='to-signup' to='/signup' style={{"textDecoration": "none"}}>Sign Up!</Link>
                 </p>
                 
                 

@@ -2,13 +2,19 @@ import React, {Component} from 'react'
 import {Route, Switch} from 'react-router-dom';
 import { connect } from 'react-redux';
 
+// ACTIONS
 import {getAllDrinks} from "../actions/drink-actions";
 
-// COMPONENT IMPORTS
+// COMPONENTS
 import AllDrinks from './AllDrinks';
 import Drink from './Drink';
 import FourOFour from './FourOFour';
+import TestingInfinite from './TestingInfinite';
  
+// OTHER
+import {BACKEND_URL} from '../constants'
+import {showProps} from '../constants'
+
 class DrinksContainer extends Component {
     state = {  }
 
@@ -24,7 +30,7 @@ class DrinksContainer extends Component {
             return null
         } else {
 
-            fetch(this.props.BACKEND_URL+"/all_drinks")
+            fetch(  BACKEND_URL+"/all_drinks")
             .then(res=> res.json())
             //     .then(json=> console.log("drinks received", json.data)) 
             // .then(json=> this.setState({allDrinks: json.data}))
@@ -34,15 +40,18 @@ class DrinksContainer extends Component {
 
     render() {
         console.log("DC props", this.props)
+        console.log("DC says store is", this.props.store.getState())
+        
         return (
             <div>
                 <h1>DrinksContainer</h1>
             <Switch>
                 <Route path ='/drinks/all_drinks' render={()=><AllDrinks/>}/>
+                <Route path ='/drinks/testing_infinite' render={()=><TestingInfinite/>}/>
                 <Route path ='/drinks/:id' render={()=><Drink/>}/> 
                 <Route component={FourOFour}/>
             </Switch>
-            <button onClick={() => this.props.showProps(this)}>Console.log props (DrinksContainer)</button>
+            <button onClick={() => showProps(this)}>Console.log props (DrinksContainer)</button>
             <h1>End of DrinksContainer</h1>
             </div>
         );
@@ -51,7 +60,7 @@ class DrinksContainer extends Component {
 
 
 function mapStateToProps(state){
-    return {showProps: state.showProps, BACKEND_URL: state.BACKEND_URL, allDrinks: state.allDrinks}
+    return {allDrinks: state.allDrinks}
   }
 
 //   import your action creators, give them to component as props

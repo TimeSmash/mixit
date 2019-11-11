@@ -9,14 +9,10 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-let showProps = (component) => {
-    console.log(`${component.constructor.name} component props`, component.props)
-  }
+
 
 
 let initialStore = {
-    BACKEND_URL: "http://localhost:3005",
-    showProps: showProps,
     allDrinks: []
 };
 
@@ -25,10 +21,12 @@ let initialStore = {
 //create the store using rootReducer(has many reducers in it) and initialize with initialStore (preloadedState)
 const store = createStore(rootReducer, initialStore);
 
+store.subscribe( () => { console.log("current state", store.getState()) } )
+
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
-            <App/>
+            <App store={store}/>
         </BrowserRouter>
     </Provider>, document.getElementById('root')
 );

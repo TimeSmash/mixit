@@ -12,11 +12,13 @@ import FourOFour from './components/FourOFour';
 import ExampleFunctionalComponent from './components/ExampleFunctionalComponent';
 import DrinksContainer from './components/DrinksContainer';
 
+// OTHER
+
+import {BACKEND_URL} from './constants.js'
+
 class App extends React.Component {
 
   state = {user: {}}
-
-  BACKEND_URL = "http://localhost:3005"
 
   // userLoggedIn = (AppStateUser) =>{
   //   if (Object.keys(AppStateUser).length>=1){
@@ -28,15 +30,11 @@ class App extends React.Component {
 
 exampleProps = "I got this sentence from App"
 
-  showProps = (component) => {
-    console.log(`${component.constructor.name} component props`, component.props)
-  }
-
   signUp = (e, userObj) => {
     e.preventDefault()
     console.log("user stats", userObj)
     // debugger
-    fetch(this.BACKEND_URL+"/signup", {
+    fetch(BACKEND_URL+"/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -66,7 +64,7 @@ exampleProps = "I got this sentence from App"
   login = (e, credentials) => {
     e.preventDefault()
     console.log("login credentials", credentials)
-    fetch(this.BACKEND_URL+'/login', {
+    fetch(BACKEND_URL+'/login', {
       method: "POST",
       headers: {"Content-Type": "application/json",
       "Accepts": "application/json"
@@ -82,6 +80,7 @@ exampleProps = "I got this sentence from App"
       if (data.user){
         localStorage.setItem("token", data.token)
         this.setState({user: data.user})
+        // REDIRECT SOMEWHERE
       } else {
         // CAN DEFF BE MODIFIED
         // Redirect to Login but showing message?
@@ -98,7 +97,7 @@ exampleProps = "I got this sentence from App"
     let token = localStorage.getItem("token")
 
     if (token){
-      fetch(this.BACKEND_URL+"/retrieve_user",{
+      fetch(BACKEND_URL+"/retrieve_user",{
         headers: {"Authorization": token}
       })
       .then(res => res.json())
@@ -113,12 +112,13 @@ exampleProps = "I got this sentence from App"
   
 
   render(){
+    // console.log("Store",this.props.store.getState())
     return (
       <div className="App">
         <Switch>
           <Route path='/login' render={() => <Login 
               submitHandler={this.login}
-              showProps ={this.showProps}/>
+              />
               }
           />
           
@@ -126,12 +126,15 @@ exampleProps = "I got this sentence from App"
             {/* <Login submitHandler={this.login}/> */}
             {/* <SignUp submitHandler={this.signUp}/> */}
           
-            <Route path ='/drinks' render={() => <DrinksContainer/>
+            <Route path ='/drinks' render={() => <DrinksContainer
+            store={this.props.store}/>
               }
             />
 
           <Route path ='/examplefunctionalcomponent' render={() => <ExampleFunctionalComponent 
-            sentenceForEFC={this.exampleProps}/>
+            sentenceForEFC={this.exampleProps}
+            store={this.props.store}
+            />
             }
           />
 
@@ -145,7 +148,7 @@ exampleProps = "I got this sentence from App"
 }
 
 function mapStateToProps(state){
-  return {BACKEND_URL: state.BACKEND_URL, showProps: state.showProps}
+  return {}
 }
 
 // function mapDispatchToProps(dispatch) { 	   

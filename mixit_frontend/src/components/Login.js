@@ -1,10 +1,11 @@
 import React, {Component} from 'react'
 import  {Link} from 'react-router-dom';
 
+import {showProps} from '../constants'
 class Login extends Component {
     state = { name: "",
               password: "" }
-
+ 
     changeHandler = (event) =>{
         // sets state.key's value to whatever is in input immediately
         this.setState({[event.target.name]: event.target.value})
@@ -27,10 +28,10 @@ class Login extends Component {
                     <br></br>
                     <input type="submit" value="Submit"></input>
                 </form>
-                <button onClick={() => this.props.showProps(this)}>Console.log props</button>
+                <button onClick={() => showProps(this)}>Console.log props</button>
                 <p>
                     Not a member? 
-                <Link id='to-signup' to='/signup' style={{"textDecoration": "none"}}>Sign Up!</Link>
+                <Link id='to-signup' to='/signup' style={{"textDecoration": "none"}}> Sign Up!</Link>
                 </p>
                 
                 
@@ -38,5 +39,7 @@ class Login extends Component {
         );
     }
 }
+
+
 
 export default Login;

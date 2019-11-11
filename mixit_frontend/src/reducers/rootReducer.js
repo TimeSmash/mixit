@@ -1,14 +1,17 @@
 import exampleReducer from './exampleReducer.js'
 import drinkReducer from './drinkReducer'
-import pseudoUrlReducer from './pseudoUrlReducer'
-import showPropsReducer from './showPropsReducer'
 import {combineReducers} from 'redux'
  
+
+// In store, these will be the keys.
+// The keys' values are determined by what is returned from a reducer
+// For example, when an action with type obtainAll is dispatched to store, rootReducer makes drinkReducer handle it
+// drinkReducer will return action.allDrinks 
+// So, state.allDrinks = action.allDrinks 
+
 const rootReducer = combineReducers({
-    example: exampleReducer, //set the state of color to be whatever reducer returns
-    allDrinks: drinkReducer,
-    BACKEND_URL: pseudoUrlReducer, // Only used to establish key for preloadedState
-    showProps: showPropsReducer // Only used to establish key for preloadedState
+    example: exampleReducer, //set the state of color to be whatever reducer returns, THIS DOES NOT MATTER AT ALL
+    allDrinks: drinkReducer
 });
 
 export default rootReducer

@@ -7,13 +7,13 @@ function Drink (props) {
         <div>
         {/* {console.log("Drink props",props)} */}
             <p>DEEEDEDEDDEDAADDDO</p>
-        {/* <button onClick={() => console.log("Drink props", props)}>Console.log props (Drink)</button> */}
+        <button onClick={() => console.log("Drink props", props)}>Console.log props (Drink)</button>
         </div>
     )
 }
 
 function mapStateToProps(state){
-    return {allDrinks: state.allDrinks, showProps: state.showProps}
+    return {allDrinks: state.allDrinks}
   }
   export default connect(mapStateToProps)(Drink);
 

@@ -16,8 +16,6 @@ let initialStore = {
     allDrinks: []
 };
 
-// const rootReducer = () => {return "HEY"}
-
 //create the store using rootReducer(has many reducers in it) and initialize with initialStore (preloadedState)
 const store = createStore(rootReducer, initialStore);
 

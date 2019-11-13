@@ -1,6 +1,8 @@
-export const BACKEND_URL = "http://localhost:3005"
+const BACKEND_URL = "http://localhost:3005"
 
-export const showProps = (component) => {
+const showProps = (component) => {
     console.log(`${component.constructor.name} component props`, component.props)
   }
-export default "no"
+
+  export { BACKEND_URL, showProps }
+// export default "no"

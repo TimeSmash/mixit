@@ -2,7 +2,9 @@ class NavBar extends Component {
     state = {  }
     render() {
         return (
-            <div>About
+            <div>
+                HomePage Icon
+                About
                 All Drinks
                 Alcohols
                 Random Drink

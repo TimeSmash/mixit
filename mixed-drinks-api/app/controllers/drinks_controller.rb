@@ -7,6 +7,17 @@ class DrinksController < ApplicationController
         # Returned in the format of {data: [{id: #, type: "drink", attributes: {name: "Kir", alcohols: [],...} }, {}]
     end
     
+    def paginated_drinks
+        # byebug
+        @drinks = Drink.all.order('name ASC')
+        @paginated_drinks = @drinks.paginate(page: params[:page])
+        render json: {
+            drinks: @paginated_drinks,
+            page: @paginated_drinks.current_page,
+            page_count: @paginated_drinks.total_pages
+        }
+    end
+
     def show
         @drink = Drink.find(params[:id])
         serialized_data = DrinkSerializer.new(@drink).serialized_json

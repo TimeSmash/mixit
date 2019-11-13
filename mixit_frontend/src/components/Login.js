@@ -11,7 +11,12 @@ class Login extends Component {
         this.setState({[event.target.name]: event.target.value})
     }
 
+    // componentDidMount(){    //A change in state does not mean componentDidMount fires aagin
+    //     console.log("Login mounted")
+    // }
+
     render() {
+        // console.log("render occurring") A rerender occurs every time state is changed
         return (
             <div>
                 <h1>Welcome! Please sign in.</h1>

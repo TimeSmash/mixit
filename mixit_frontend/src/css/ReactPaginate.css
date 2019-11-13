@@ -1,0 +1,103 @@
+/* #react-paginate ul {
+    display: inline-block;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#react-paginate li {
+    display: inline-block;
+} */
+
+.react-paginate ul {
+    border:1px solid black;
+    display: inline-block;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
+.disabled a{
+    color:grey
+}
+
+.disabled a:hover{
+    cursor:not-allowed;
+    color:grey
+}
+
+.active a{
+    color:red;
+}
+
+.active a:hover{
+    color:red;
+    /* cursor:not-allowed; */
+    
+}
+.react-paginate li {
+    padding:5px;
+    background-image: linear-gradient(#EEE, #BABABA);
+    /* height:40px; */
+    /* min-width: 35px; */
+    display: inline-block;
+    overflow:auto;
+}
+
+.page{
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-right:none;
+    
+}
+
+.page-link{
+    display: inline-block;
+    width:35px;
+    padding-right:10px;
+    padding-left:10px;
+    background: transparent;
+    border:none;
+    color:black;
+    font-weight: bold;
+    font-size: 2em;
+    line-height:1em;
+    
+}
+
+.page-link:hover{
+    text-decoration:none;
+    background:transparent;
+    color:black;
+    cursor:pointer;
+}
+
+a:hover{
+    text-decoration:none;
+    background:transparent;
+    color:white;
+    cursor:pointer;
+}
+
+a{
+    color:black;
+}
+
+.previous{
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-right:none;
+    border-radius: 10px 0px 0px 10px; /* top left, top right, bottom right, bottom left */
+    color:black;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.next{
+    border:1px solid black;
+    border-radius: 0px 10px 10px 0px; /* top left, top right, bottom right, bottom left */
+    color:black;
+    font-weight: bold;
+    font-size: 2em;
+}

@@ -67,7 +67,7 @@ liquer = "Liquer"
 chambord = "Chambord" 
 amaretto = "Amaretto Liqueur" 
 coffee_liqueur = "Coffee Liqueur"
-maraschino_
+maraschino_liqueur = "Maraschino liqueur"
 creme_de_cassis = "Crème de cassis"
 creme_de_cacao = "Crème de cacao"
 creme_de_menthe = "Crème de menthe"
@@ -715,18 +715,199 @@ french_75 = Drink.create(
 
 casino = Drink.create(
     name: "Casino",
-    alcohols: ,
-    flavors: ,
-    types: ,
-    color: ,
-    picture_url: ,
-    picture_credit: ,
-    recipe: ,
-    recipe_url: ,
-    additional_notes:
+    alcohols: [gin, maraschino_liqueur],
+    flavors: [sweet, citrus],
+    types: [classic, iba_unforgettable],
+    color: white,
+    picture_url: "https://imbibemagazine.com/wp-content/uploads/2016/02/casino-cocktail-vertical-crdt-lara-ferroni-330x410.jpg",
+    picture_credit: "imbibemagazine.com",
+    recipe: "2 oz. Old Tom gin
+        1/4 oz. maraschino liqueur
+        1/4 oz. fresh lemon juice
+        2 dashes Regan’s orange bitters",
+    recipe_url: "https://imbibemagazine.com/casino-old-tom-gin-cocktail/",
+    additional_notes: "The Casino is quite an old drink, getting its origins from the Savoy Cocktail book published in 1930."
 )
 
 # # = Drink.create(
+# #     name: ,
+# #     alcohols: ,
+# #     flavors: ,
+# #     types: ,
+# #     color: ,
+# #     picture_url: ,
+# #     picture_credit: ,
+# #     recipe: ,
+# #     recipe_url: ,
+# #     additional_notes:
+# # )
+
+# # = Drink.create(
+# #     name: ,
+# #     alcohols: ,
+# #     flavors: ,
+# #     types: ,
+# #     color: ,
+# #     picture_url: ,
+# #     picture_credit: ,
+# #     recipe: ,
+# #     recipe_url: ,
+# #     additional_notes:
+# # )# # = Drink.create(
+# #     name: ,
+# #     alcohols: ,
+# #     flavors: ,
+# #     types: ,
+# #     color: ,
+# #     picture_url: ,
+# #     picture_credit: ,
+# #     recipe: ,
+# #     recipe_url: ,
+# #     additional_notes:
+# # )# # = Drink.create(
+# #     name: ,
+# #     alcohols: ,
+# #     flavors: ,
+# #     types: ,
+# #     color: ,
+# #     picture_url: ,
+# #     picture_credit: ,
+# #     recipe: ,
+# #     recipe_url: ,
+# #     additional_notes:
+# # )# # = Drink.create(
+# #     name: ,
+# #     alcohols: ,
+# #     flavors: ,
+# #     types: ,
+# #     color: ,
+# #     picture_url: ,
+# #     picture_credit: ,
+# #     recipe: ,
+# #     recipe_url: ,
+# #     additional_notes:
+# # )# # = Drink.create(
+# #     name: ,
+# #     alcohols: ,
+# #     flavors: ,
+# #     types: ,
+# #     color: ,
+# #     picture_url: ,
+# #     picture_credit: ,
+# #     recipe: ,
+# #     recipe_url: ,
+# #     additional_notes:
+# # )# # = Drink.create(
+# #     name: ,
+# #     alcohols: ,
+# #     flavors: ,
+# #     types: ,
+# #     color: ,
+# #     picture_url: ,
+# #     picture_credit: ,
+# #     recipe: ,
+# #     recipe_url: ,
+# #     additional_notes:
+# # )# # = Drink.create(
+# #     name: ,
+# #     alcohols: ,
+# #     flavors: ,
+# #     types: ,
+# #     color: ,
+# #     picture_url: ,
+# #     picture_credit: ,
+# #     recipe: ,
+# #     recipe_url: ,
+# #     additional_notes:
+# # )# # = Drink.create(
+# #     name: ,
+# #     alcohols: ,
+# #     flavors: ,
+# #     types: ,
+# #     color: ,
+# #     picture_url: ,
+# #     picture_credit: ,
+# #     recipe: ,
+# #     recipe_url: ,
+# #     additional_notes:
+# # )# # = Drink.create(
+# #     name: ,
+# #     alcohols: ,
+# #     flavors: ,
+# #     types: ,
+# #     color: ,
+# #     picture_url: ,
+# #     picture_credit: ,
+# #     recipe: ,
+# #     recipe_url: ,
+# #     additional_notes:
+# # )# # = Drink.create(
+# #     name: ,
+# #     alcohols: ,
+# #     flavors: ,
+# #     types: ,
+# #     color: ,
+# #     picture_url: ,
+# #     picture_credit: ,
+# #     recipe: ,
+# #     recipe_url: ,
+# #     additional_notes:
+# # )# # = Drink.create(
+# #     name: ,
+# #     alcohols: ,
+# #     flavors: ,
+# #     types: ,
+# #     color: ,
+# #     picture_url: ,
+# #     picture_credit: ,
+# #     recipe: ,
+# #     recipe_url: ,
+# #     additional_notes:
+# # )# # = Drink.create(
+# #     name: ,
+# #     alcohols: ,
+# #     flavors: ,
+# #     types: ,
+# #     color: ,
+# #     picture_url: ,
+# #     picture_credit: ,
+# #     recipe: ,
+# #     recipe_url: ,
+# #     additional_notes:
+# # )# # = Drink.create(
+# #     name: ,
+# #     alcohols: ,
+# #     flavors: ,
+# #     types: ,
+# #     color: ,
+# #     picture_url: ,
+# #     picture_credit: ,
+# #     recipe: ,
+# #     recipe_url: ,
+# #     additional_notes:
+# # )# # = Drink.create(
+# #     name: ,
+# #     alcohols: ,
+# #     flavors: ,
+# #     types: ,
+# #     color: ,
+# #     picture_url: ,
+# #     picture_credit: ,
+# #     recipe: ,
+# #     recipe_url: ,
+# #     additional_notes:
+# # )# # = Drink.create(
+# #     name: ,
+# #     alcohols: ,
+# #     flavors: ,
+# #     types: ,
+# #     color: ,
+# #     picture_url: ,
+# #     picture_credit: ,
+# #     recipe: ,
+# #     recipe_url: ,
+# #     additional_notes:
+# # )# # = Drink.create(
 # #     name: ,
 # #     alcohols: ,
 # #     flavors: ,

@@ -56,7 +56,7 @@ class Drink extends Component{
     }
 
     render(){
-        console.log("DrinkClass props BETTER HAVE DRINK TO SHOW",this.props)
+        console.log("DrinkClass props BETTER HAVE DRINK TO SHOW",this.props.drinkToShow)
         console.log("L",window.location.href)
     return (
             <div className="col s12 m7">

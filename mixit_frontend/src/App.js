@@ -130,6 +130,7 @@ exampleProps = "I got this sentence from App"
             store={this.props.store}/>
               }
             />
+            
 
           <Route path ='/examplefunctionalcomponent' render={() => <ExampleFunctionalComponent 
             sentenceForEFC={this.exampleProps}

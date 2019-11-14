@@ -30,8 +30,9 @@ class DrinksContainer extends Component {
             <Switch>
                 {/* <Route path ='/drinks/all_drinks' render={()=><AllDrinks/>}/> */}
                 <Route path ='/drinks/all_drinks' render={()=><AllDrinks/>}/>
-                
-                <Route path ='/drinks/:id' render={()=><DrinkClass drinkToShow={this.state.drinkToShow}/>}/> 
+                {/* Use regex d+ to only include number routes */}
+                <Route path ='/drinks/:id(\d+)' render={()=><DrinkClass drinkToShow={this.state.drinkToShow}/>}/> 
+                <Route exact path='/drinks/' component={AllDrinks}/>
                 <Route component={FourOFour}/>
             </Switch>
             <button onClick={() => showProps(this)}>Console.log props (DrinksContainer)</button>

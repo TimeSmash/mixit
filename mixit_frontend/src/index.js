@@ -5,15 +5,34 @@ import { Provider } from 'react-redux';
 import {createStore} from 'redux';
 
 import rootReducer from './reducers/rootReducer'
+
+//PERSISITING REDUX
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+
+// ????????????
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
+
+
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { PersistGate } from 'redux-persist/integration/react';
 
+// export const store = createStore(pReducer);
+// export const persistor = persistStore(store);
 
-
+//
+const persistConfig = {
+    key: 'root',
+    storage: storage,
+    stateReconciler: autoMergeLevel2 // see "Merge Process" section for details.
+   };
+   //This reducer wraps around rootReducer
+   const persistingReducer = persistReducer(persistConfig, rootReducer);
 
 let initialStore = {
-    allDrinks: []
+    drinkToLoad: {}
 };
 
 //create the store using rootReducer(has many reducers in it) and initialize with initialStore (preloadedState)
@@ -23,9 +42,11 @@ store.subscribe( () => { console.log("current state", store.getState()) } )
 
 ReactDOM.render(
     <Provider store={store}>
-        <BrowserRouter>
-            <App store={store}/>
-        </BrowserRouter>
+        {/* <PersistGate> */}
+            <BrowserRouter>
+                <App store={store}/>
+            </BrowserRouter>
+        {/* </PersistGate> */}
     </Provider>, document.getElementById('root')
 );
 

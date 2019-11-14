@@ -18,6 +18,12 @@ import '../css/DrinkCard.css'
 class DrinkCard extends Component {
   state={}
   
+  showLoadingIcon = () =>{
+    if (this.props.imgUrl  === ""){
+      return 
+    }
+  }
+
   render() {
   console.log(this.props.drinkToShow)
 

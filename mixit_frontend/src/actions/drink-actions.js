@@ -1,3 +1,5 @@
-export const obtainAll = "Obtain all drinks from backend"
 
-export function getAllDrinks(drinkArray)  {return {type: obtainAll, allDrinks: drinkArray}} 
+
+export const showDrink = "show specified drink"
+
+export function setDrinkToShow(drink)  {return {type: showDrink, drinkToShow: drink}} 

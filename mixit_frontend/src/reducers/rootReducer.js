@@ -11,8 +11,7 @@ import {combineReducers} from 'redux'
 
 const rootReducer = combineReducers({
     example: exampleReducer, //set the state of color to be whatever reducer returns, THIS DOES NOT MATTER AT ALL
-    allDrinks: drinkReducer,
-    drinkToShow: drinkReducer
+    drinkToLoad: drinkReducer
 });
 
 export default rootReducer

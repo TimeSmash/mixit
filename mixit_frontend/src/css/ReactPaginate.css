@@ -1,13 +1,3 @@
-/* #react-paginate ul {
-    display: inline-block;
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-#react-paginate li {
-    display: inline-block;
-} */
-
 .react-paginate ul {
     border:1px solid black;
     display: inline-block;
@@ -16,24 +6,6 @@
 }
 
 
-.disabled a{
-    color:grey
-}
-
-.disabled a:hover{
-    cursor:not-allowed;
-    color:grey
-}
-
-.active a{
-    color:red;
-}
-
-.active a:hover{
-    color:red;
-    /* cursor:not-allowed; */
-    
-}
 .react-paginate li {
     padding:5px;
     background-image: linear-gradient(#EEE, #BABABA);
@@ -41,6 +13,35 @@
     /* min-width: 35px; */
     display: inline-block;
     overflow:auto;
+}
+
+a:hover{
+    text-decoration:none;
+    background:transparent;
+    color:white;
+    cursor:pointer;
+}
+
+.disabled a{
+    color:grey;
+    cursor: default
+}
+
+.disabled a:hover{
+    color:grey;
+    cursor: default
+}
+
+.active a{
+    color:white;
+    background-color:  grey;
+}
+
+.active a:hover{
+    color:white;
+    background-color:  grey;
+    /* cursor:not-allowed; */
+    
 }
 
 .page{
@@ -68,16 +69,11 @@
 .page-link:hover{
     text-decoration:none;
     background:transparent;
-    color:black;
-    cursor:pointer;
-}
-
-a:hover{
-    text-decoration:none;
-    background:transparent;
     color:white;
     cursor:pointer;
 }
+
+
 
 a{
     color:black;

@@ -7,14 +7,18 @@ import {Route, Switch} from 'react-router-dom';
 
 // COMPONENTS
 import AllDrinks from './AllDrinks';
-import Drink from './Drink';
+import DrinkClass from './DrinkClass';
 import FourOFour from './FourOFour';
  
 // OTHER
 import {showProps} from '../constants'
 
 class DrinksContainer extends Component {
-    state = {  }
+    state = { drinkToShow: {} }
+
+    setDrinkToShow = (drink) => {
+        this.setState({drinkToShow:drink})
+    }
 
     render() {
         // console.log("DC props", this.props)
@@ -24,8 +28,10 @@ class DrinksContainer extends Component {
             <div>
                 <h1>DrinksContainer</h1>
             <Switch>
+                {/* <Route path ='/drinks/all_drinks' render={()=><AllDrinks/>}/> */}
                 <Route path ='/drinks/all_drinks' render={()=><AllDrinks/>}/>
-                <Route path ='/drinks/:id' render={()=><Drink/>}/> 
+                
+                <Route path ='/drinks/:id' render={()=><DrinkClass drinkToShow={this.state.drinkToShow}/>}/> 
                 <Route component={FourOFour}/>
             </Switch>
             <button onClick={() => showProps(this)}>Console.log props (DrinksContainer)</button>

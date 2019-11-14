@@ -1,8 +1,10 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux';
 import ReactPaginate from 'react-paginate';
-
+import {withRouter} from 'react-router-dom'
 import DrinkCard from './DrinkCard' 
+import DrinkCard2 from './DrinkCard2' 
+
 import Loader from './Loader' 
 
 import {BACKEND_URL} from '../constants'
@@ -22,35 +24,20 @@ class AllDrinks extends Component {
 
     componentDidMount(){
         console.log("cDM says this.state.page is", this.state.page)
-        fetch(BACKEND_URL+"/all_drinks_paginated/"+this.state.page,
-        {
-            method: "GET",
-            headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json"
-          }
-        }
-        )
-    .then(res=> res.json())
-    .then(json=> {
-        console.log("cDM data after fetch",json)
-        this.setState({drinkAndPageInfo: json, loading: false})
+        this.getDrinksAndInfoFromPage(this.state.page)
     }
-    )}
 
     componentDidUpdate(){
         console.log("AllDrinks updated")
     }
     // drinkAndPageInfo format {drinks: Array(14), page: 1, pages: 5}
-    //     fetch(BACKEND_URL+"/all_drinks")
-    // .then(res=> res.json())
-    // .then(json=> this.setState({drinkAndPageInfo: json.data, loading: false}))}
-    //     .then(json=> console.log("thing", json.data)) 
+     
 
 
     getDrinksAndInfoFromPage = (page) => {
         // First get info from clicked page #
         // this.setState({loading:true})
+        
         fetch(BACKEND_URL+"/all_drinks_paginated/"+page,
         {
             method: "GET",
@@ -64,7 +51,8 @@ class AllDrinks extends Component {
     .then(json=> {
         console.log("data retrieved from page "+page,json) //gets new array of Drink objects
         // Then set dAPI to json, page to current page
-        this.setState({drinkAndPageInfo: json, page: page})
+        this.setState({drinkAndPageInfo: json, page: page, loading: false})
+        // Could also do: this.setState({drinkAndPageInfo: json, page: json.drinks.page, loading: false}) to get data from backend for current page
         // this.setState({drinkAndPageInfo: json, loading: false})        
     })
     }
@@ -77,7 +65,8 @@ class AllDrinks extends Component {
         
         // console.log("PageAndDrink",this.state.drinkAndPageInfo)
         if (this.state.drinkAndPageInfo.drinks !== undefined) {
-            return this.state.drinkAndPageInfo.drinks.map(drinkObj => <DrinkCard 
+            return this.state.drinkAndPageInfo.drinks.map(drinkObj => <DrinkCard
+                drink={drinkObj}
                 key={drinkObj.id}
                 drinkId={drinkObj.id}
                 imgUrl={drinkObj.picture_url}
@@ -87,6 +76,7 @@ class AllDrinks extends Component {
     }
 
     handlePageClick = (event) => {
+        this.props.history.push("/drinks/all_drinks/"+(event.selected+1))
         console.log("page clicked",event)
         this.getDrinksAndInfoFromPage(event.selected+1)
     }
@@ -107,29 +97,33 @@ class AllDrinks extends Component {
                     <Loader/> : 
                     
                     <div>
-                    <ReactPaginate id="react-paginate"
+                    `<ReactPaginate id="react-paginate"
                     // Labels
                     previousLabel={'Previous'}
                       nextLabel={'Next'}
                       breakLabel={'...'}
                       //   classNames
                       containerClassName={'react-paginate'} //className for container
+                      
                       previousClassName={'previous'}
-                      nextClassName={'next'}
-                      pageClassName={'page'}
-                      activeClassName={'active'} //className for activepage
+                      previousLinkClassName={'previous-link'}
                       breakClassName={'break-me'}
+                      nextClassName={'next'}
+
+                      pageClassName={'page'}
                       pageLinkClassName={'page-link'}
+
+                      activeClassName={'active'} //className for activepage
                       disabledClassName={'disabled'}
                     //   
                       pageCount={this.state.drinkAndPageInfo.page_count} //total pages
                       marginPagesDisplayed={2}
                       pageRangeDisplayed={5}
                     
-                      initialPage={0} //a page is treated like an item in array, therefore [0] is the 1st page
+                       //a page is treated like an item in array, therefore [0] is the 1st page
                       onPageChange={(event) => {this.handlePageClick(event)} /*Fxn when page clicked*/}
                       disableInitialCallback={true}
-                    />
+                    />`
                         <div className="card-deck">
                             {/* {this.getDrinksAndInfoFromPage(this.state.page)} */}
                             {this.allDrinks()}
@@ -146,6 +140,6 @@ class AllDrinks extends Component {
 // function mapStateToProps(state){
 //     return {allDrinks: state.allDrinks}
 //   }
-  export default AllDrinks;
+  export default withRouter(AllDrinks);
 
 // export default AllDrinks;

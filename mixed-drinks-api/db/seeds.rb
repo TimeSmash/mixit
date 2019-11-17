@@ -155,7 +155,7 @@ wine used with champagne. Traditionally, aligotè wine is used to make a Kir."
 
 kir_royale = Drink.create(
     name: "Kir Royale",
-    alcohols: [white_wine, champagne],
+    alcohols: [champagne, creme_de_cassis],
     flavors: [sweet, fruity, bubbly],
     types: [classy, party, easy_to_make, cheap, apertif],
     color: pink,
@@ -731,53 +731,69 @@ casino = Drink.create(
     additional_notes: "The Casino is quite an old drink, getting its origins from the Savoy Cocktail book published in 1930."
 )
 
-# # = Drink.create(
-# #     name: ,
-# #     alcohols: ,
-# #     flavors: ,
-# #     types: ,
-# #     color: ,
-# #     picture_url: ,
-# #     picture_credit: ,
-# #     recipe: ,
-# #     recipe_url: ,
-# #     additional_notes:
-# # )
+kentucky_flyer = Drink.create(
+    name: "Kentucky Flyer",
+    alcohols: [rye_whiskey, maraschino_liqueur],
+    flavors: [semi_sweet],
+    types: [easy_to_make],
+    color: yellow,
+    picture_url: "https://cdn.liquor.com/wp-content/uploads/2011/05/kentucky-flyer1.jpg",
+    picture_credit: "liquor.com",
+    recipe: "
+    2 oz Rye whiskey,
+3⁄4 oz Luxardo maraschino liqueur,
+1⁄2 oz Fresh lemon juice",
+    recipe_url: "https://www.liquor.com/recipes/kentucky-flyer/#gs.g3q186",
+    additional_notes: "The Kentucky Flyer is very similar to the Avaition cocktail, preferring whiskey over gin and the absence of creme liqueurs. It's a bit more brusque in taste."
+)
+
+aviation = Drink.create(
+    name: "Aviation",
+    alcohols: [gin, maraschino_liqueur, creme_de_violette],
+    flavors: [herbal, citrus],
+    types: [iba_unforgettable, unique, easy_to_make],
+    color: purple,
+    picture_url: "https://cdn.liquor.com/wp-content/uploads/2019/01/22133711/aviation-new-720x720-recipe-1.jpg",
+    picture_credit: "liquor.com",
+    recipe: "2 oz Gin
+    1⁄2 oz Maraschino liqueur
+    1⁄4 oz Crème de violette or Crème Yvette
+    3⁄4 oz Fresh lemon juice",
+    recipe_url: "https://www.liquor.com/recipes/aviation/#gs.g3o7va",
+    additional_notes: "The Aviation cocktail ranges from purple to sky blue. The purple comes from creme de violette, and the sky blue can be seen when it is mixed with the gin and lemon juice."
+)
+
+water_lily = Drink.create(
+    name: "Water Lily",
+    alcohols: [gin, triple_sec, creme_de_violette],
+    flavors: [floral, citrus],
+    types: [unique, classy],
+    color: purple,
+    picture_url: "https://www.saveur.com/resizer/J9qha0ryJ3Tqfx4SlxcytiWSnyk=/1034x689/arc-anglerfish-arc2-prod-bonnier.s3.amazonaws.com/public/QNIAB53FRHKQWGGQD7J7MVVKYE.jpg",
+    picture_credit: "saveur.com",
+    recipe: "3⁄4 oz. triple sec
+        3⁄4 oz. crème de violette
+        3⁄4 oz. fresh lemon juice
+        3⁄4 oz. gin
+        Strip of orange zest, for garnish",
+    recipe_url: "https://www.saveur.com/article/recipes/water-lily/",
+    additional_notes: "The Water Lily is somewhat similar in composition to the Aviation, with a more pronounced citrus note"
+)
+
+old_pal = Drink.create(
+    name: "Old Pal",
+    alcohols: ,
+    flavors: ,
+    types: ,
+    color: ,
+    picture_url: ,
+    picture_credit: ,
+    recipe: ,
+    recipe_url: ,
+    additional_notes:
+)
 
 # # = Drink.create(
-# #     name: ,
-# #     alcohols: ,
-# #     flavors: ,
-# #     types: ,
-# #     color: ,
-# #     picture_url: ,
-# #     picture_credit: ,
-# #     recipe: ,
-# #     recipe_url: ,
-# #     additional_notes:
-# # )# # = Drink.create(
-# #     name: ,
-# #     alcohols: ,
-# #     flavors: ,
-# #     types: ,
-# #     color: ,
-# #     picture_url: ,
-# #     picture_credit: ,
-# #     recipe: ,
-# #     recipe_url: ,
-# #     additional_notes:
-# # )# # = Drink.create(
-# #     name: ,
-# #     alcohols: ,
-# #     flavors: ,
-# #     types: ,
-# #     color: ,
-# #     picture_url: ,
-# #     picture_credit: ,
-# #     recipe: ,
-# #     recipe_url: ,
-# #     additional_notes:
-# # )# # = Drink.create(
 # #     name: ,
 # #     alcohols: ,
 # #     flavors: ,

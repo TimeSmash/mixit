@@ -10,7 +10,7 @@ import {combineReducers} from 'redux'
 // So, state.allDrinks = action.allDrinks 
 
 const rootReducer = combineReducers({
-    example: exampleReducer, //set the state of color to be whatever reducer returns, THIS DOES NOT MATTER AT ALL
+    // example: exampleReducer, //set the state of color to be whatever reducer returns, THIS DOES NOT MATTER AT ALL
     drinkToLoad: drinkReducer
 });
 

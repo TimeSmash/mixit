@@ -15,22 +15,16 @@
     overflow:auto;
 }
 
-a:hover{
+
+
+.page-link:hover{
     text-decoration:none;
     background:transparent;
     color:white;
     cursor:pointer;
 }
 
-.disabled a{
-    color:grey;
-    cursor: default
-}
 
-.disabled a:hover{
-    color:grey;
-    cursor: default
-}
 
 .active a{
     color:white;
@@ -90,10 +84,34 @@ a{
     font-size: 2em;
 }
 
+
+.previous a:hover{
+    text-decoration:none;
+    color:white
+}
+
+
+
+    
 .next{
     border:1px solid black;
     border-radius: 0px 10px 10px 0px; /* top left, top right, bottom right, bottom left */
     color:black;
     font-weight: bold;
     font-size: 2em;
+}
+
+.next a:hover{
+    text-decoration:none;
+    color:white
+}
+
+.disabled a{
+    color:grey;
+    cursor: default
+}
+
+.disabled a:hover{
+    color:grey;
+    cursor: default
 }

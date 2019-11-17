@@ -11,6 +11,8 @@ import SignUp from './components/SignUp';
 import FourOFour from './components/FourOFour';
 import ExampleFunctionalComponent from './components/ExampleFunctionalComponent';
 import DrinksContainer from './components/DrinksContainer';
+import DrinkClass from './components/DrinkClass';
+import NavBar from './components/NavBar';
 
 // OTHER
 
@@ -115,6 +117,7 @@ exampleProps = "I got this sentence from App"
     // console.log("Store",this.props.store.getState())
     return (
       <div className="App">
+        <NavBar/>
         <Switch>
           <Route path='/login' render={() => <Login 
               submitHandler={this.login}
@@ -130,7 +133,8 @@ exampleProps = "I got this sentence from App"
             store={this.props.store}/>
               }
             />
-            
+            <Route path ='/random_drink' render={() => <DrinkClass
+            />}/>
 
           <Route path ='/examplefunctionalcomponent' render={() => <ExampleFunctionalComponent 
             sentenceForEFC={this.exampleProps}

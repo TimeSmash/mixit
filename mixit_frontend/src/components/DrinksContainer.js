@@ -29,10 +29,12 @@ class DrinksContainer extends Component {
                 <h1>DrinksContainer</h1>
             <Switch>
                 {/* <Route path ='/drinks/all_drinks' render={()=><AllDrinks/>}/> */}
-                <Route path ='/drinks/all_drinks' render={()=><AllDrinks/>}/>
+                <Route exact path ='/drinks/all_drinks/:page(\d+)' render={()=><AllDrinks startingPage={parseInt(window.location.href.substring(window.location.href.lastIndexOf('/')+1))}/>}/>
                 {/* Use regex d+ to only include number routes */}
                 <Route path ='/drinks/:id(\d+)' render={()=><DrinkClass drinkToShow={this.state.drinkToShow}/>}/> 
-                <Route exact path='/drinks/' component={AllDrinks}/>
+                <Route path ='/drinks/random_drink' render={()=><DrinkClass drinkToShow={this.state.drinkToShow}/>}/> 
+                
+                <Route exact path='/drinks/' render={() =><AllDrinks startingPage={1}/>}/>
                 <Route component={FourOFour}/>
             </Switch>
             <button onClick={() => showProps(this)}>Console.log props (DrinksContainer)</button>

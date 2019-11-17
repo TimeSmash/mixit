@@ -18,24 +18,23 @@ class AllDrinks extends Component {
               page: 1  }
     // drinkAndPageInfo 
 // eslint-disable-next-line
-        componentWillMount(){
-            console.log("cdW")
-        }
+        // componentWillMount(){
+        //     console.log("cdW")
+        // }
 
     componentDidMount(){
         console.log("cDM says this.state.page is", this.state.page)
-        this.getDrinksAndInfoFromPage(this.state.page)
+        this.getDrinksAndInfoFromPage(this.props.startingPage)
     }
 
-    componentDidUpdate(){
-        console.log("AllDrinks updated")
-    }
+    // componentDidUpdate(){
+    //     console.log("AllDrinks updated")
+    // }
+   
     // drinkAndPageInfo format {drinks: Array(14), page: 1, pages: 5}
-     
-
-
     getDrinksAndInfoFromPage = (page) => {
         // First get info from clicked page #
+        
         // this.setState({loading:true})
         
         fetch(BACKEND_URL+"/all_drinks_paginated/"+page,
@@ -53,9 +52,16 @@ class AllDrinks extends Component {
         // Then set dAPI to json, page to current page
         this.setState({drinkAndPageInfo: json, page: page, loading: false})
         // Could also do: this.setState({drinkAndPageInfo: json, page: json.drinks.page, loading: false}) to get data from backend for current page
-        // this.setState({drinkAndPageInfo: json, loading: false})        
+        // this.setState({drinkAndPageInfo: json, loading: false})    
+        if (document.getElementsByClassName('active')[0].innerText === "1" && page !== 1) {
+            document.getElementsByClassName('disabled')[0].classList.remove("disabled")
+        }    
+        document.getElementsByClassName('active')[0].classList.remove("active")
+        var headings = document.evaluate(`//li[contains(., ${page})]`, document, null, XPathResult.ANY_TYPE, null );
+        var thisHeading = headings.iterateNext()
+        thisHeading.className += " active"
     })
-    }
+}
 
     // click cuse this.state.page = whatever NUM
     // setState triggers rerender
@@ -68,14 +74,15 @@ class AllDrinks extends Component {
             return this.state.drinkAndPageInfo.drinks.map(drinkObj => <DrinkCard
                 drink={drinkObj}
                 key={drinkObj.id}
-                drinkId={drinkObj.id}
-                imgUrl={drinkObj.picture_url}
-                name={drinkObj.name}
         />)
         } else {return null}
     }
 
     handlePageClick = (event) => {
+        //Points to the route using page # as arg, Route loads AllDrinks using page # as startingPage prop
+        document.getElementsByClassName('active')[0].classList.remove("active")
+
+
         this.props.history.push("/drinks/all_drinks/"+(event.selected+1))
         console.log("page clicked",event)
         this.getDrinksAndInfoFromPage(event.selected+1)
@@ -87,6 +94,7 @@ class AllDrinks extends Component {
 
     render() {
         console.log("RENDER: New state of AllDrinks",this.state)
+        console.log("AllDrinks props",this.props)
         
         return (
             <div>
@@ -124,7 +132,7 @@ class AllDrinks extends Component {
                       onPageChange={(event) => {this.handlePageClick(event)} /*Fxn when page clicked*/}
                       disableInitialCallback={true}
                     />`
-                        <div className="card-deck">
+                        <div className="card-deck"style={{width:"90%",marginLeft:"8.5em"}}>
                             {/* {this.getDrinksAndInfoFromPage(this.state.page)} */}
                             {this.allDrinks()}
                         </div>

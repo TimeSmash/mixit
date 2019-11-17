@@ -1,0 +1,11 @@
+.nav-link {
+    font-family: "Josefin Sans";
+    font-size: 3em;
+    display:inline;
+}
+
+.nav-link:hover{
+    color:red;
+    
+}
+

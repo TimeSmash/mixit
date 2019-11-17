@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import { connect } from 'react-redux';
-
-import {showDrink, setDrinkToShow} from '../actions/drink-actions'
+import {setDrinkToShow} from '../actions/drink-actions'
 
 
 import '../css/DrinkCard.css'
@@ -18,27 +17,29 @@ import '../css/DrinkCard.css'
 class DrinkCard extends Component {
   state={}
   
-  showLoadingIcon = () =>{
-    if (this.props.imgUrl  === ""){
-      return 
-    }
-  }
+  // showLoadingIcon = () =>{
+  //   if (this.props.imgUrl  === ""){
+  //     return 
+  //   }
+  // }
 
   render() {
-  console.log(this.props.drinkToShow)
+  // console.log("DrinkCard's drink prop from AllDrinks",this.props.drink)
 
     // debugger
     return(
-      <div>
+      <div style={{width:"11rem",display:"inline-block",float:"left"}}
+      >
 
-           <Link to={`/drinks/${this.props.drinkId}`} onClick={() =>{this.props.dispatch(setDrinkToShow(this.props.drink))}}>
-              <div className="card" style={{"width": "10rem"}}>
-                <img src={this.props.imgUrl} className="card-img-top" alt={this.props.name}></img>
+           <Link to={`/drinks/${this.props.drink.id}`} onClick={() =>{this.props.dispatch(setDrinkToShow(this.props.drink))}}>
+              <div className="card" style={{"width": "10rem", display:"block"}}>
+                <img src={this.props.drink.picture_url} className="card-img-top" alt={this.props.drink.name}></img>
                 <div className="card-block">
-                  <p className="card-text">{this.props.name}</p>
+                  <p className="card-text">{this.props.drink.name}</p>
                 </div>
               </div>
            </Link>
+           
         </div>
     ) 
   }
@@ -50,21 +51,3 @@ class DrinkCard extends Component {
   
   export default connect(mapStateToProps)(DrinkCard);
   
-
-  // function DrinkCard(props) {
-  //   console.log("DrinkCard",props)
-  //   // debugger
-  //     return(
-  //         <div>
-  
-  //            <Link to={`/drinks/${props.drinkId}`} onClick={() =>alert("HEY")}>
-  //               <div className="card" style={{"width": "10rem"}}>
-  //                 <img src={props.imgUrl} className="card-img-top" alt={props.name}></img>
-  //                 <div className="card-block">
-  //                   <p className="card-text">{props.name}</p>
-  //                 </div>
-  //               </div>
-  //            </Link>
-  //         </div>
-  //     ) 
-  //   }

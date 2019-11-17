@@ -32,9 +32,9 @@ class DrinksController < ApplicationController
         render plain: @secret
     end
 
-    def similar_drinks
+    def similar_drinks(drink_id)
         # To do that, take info from Drink card somehow and send to backend
-        drink_to_compare = "SOMETHING SENT TO BACKEND" #ex. <h1 id="name">.innerText and send to back
+        # drink_to_compare = "SOMETHING SENT TO BACKEND" #ex. <h1 id="name">.innerText and send to back
         # # This works if finding a drink by name and seeing if any drinks have same alcohol
         # Drink.select do |drink|
         #     drink.alcohols.any? do |alcohol|
@@ -56,34 +56,51 @@ class DrinksController < ApplicationController
         # 4. This still will include original drink, so find it and filter it out
              
         # REPLACE MARTINI CRAP with drink_to_compare
+        @id_of_drink_to_compare = Drink.find(drink_id).id
+
+        # Drink.select = go thru all drinks where |drink| represented a Drink obj being looked at
         @similar_drinks = Drink.select do |drink|
             drink.alcohols.any? do |alcohol|
-                Drink.find_by(name:"Martini").alcohols.include?(alcohol) && drink.name != "Martini"
+                Drink.find(@id_of_drink_to_compare).alcohols.include?(alcohol) && drink.id != @id_of_drink_to_compare
             end
         end.select do |drink2|
             drink2.flavors.any? do |flavor|
-                Drink.find_by(name:"Martini").flavors.include?(flavor)
+                Drink.find(@id_of_drink_to_compare).flavors.include?(flavor)
             end
         end.select do |drink3|
             drink3.types.any? do |type|
-              Drink.find_by(name:"Martini").types.include?(type)
+              Drink.find(@id_of_drink_to_compare).types.include?(type)
             end
         end
-        render json: @similar_drinks
+        return @similar_drinks
     end
 
-    def drinks_with_same_alc
+     def drinks_with_same_alc(id)
         # Same FIRST alcohol
 
-        drink_to_compare = "SOMETHING FROM FRONTEND"
+        drink_to_compare = Drink.find(id)
         
-        Drink.select do |drink|
+        @drinks = Drink.select do |drink|
             # Go thru all drinks, for one drink, go thru all its alcohols
             # If any match d_to_c's alcs && are NOT d_to_c, (true) get those drinks
             drink.alcohols.include?(drink_to_compare.alcohols[0]) && drink.name != drink_to_compare.name
             # Afterwards, randomize the array and take the first five elements
         end.shuffle.slice(0..4)
+        return @drinks
     end
+
+    # def drinks_with_same_alc
+    #     # Same FIRST alcohol
+
+    #     drink_to_compare = Drink.find(params[:id])
+        
+    #     Drink.select do |drink|
+    #         # Go thru all drinks, for one drink, go thru all its alcohols
+    #         # If any match d_to_c's alcs && are NOT d_to_c, (true) get those drinks
+    #         drink.alcohols.include?(drink_to_compare.alcohols[0]) && drink.name != drink_to_compare.name
+    #         # Afterwards, randomize the array and take the first five elements
+    #     end.shuffle.slice(0..4)
+    # end
 
     def classy_drinks
         @classy_drinks = Drink.select do |drink|
@@ -92,26 +109,63 @@ class DrinksController < ApplicationController
         render json: @classy_drinks
     end
 
-    def drinks_with_same_flav
-        drink_to_compare = "SOMETHING FROM FRONTEND"
-        
-        Drink.select do |drink|
-            # Go thru all drinks, for one drink, go thru all its flavors
-            # If any match d_to_c's flavs && are NOT d_to_c, (true) get those drinks
-            drink.flavors.include?(drink_to_compare.flavors[0]) && drink.name != drink_to_compare.name
-            # Afterwards, randomize the array and take the first five drinks
-        end.shuffle.slice(0..4)
+    def drinks_with_same_flav(id)
+            drink_to_compare = Drink.find(id)
+            
+            
+
+            @drinks_with_flav = Drink.select do |drink|
+                # Go thru all drinks, for one drink, go thru all its flavors
+                # If any match d_to_c's flavs && are NOT d_to_c, (true) get those drinks
+                drink.flavors.include?(drink_to_compare.flavors[0]) && drink.name != drink_to_compare.name
+                # Afterwards, randomize the array and take the first five drinks
+            end.shuffle.slice(0..4)
+            return @drinks_with_flav
+            
     end
 
-    def drinks_with_same_type
-        drink_to_compare = Drink.find_by(name: "SOMETHING FROM FRONTEND")
+    # def drinks_with_same_flav
+    #     drink_to_compare = Drink.find(params[:id])
         
-        Drink.select do |drink|
+    #     Drink.select do |drink|
+    #         # Go thru all drinks, for one drink, go thru all its flavors
+    #         # If any match d_to_c's flavs && are NOT d_to_c, (true) get those drinks
+    #         drink.flavors.include?(drink_to_compare.flavors[0]) && drink.name != drink_to_compare.name
+    #         # Afterwards, randomize the array and take the first five drinks
+    #     end.shuffle.slice(0..4)
+    # end
+
+     def drinks_with_same_type(id)
+        drink_to_compare = Drink.find(id)
+        
+        @drinks = Drink.select do |drink|
             # Go thru all drinks, for one drink, go thru all its types
             # If any match d_to_c's types && are NOT d_to_c, (true) get those drinks
             drink.types.include?(drink_to_compare.types[0]) && drink.name != drink_to_compare.name
             # Afterwards, randomize the array and take the first five drinks
         end.shuffle.slice(0..4)
+        return @drinks
+    end
+
+    # def drinks_with_same_type
+    #     drink_to_compare = Drink.find(params[:id])
+        
+    #     Drink.select do |drink|
+    #         # Go thru all drinks, for one drink, go thru all its types
+    #         # If any match d_to_c's types && are NOT d_to_c, (true) get those drinks
+    #         drink.types.include?(drink_to_compare.types[0]) && drink.name != drink_to_compare.name
+    #         # Afterwards, randomize the array and take the first five drinks
+    #     end.shuffle.slice(0..4)
+    # end
+
+    def return_drink_arrays
+        @id = params[:id]
+        # byebug
+        render json: {drinks_with_same_flav: drinks_with_same_flav(@id),
+        drinks_with_same_alc: drinks_with_same_alc(@id),
+        drinks_with_same_type: drinks_with_same_type(@id),
+        similar_drinks: similar_drinks(@id)            
+        }
     end
 
     def show_random_drink

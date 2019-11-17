@@ -31,7 +31,7 @@ class DrinkCard extends Component {
       <div style={{width:"11rem",display:"inline-block",float:"left"}}
       >
 
-           <Link to={`/drinks/${this.props.drink.id}`} onClick={() =>{this.props.dispatch(setDrinkToShow(this.props.drink))}}>
+           <Link className="card-link" to={`/drinks/${this.props.drink.id}`} onClick={() =>{this.props.dispatch(setDrinkToShow(this.props.drink))}}>
               <div className="card" style={{"width": "10rem", display:"block"}}>
                 <img src={this.props.drink.picture_url} className="card-img-top" alt={this.props.drink.name}></img>
                 <div className="card-block">

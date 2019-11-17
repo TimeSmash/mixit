@@ -91,7 +91,7 @@ class Drink extends Component{
             })
             this.getAllSimilarDrinkArrays()
         } else {
-            console.log("Else")
+            this.getAllSimilarDrinkArrays()
         }
         
     }
@@ -172,7 +172,7 @@ class Drink extends Component{
                     </div>
 
                     <div className="card-stacked" style={{minHeight:"27em"}}>
-                        {/* <h1 style={{marginTop:"-1em"}}>BITCH</h1> */}
+                        
                         <div className="card-content" >
                             <ul style={{marginLeft:"17em",marginTop:"1em",position:"relative",fontSize:"1.5em",textAlign:"left"}}>
                                 <li><span style={{fontWeight:"bolder"}}>Name: </span>{this.props.drinkToShow.name}</li>

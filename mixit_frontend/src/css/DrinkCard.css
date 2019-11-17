@@ -30,6 +30,13 @@
 .card-text{
     /* opacity:0.6; */
     color:black;
+    text-align:center;
+    font-family: "Arial";
+    /* background:#CCC */
+}
+
+.card-link:hover{
+    text-decoration:none;
 }
 
 /* The use of transition and opacity gives a fade-in effect */

@@ -71,7 +71,8 @@ class DrinksController < ApplicationController
             drink3.types.any? do |type|
               Drink.find(@id_of_drink_to_compare).types.include?(type)
             end
-        end
+        end.delete_if{|drink| drink.id === @id_of_drink_to_compare}.slice(0..4)
+
         return @similar_drinks
     end
 
@@ -181,6 +182,12 @@ class DrinksController < ApplicationController
             drink.name.downcase.include?(params[:name].downcase)
         end
         render json: @drinks_including_name
+    end
+
+    def get_id_ranges
+        @lowest_id = Drink.first.id
+        @highest_id = Drink.last.id
+        render json: {lowestId: @lowest_id, highestId: @highest_id}
     end
 
     # route = post 'search_by_alcohol/:alcohol', to: 'drinks#search_by_alcohol'

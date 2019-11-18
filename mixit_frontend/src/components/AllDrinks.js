@@ -23,7 +23,7 @@ class AllDrinks extends Component {
         // }
 
     componentDidMount(){
-        console.log("cDM says this.state.page is", this.state.page)
+        // console.log("cDM says this.state.page is", this.state.page)
         this.getDrinksAndInfoFromPage(this.props.startingPage)
     }
 
@@ -48,9 +48,9 @@ class AllDrinks extends Component {
         )
     .then(res=> res.json())
     .then(json=> {
-        console.log("data retrieved from page "+page,json) //gets new array of Drink objects
+        // console.log("data retrieved from page "+page,json) //gets new array of Drink objects
         // Then set dAPI to json, page to current page
-        this.setState({drinkAndPageInfo: json, page: page, loading: false})
+        this.setState({drinkAndPageInfo: json, loading: false})
         // Could also do: this.setState({drinkAndPageInfo: json, page: json.drinks.page, loading: false}) to get data from backend for current page
         // this.setState({drinkAndPageInfo: json, loading: false})    
         if (document.getElementsByClassName('active')[0].innerText === "1" && page !== 1) {
@@ -133,7 +133,7 @@ class AllDrinks extends Component {
                       disableInitialCallback={true}
                     />`
                         <div className="card-deck"style={{width:"90%",marginLeft:"8.5em"}}>
-                            {/* {this.getDrinksAndInfoFromPage(this.state.page)} */}
+                            
                             {this.allDrinks()}
                         </div>
                     </div>

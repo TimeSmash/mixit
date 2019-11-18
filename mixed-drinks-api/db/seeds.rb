@@ -21,7 +21,7 @@
 
 
  
-#  ALCOHOLS 
+# ALCOHOLS 
 champagne = "Champagne"
 prosecco = "Prosecco"
 vodka = "Vodka"
@@ -29,10 +29,11 @@ gin = "Gin"
 whiskey = "Whiskey"
 tequila = "Tequila"
 brandy = "Brandy"
-cognac = "cognac"
+cognac = "Cognac"
 rum = "Rum"
 absinthe = "Absinthe"
 cachaca = "Cachaça"
+
 scotch = "Scotch"
 vermouth = "Vermouth"
 soju = "Soju"
@@ -55,7 +56,7 @@ red_wine = "Red Wine"
 beer = "Beer"
 calvados = "Calvados"
 sake = "sake"
-# ??????
+
 
 # APERTIFS
 aperol = "Aperol" 
@@ -63,8 +64,9 @@ ouzo = "Ouzo"
 raki = "Raki"
 
 # LIQUERS
-liquer = "Liquer" 
-chambord = "Chambord" 
+
+chambord = "Chambord (raspberry liqueur)" 
+cynar = "Cynar (artichoke-based liqueur" #digestif but also apertif? b/c it's bittersweet
 amaretto = "Amaretto Liqueur" 
 rasp_liquer = "Raspberry Liqueur"
 coffee_liqueur = "Coffee Liqueur"
@@ -72,6 +74,7 @@ maraschino_liqueur = "Maraschino liqueur"
 creme_de_cassis = "Crème de cassis"
 creme_de_cacao = "Crème de cacao"
 creme_de_menthe = "Crème de menthe"
+creme_de_violette = "Crème de violette"
 
 
 ##### FLAVORS ##### 
@@ -95,7 +98,7 @@ mulled = "Mulled"
 smoky = "Smoky"
 dry = "Dry"
 cinnamon = "Cinnamon"
-apertif = "Apertif" 
+ 
 
 #  .TYPES 
 
@@ -104,17 +107,17 @@ classic = "Classic"
 casual = "Casual"
 easily_classed_up = "Easily Classed Up"
 easy_to_make = "Easy To Make"
-hard_to_make = "Hard To Make"
+hard_to_make = "Hard To Make" #!!
 cheap = "Cheap"
-expensive = "Expensive"
+# expensive = "Expensive"
 party = "Party/Celebration"
-college = "College"
-frozen = "Frozen"
-hot = "Hot"
-bubbly = "Bubbly"
+college = "College" 
+frozen = "Frozen" #!!
+hot = "Hot" #None so far
+bubbly = "Bubbly" 
 unique = "Unique"
-holiday = "Holiday"
-themed = "Themed"
+holiday = "Holiday" #None so far
+themed = "Themed" #None so far
 iba_unforgettable = "IBA Unforgettables"
 iba_classic = "IBA Contemporary Classics"
 iba_new = "IBA New Era"
@@ -172,7 +175,7 @@ mint_julep = Drink.create(
     name: "Mint Julep",
     alcohols:[bourbon],
     flavors:[minty, sweet],
-    types:[classic, hard_to_make, iba_classic, party],
+    types:[classic, hard_to_make, iba_classic, party, college],
     color: yellow,
     picture_url:"https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/cold-refreshing-classic-mint-julep-royalty-free-image-526283900-1553696390.jpg?resize=768:*",
     picture_credit:"Getty Images",
@@ -766,7 +769,7 @@ aviation = Drink.create(
 water_lily = Drink.create(
     name: "Water Lily",
     alcohols: [gin, triple_sec, creme_de_violette],
-    flavors: [floral, citrus],
+    flavors: [herbal, citrus],
     types: [unique, classy],
     color: purple,
     picture_url: "https://www.saveur.com/resizer/J9qha0ryJ3Tqfx4SlxcytiWSnyk=/1034x689/arc-anglerfish-arc2-prod-bonnier.s3.amazonaws.com/public/QNIAB53FRHKQWGGQD7J7MVVKYE.jpg",
@@ -782,40 +785,51 @@ water_lily = Drink.create(
 
 old_pal = Drink.create(
     name: "Old Pal",
-    alcohols: ,
-    flavors: ,
-    types: ,
-    color: ,
-    picture_url: ,
-    picture_credit: ,
-    recipe: ,
-    recipe_url: ,
-    additional_notes:
+    alcohols: [rye_whiskey, vermouth, campari],
+    flavors: [dry, bitter],
+    types: [classic],
+    color: red,
+    picture_url: "https://assets.bonappetit.com/photos/57afb4f21b33404414975ded/16:9/w_1280,c_limit/old-pal.jpg",
+    picture_credit: "bonappetit.com",
+    recipe: "1 oz Rye whiskey
+        1 oz Dry vermouth
+        1 oz Campari",
+    recipe_url: "https://www.liquor.com/recipes/old-pal/#gs.gq5rq2",
+    additional_notes: "The Old Pal is closely related to the Boulevardier."
+)
+
+rabo_de_gaho= Drink.create(
+    name: "Rabo de Gaho",
+    alcohols: [cachaca, vermouth, cynar],
+    flavors: [herbal, bitter],
+    types: [casual],
+    color: brown,
+    picture_url: "http://www.saopauloinfoco.com.br/wp-content/uploads/2018/02/rabo_de_galo_yaguara___foto_kato.jpg",
+    picture_credit: "saopauloinfoco.com.br",
+    recipe: "1.5 oz Novo Fogo “Chameleon” Cachaça,
+        0.75 oz sweet vermouth,
+        0.75 oz Cynar,
+        2 dashes Scrappy’s Orange Bitters",
+    recipe_url: "https://www.novofogo.com/cocktail-recipe-rabo-de-galo/",
+    additional_notes: "The Rabo de Gaho can be made with equal parts cachaca and vermouth or Cynar. Some recipes, such as the one here, opt to half each to include both. "
+)
+
+sin_cyn= Drink.create(
+    name: "Sin Cyn",
+    alcohols: [cynar, scotch,vermouth],
+    flavors: [herbal],
+    types: [classy,apertif],
+    color: brown,
+    picture_url: "https://cdn.liquor.com/wp-content/uploads/2018/09/27134903/sin-cyn-720x720-recipe.jpg",
+    picture_credit: "liquor.com",
+    recipe: "1 oz The Macallan 12-year-old single-malt scotch,
+        1 oz Cynar,
+        1 oz Carpano Antica Formula vermouth",
+    recipe_url: "https://www.liquor.com/recipes/sin-cyn/#gs.gq12cr",
+    additional_notes: "Spelled in a variety of ways, the Sin Cyn is somewhat related to the Negroni."
 )
 
 # # = Drink.create(
-# #     name: ,
-# #     alcohols: ,
-# #     flavors: ,
-# #     types: ,
-# #     color: ,
-# #     picture_url: ,
-# #     picture_credit: ,
-# #     recipe: ,
-# #     recipe_url: ,
-# #     additional_notes:
-# # )# # = Drink.create(
-# #     name: ,
-# #     alcohols: ,
-# #     flavors: ,
-# #     types: ,
-# #     color: ,
-# #     picture_url: ,
-# #     picture_credit: ,
-# #     recipe: ,
-# #     recipe_url: ,
-# #     additional_notes:
-# # )# # = Drink.create(
 # #     name: ,
 # #     alcohols: ,
 # #     flavors: ,

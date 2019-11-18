@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import {BACKEND_URL} from '../constants'
 import DrinkCard from './DrinkCard'
 
+import {setDrinkToShow} from '../actions/drink-actions'
+
 class Drink extends Component{
 
 
@@ -39,14 +41,19 @@ class Drink extends Component{
     idFromLocation = () => {
         let url = window.location+""
         let lastSlash = url.lastIndexOf("/")
-        let id = url.substring(lastSlash+1)
-        return id
+        let id = parseInt(url.substring(lastSlash+1))
+        if (typeof id === "number" && (id+"" !== "NaN")){
+            return id
+        } else {
+            return id + ""
+        }
     }
 
     ingId = 1
 
     getAllSimilarDrinkArrays = () =>{
-        if (this.idFromLocation() === this.props.drinkToShow.id){
+        //if the url's drink id doesn't match the store.drinkToShowId, favor the url
+        if (this.idFromLocation() !== this.props.drinkToShow.id){
             fetch(BACKEND_URL+'/similar_drinks/'+this.idFromLocation())
             .then(res => res.json())
             .then(json => {
@@ -71,74 +78,135 @@ class Drink extends Component{
         }   
     }
 
-    // USING URL TO GET THE DRINK WITH FETCH
-    //EASIER BUT SLOWER, NOT GREAT WAY OF TRANSFERRING DATA THROUGHOUT APP
-    componentDidMount() {
-        // covers url and storw.drinkToShow id discrepancies (see render for more info)
-        
-        //if url endpath is same as Redux's store id
-        if (this.idFromLocation() === this.props.drinkToShow.id){
-            //Then the data being presented is correct, only get the similar drink recommendations
-            
-            return this.getAllSimilarDrinkArrays()
-        } else if (typeof this.idFromLocation() === "number"){
-            // Then fetch the right drink that matches with the url, and also get drink recommendations based off that
-            fetch(BACKEND_URL+'/drinks/'+this.idFromLocation())
+    getDrinkArrays = (id) =>{
+        fetch(BACKEND_URL+'/similar_drinks/'+id)
             .then(res => res.json())
             .then(json => {
-                console.log("cDM",json)
-                this.setState({drink: json.data.attributes})
+                console.log(json)
+                this.setState({similarAlcoholDrinks: json.drinks_with_same_alc,
+                    similarFlavorDrinks: json.drinks_with_same_flav,
+                    similarTypeDrinks: json.drinks_with_same_type,
+                    similarGeneralDrinks: json.similar_drinks
+                })
             })
-            this.getAllSimilarDrinkArrays()
-        } else {
-            this.getAllSimilarDrinkArrays()
-        }
-        
     }
 
+    componentWillMount(){
+        console.log("component about to mount")
+    }
 
+    // USING URL TO GET THE DRINK WITH FETCH
+    //EASIER BUT SLOWER, NOT GREAT WAY OF TRANSFERRING DATA THROUGHOUT APP
+    // componentDidMount() {
+    //     // covers url and storw.drinkToShow id discrepancies (see render for more info)
+    //     console.log("ComponentDidMount about to take action \n \n")
+        
+    //     //if url endpath is same as Redux's store id
+    //     if (this.idFromLocation() === this.props.drinkToShow.id){
+    //         //Then the data being presented is correct, only get the similar drink recommendations
+    //         console.log("Url endpoint matches store.drinkToShow.id")
+    //         return this.getAllSimilarDrinkArrays()
+    //     } else if (this.idFromLocation() !== this.props.drinkToShow.id && typeof this.idFromLocation() === "number"){
+    //         // Then fetch the right drink that matches with the url, and also get drink recommendations based off that
+    //         console.log("Url doesn't match store.drinkToShow.id. URL ID",this.idFromLocation())
+    //         fetch(BACKEND_URL+'/drinks/'+this.idFromLocation())
+    //         .then(res => res.json())
+    //         .then(json => {
+    //             console.log("cDM",json)
+    //             this.setState({drink: json.data.attributes})
+    //         })
+    //         this.getAllSimilarDrinkArrays()
+    //     } else {
+    //         console.log("CDM NO-SELL HIT")
+    //         debugger
+    //         this.getAllSimilarDrinkArrays()
+    //     }
+    //     console.log("componentDidMount finished")
+    // }
+
+    componentWillUnmount() {
+        console.log("component will unmount soon")
+    }
+
+    componentWillUpdate(){
+        console.log("component going to update")
+    }
 
     //could also have localStorage.setItem({drinkId: drink's id}) or ({drink: drink}) as onClick in DrinkCard
     //Then here we could localStorage.getState and either cdM with id or setState with whole drink obj
 
-    // getDrinksWithSameFlavor = () =>{
-    //     fetch(BACKEND_URL+'/drinks_with_same_flav/'+this.idFromLocation())
-    //     .then(res => res.json())
-    //     .then(json => {
-    //         console.log("Drinks with same flav",json)
-    //         this.setState({flavDrinks: json})
-    //     })
-    // }
+    
 
     makeDrinkCardsWithSame = (quality) =>{
         switch(quality){
             case "alcohol":
-                return this.state.similarAlcoholDrinks.map(drink => <DrinkCard drink={drink}/>)
+                return this.state.similarAlcoholDrinks.map(drink => <DrinkCard key={drink.id} drink={drink}/>)
             case "flavor":
-                return this.state.similarFlavorDrinks.map(drink => <DrinkCard drink={drink}/>)
+                return this.state.similarFlavorDrinks.map(drink => <DrinkCard key={drink.id} drink={drink}/>)
             case "type":
-                return this.state.similarTypeDrinks.map(drink => <DrinkCard drink={drink}/>)
+                return this.state.similarTypeDrinks.map(drink => <DrinkCard key={drink.id} drink={drink}/>)
             case "generalities":
-                return this.state.similarGeneralDrinks.map(drink => <DrinkCard drink={drink}/>)
+                return this.state.similarGeneralDrinks.map(drink => <DrinkCard key={drink.id} drink={drink}/>)
+            default:
+                return null
         }
     }
 
     reRenderIfStateDifferentThanStore = () => {
-        if (this.state.drink.name !== this.props.drinkToShow.name){
-            // console.log("No match, state drink", this.state.drink)
-            // console.log("No match, store drink", this.props.drinkToShow)
-            this.getAllSimilarDrinkArrays(this.props.drinkToShow.id)
-            this.setState({drink: this.props.drinkToShow})
+        
+        // if (this.idFromLocation() !== this.props.drinkToShow.id) {
+            
+        //     console.log("store id", this.props.drinkToShow.id)
+        //     console.log("url id", this.idFromLocation())
+        //     // this.props.history.push('/'+this)
+        //     fetch(BACKEND_URL+'/drinks/'+this.idFromLocation())
+        //     .then(res => res.json())
+        //     .then(json => {
+        //         console.log("cDM",json)
+        //         this.props.dispatch(setDrinkToShow(json.data.attributes))
+        //         this.setState({drink: json.data.attributes})
+        //     })
+            
+
+        //  } else 
+        if (this.idFromLocation() !== this.props.drinkToShow.id){
+            console.log("No match, id of url drink", this.idFromLocation())
+            console.log("No match, store drink", this.props.drinkToShow)
+            console.log("reRender fxn triggered, drink url and store no match")
+            
+            //get and set the right drink based on url
+            fetch(BACKEND_URL+'/drinks/'+this.idFromLocation())
+            .then(res => res.json())
+            .then(json => {
+                console.log("cDM",json)
+                this.props.dispatch(setDrinkToShow(json.data.attributes))
+                this.getDrinkArrays(this.idFromLocation())
+            })
+            // this.setState({drink: this.props.drinkToShow})
         } else{
-            // console.log("DrinkClass.state and store.drink match")
+            //if they match, get from store.drinkToShow
+            console.log("Url and  and store.drink match")
+            //ONLY set state (again) if the types array is 0 (at least 1 item in this array for all drinks as checked in backend)
+            if (this.state.similarTypeDrinks.length ===0) {
+                console.log("YOU SHOULD ONLY SEE THIS RERENDER ONCE \n")
+                this.getDrinkArrays(this.props.drinkToShow.id)
+            }
         }
     }
     
     render(){
+        console.log("New RENDER at " +  (new Date()).getHours() + ":" + (new Date()).getMinutes() + ":" + (new Date()).getSeconds())
+        console.log( this.idFromLocation() === null ? console.log(window.location.href) : "Rendering, id of url is", this.idFromLocation()
+            )
+        // debugger
         console.log("DrinkClass props DRINK TO SHOW",this.props.drinkToShow)
-        console.log("DrinkClass state",this.state)
-        {this.reRenderIfStateDifferentThanStore()}
+        // console.log("DrinkClass state",this.state)
         window.scrollTo(0, 0)
+        if (window.scrollY === 0) {
+
+        }
+        {this.reRenderIfStateDifferentThanStore()}
+        
         // console.log("L",window.location.href)
         // if (this.idFromLocation() === this.props.drinkToShow.id){
         //     return null
@@ -175,24 +243,26 @@ class Drink extends Component{
                         
                         <div className="card-content" >
                             <ul style={{marginLeft:"17em",marginTop:"1em",position:"relative",fontSize:"1.5em",textAlign:"left"}}>
-                                <li><span style={{fontWeight:"bolder"}}>Name: </span>{this.props.drinkToShow.name}</li>
+                                <li key={1}><span style={{fontWeight:"bolder"}}>Name: </span>{this.props.drinkToShow.name}</li>
                                 
-                                <li><span style={{fontWeight:"bolder"}}>Alcohols: </span>{this.ifNotUndefinedReturnData(this.props.drinkToShow.alcohols,"array").join(", ")}</li>
+                                <li key={2}><span style={{fontWeight:"bolder"}}>Alcohols: </span>{this.ifNotUndefinedReturnData(this.props.drinkToShow.alcohols,"array").join(", ")}</li>
 
-                                <li><span style={{fontWeight:"bolder"}}>Flavors: </span>{this.ifNotUndefinedReturnData(this.props.drinkToShow.flavors,"array").join(", ")}</li>
+                                <li key={3}><span style={{fontWeight:"bolder"}}>Flavors: </span>{this.ifNotUndefinedReturnData(this.props.drinkToShow.flavors,"array").join(", ")}</li>
 
-                                <li><span style={{fontWeight:"bolder"}}>Types: </span>{this.ifNotUndefinedReturnData(this.props.drinkToShow.types,"array").join(", ")}</li>
+                                <li key={4}><span style={{fontWeight:"bolder"}}>Types: </span>{this.ifNotUndefinedReturnData(this.props.drinkToShow.types,"array").join(", ")}</li>
 
-                                <li><span style={{fontWeight:"bolder"}}>Color: </span>{this.props.drinkToShow.color}</li>
+                                <li key={5}><span style={{fontWeight:"bolder"}}>Color: </span>{this.props.drinkToShow.color}</li>
 
-                                <li><span style={{fontWeight:"bolder"}}>Ingredients: </span><ul>{this.ifNotUndefinedReturnData(this.props.drinkToShow.recipe,"string").split(",").map( ingred => <li key={"ingredient-"+this.ingId++} style={{fontSize:"0.7em"}}>{ingred}</li>)}</ul></li>
+                                <li key={6}><span style={{fontWeight:"bolder"}}>Ingredients: </span>
+                                    <ul>{this.ifNotUndefinedReturnData(this.props.drinkToShow.recipe,"string").split(",").map( ingred => <li key={"ing"+this.ingId++} style={{fontSize:"0.7em"}}>{ingred}</li>)}</ul></li>
 
-                                <li><span style={{fontWeight:"bolder"}}>Recipe Link: </span><a href={this.props.drinkToShow.recipe_url}style={{color:"blue"}} target="_blank">Click Here!</a></li>
-                                <li><span style={{fontWeight:"bolder"}}>Additional Notes: </span>{this.props.drinkToShow.additional_notes}</li>
+                                <li key={7}><span style={{fontWeight:"bolder"}}>Recipe Link: </span><a href={this.props.drinkToShow.recipe_url}style={{color:"blue"}} target="_blank">Click Here!</a></li>
+                                <li key={8}><span style={{fontWeight:"bolder"}}>Additional Notes: </span>{this.props.drinkToShow.additional_notes}</li>
                             </ul>
                         </div> {/* end card-content */}
                     </div> {/* end card-stacked */}
                 </div>{/* end card-horizontal (the whole card) */}
+                {/* Consider making DRYer */}
                 <div style={{display:"inline",textAlign:"left",clear:"both"}}>
                     <h1 style={{clear:"both"}}>If you like this, check out these drinks:</h1>
                     {this.makeDrinkCardsWithSame("generalities")}

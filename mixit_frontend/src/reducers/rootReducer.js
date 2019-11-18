@@ -1,5 +1,6 @@
 import exampleReducer from './exampleReducer.js'
 import drinkReducer from './drinkReducer'
+import drinkIdRangeReducer from './drinkIdRangeReducer'
 import {combineReducers} from 'redux'
  
 
@@ -11,7 +12,8 @@ import {combineReducers} from 'redux'
 
 const rootReducer = combineReducers({
     // example: exampleReducer, //set the state of color to be whatever reducer returns, THIS DOES NOT MATTER AT ALL
-    drinkToLoad: drinkReducer
+    drinkToLoad: drinkReducer,
+    drinkIdRange: drinkIdRangeReducer
 });
 
 export default rootReducer

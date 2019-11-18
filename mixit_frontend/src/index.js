@@ -57,7 +57,7 @@ export const persistor = persistStore(store);
 //OLD: create the store using rootReducer(has many reducers in it) and initialize with initialStore (preloadedState)
 // const store = createStore(rootReducer, initialStore);
 
-store.subscribe( () => { console.log("current store/state", store.getState()) } )
+store.subscribe( () => { console.log("Subscribe: current store/state", store.getState()) } )
 
 ReactDOM.render(
     <Provider store={store}>

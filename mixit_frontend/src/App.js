@@ -14,7 +14,11 @@ import DrinksContainer from './components/DrinksContainer';
 import DrinkClass from './components/DrinkClass';
 import NavBar from './components/NavBar';
 
-// OTHER
+// REDUX ACTION CREATORS
+
+import {setDrinkIdRanges} from './actions/drink-actions'
+
+// CONSTANTS
 
 import {BACKEND_URL} from './constants.js'
 
@@ -92,13 +96,32 @@ exampleProps = "I got this sentence from App"
     })
   }
   
-  
+  //DELETE IF NO WORK
+  getRangeOfDrinkIdsIfNotInStore = () => {
+    //use Object.keys.length because store.drinkIdRange may start off as {} (truthy)
+    //BUT {} has no keys => length of keys is 0 => zero is falsy => activate
+    if (this.props.drinkIdRange && Object.keys(this.props.drinkIdRange).length) {
+      // if we already have the range, no one cares
+      return null
+    } else {
+      console.log("Retrieveing drink id range")
+      //if we don't have it, get it from backend and dispatch to store
+      fetch(BACKEND_URL+'/get_id_ranges')
+      .then(res => res.json())
+      .then(range=>{
+        console.log("Drink id range retrieved: ",range)
+        // should be {lowestId: #, highestId: # }
+        this.props.dispatch(setDrinkIdRanges(range))
+      })
+    }
+  }
 
   componentDidMount(){
+    
     // Keep the user logged in!
     let token = localStorage.getItem("token")
 
-    if (token){
+    if (token && token!=="undefined"){
       fetch(BACKEND_URL+"/retrieve_user",{
         headers: {"Authorization": token}
       })
@@ -108,6 +131,12 @@ exampleProps = "I got this sentence from App"
         console.log("App state after cDM", this.state)
         // this.props.history.push('/welcome')
       })
+      //Then check if drinkIdRange is filled in using below fxn
+      this.getRangeOfDrinkIdsIfNotInStore()
+    } else {
+      console.log("No token, MAKE REDIRECT FUNCTION TO LOGIN PAGE")
+      // remove this later, using now for testing purposes
+      this.getRangeOfDrinkIdsIfNotInStore()
     }
   }
 
@@ -152,8 +181,9 @@ exampleProps = "I got this sentence from App"
   }
 }
 
+//remmeber this also bestows dispatch functionality
 function mapStateToProps(state){
-  return {}
+  return {drinkIdRange: state.drinkIdRange}
 }
 
 // function mapDispatchToProps(dispatch) { 	   

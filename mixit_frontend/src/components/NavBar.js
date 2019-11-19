@@ -46,6 +46,7 @@ class NavBar extends Component {
     
     //Get id ranges when App initializes, store in Redux store then get radnom num from store
     componentDidMount(){
+        console.log("NavBar mounted")
         this.getRandomDrinkId()
     }
 

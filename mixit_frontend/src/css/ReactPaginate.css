@@ -85,13 +85,11 @@ a{
 }
 
 
-.previous a:hover{
+.previous-link:hover{
     text-decoration:none;
+    cursor: pointer;
     color:white
 }
-
-
-
     
 .next{
     border:1px solid black;
@@ -101,8 +99,9 @@ a{
     font-size: 2em;
 }
 
-.next a:hover{
+.next-link:hover{
     text-decoration:none;
+    cursor:pointer; 
     color:white
 }
 

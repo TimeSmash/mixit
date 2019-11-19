@@ -828,9 +828,41 @@ sin_cyn= Drink.create(
     recipe_url: "https://www.liquor.com/recipes/sin-cyn/#gs.gq12cr",
     additional_notes: "Spelled in a variety of ways, the Sin Cyn is somewhat related to the Negroni."
 )
+toronto = Drink.create( name: "Toronto",
+     alcohols:[whiskey, fernet],
+     flavors:[dry,bitter, herbal], 
+     types:[classic],
+     color: brown,
+     picture_url:" https://cdn.liquor.com/wp-content/uploads/2017/03/17132350/toronto-720x720-recipe.jpg",
+     picture_credit: "liquor.com",
+     recipe: "2 oz. Alberta Premium Canadian whisky,
+        1/4 oz. Fernet-Branca digestif,
+        1/4 oz. Simple syrup,
+        3 dashes Angostura bitters",
+     recipe_url: "https://cdn.liquor.com/wp-content/uploads/2017/03/17132350/toronto-720x720-recipe.jpg",
+     additional_notes: "The Toronto is similarly structured to the Old Fashioned, and is often the primary cocktail associated with the use of Fernet." )
 
+
+  michelada = Drink.create( name: "Michelada",
+     alcohols:[beer],
+     flavors:[spicy, savory, citrus],
+     types:[casual],
+     color: amber,
+     picture_url:" https://www.seriouseats.com/recipes/images/2017/06/20170621-michelada-chelada-vicky-wasik-8.jpg",
+     picture_credit: "seriouseats.com",
+     recipe: "Taijin or other chili-salt blend,
+     Kosher or sea salt,
+     2 oz. fresh lime juice from 2 limes,
+     half a juiced lime reserved for the rim,
+     2 tsp hot sauce,
+     1 tsp Worcestershire sauce,
+     1 12-oz can or bottle light Mexican beer",
+     recipe_url: " https://www.seriouseats.com/recipes/2017/06/perfect-michelada-mexican-beer-cocktail-recipe.html"
+     additional_notes: "The rim of this drink can either be salt or a chili-salt mix."
+)
 # # = Drink.create(
 # #     name: ,
+
 # #     alcohols: ,
 # #     flavors: ,
 # #     types: ,

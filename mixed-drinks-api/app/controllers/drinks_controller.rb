@@ -61,7 +61,7 @@ class DrinksController < ApplicationController
         # Drink.select = go thru all drinks where |drink| represented a Drink obj being looked at
         @similar_drinks = Drink.select do |drink|
             drink.alcohols.any? do |alcohol|
-                Drink.find(@id_of_drink_to_compare).alcohols.include?(alcohol) && drink.id != @id_of_drink_to_compare
+                Drink.find(@id_of_drink_to_compare).alcohols.include?(alcohol) 
             end
         end.select do |drink2|
             drink2.flavors.any? do |flavor|
@@ -80,7 +80,7 @@ class DrinksController < ApplicationController
         # Same FIRST alcohol
 
         drink_to_compare = Drink.find(id)
-        
+        # byebug
         @drinks = Drink.select do |drink|
             # Go thru all drinks, for one drink, go thru all its alcohols
             # If any match d_to_c's alcs && are NOT d_to_c, (true) get those drinks

@@ -16,7 +16,8 @@ class AllDrinks extends Component {
     state = { loading: true,
               drinkAndPageInfo: {},
               page: 1  }
-    // drinkAndPageInfo 
+    // drinkAndPageInfo
+
 // eslint-disable-next-line
         // componentWillMount(){
         //     console.log("cdW")
@@ -32,11 +33,12 @@ class AllDrinks extends Component {
     // }
    
     // drinkAndPageInfo format {drinks: Array(14), page: 1, pages: 5}
+    
     getDrinksAndInfoFromPage = (page) => {
         // First get info from clicked page #
         
         // this.setState({loading:true})
-        
+        console.log("Page's value in getDrinsAndInfo is ",page)
         fetch(BACKEND_URL+"/all_drinks_paginated/"+page,
         {
             method: "GET",
@@ -46,20 +48,29 @@ class AllDrinks extends Component {
           }
         }
         )
-    .then(res=> res.json())
-    .then(json=> {
-        // console.log("data retrieved from page "+page,json) //gets new array of Drink objects
+        .then(res=> res.json())
+        .then(json=> {
+        // console.log("data retrieved from page "+page,json) //gets/shows new array of Drink objects
         // Then set dAPI to json, page to current page
         this.setState({drinkAndPageInfo: json, loading: false})
         // Could also do: this.setState({drinkAndPageInfo: json, page: json.drinks.page, loading: false}) to get data from backend for current page
-        // this.setState({drinkAndPageInfo: json, loading: false})    
-        if (document.getElementsByClassName('active')[0].innerText === "1" && page !== 1) {
-            document.getElementsByClassName('disabled')[0].classList.remove("disabled")
-        }    
-        document.getElementsByClassName('active')[0].classList.remove("active")
-        var headings = document.evaluate(`//li[contains(., ${page})]`, document, null, XPathResult.ANY_TYPE, null );
-        var thisHeading = headings.iterateNext()
-        thisHeading.className += " active"
+        // this.setState({drinkAndPageInfo: json, loading: false})   
+        
+        //active starts off as 1 always, then changes based on url. Previous-Disabled doesn't follow this change
+        //So if the url's page number is NOT 1, remove disabled so it can be clicked when correct page is active 
+        // if (document.getElementsByClassName('active')[0].innerText === "1" && page !== 1) {
+        //     // debugger
+        //     document.getElementsByClassName('disabled')[0].classList.remove("disabled")
+        //     //if we are going to go to the last page though, add disabled onto the Next button
+        //     if (page === json.page_count) {
+        //         document.getElementsByClassName('next')[0].classList.add("disabled")
+        //     }
+        // } 
+
+        // document.getElementsByClassName('active')[0].classList.remove("active")
+        // var headings = document.evaluate(`//li[contains(., ${page})]`, document, null, XPathResult.ANY_TYPE, null );
+        // var thisHeading = headings.iterateNext()
+        // thisHeading.className += " active"
     })
 }
 
@@ -80,9 +91,10 @@ class AllDrinks extends Component {
 
     handlePageClick = (event) => {
         //Points to the route using page # as arg, Route loads AllDrinks using page # as startingPage prop
-        document.getElementsByClassName('active')[0].classList.remove("active")
-
-
+        //So when click page #, /drinks/all_drinks/# is route, startingPage is
+        // document.getElementsByClassName('active')[0].classList.remove("active")
+        this.setState({loading:true})
+        // if (event.selected !== 4) {document.getElementsByClassName('next')[0].classList.remove("disabled")}
         this.props.history.push("/drinks/all_drinks/"+(event.selected+1))
         console.log("page clicked",event)
         this.getDrinksAndInfoFromPage(event.selected+1)
@@ -117,7 +129,8 @@ class AllDrinks extends Component {
                       previousLinkClassName={'previous-link'}
                       breakClassName={'break-me'}
                       nextClassName={'next'}
-
+                      nextLinkClassName={'next-link'}
+                      
                       pageClassName={'page'}
                       pageLinkClassName={'page-link'}
 
@@ -127,8 +140,8 @@ class AllDrinks extends Component {
                       pageCount={this.state.drinkAndPageInfo.page_count} //total pages
                       marginPagesDisplayed={2}
                       pageRangeDisplayed={5}
-                    
-                       //a page is treated like an item in array, therefore [0] is the 1st page
+                      forcePage={this.state.drinkAndPageInfo.page-1}  
+                       
                       onPageChange={(event) => {this.handlePageClick(event)} /*Fxn when page clicked*/}
                       disableInitialCallback={true}
                     />`

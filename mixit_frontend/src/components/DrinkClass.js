@@ -6,7 +6,7 @@ import DrinkCard from './DrinkCard'
 import {setDrinkToShow} from '../actions/drink-actions'
 
 class Drink extends Component{
-
+    //THIS DOES NOT RERENDER OR REMOUNT UPON HITTING BACK/FORWARD IN BROWSER
 
     // by saying al the components of drink in state, I can avoid use of ifNotUndefinedReturnData
     state = {drink: this.props.drinkToShow,
@@ -132,6 +132,9 @@ class Drink extends Component{
         console.log("component going to update")
     }
 
+    //Problem: Drink loads fine from Drink Card under related drinks arrays,
+    // BUT when go back, drink info stays the same
+
     //could also have localStorage.setItem({drinkId: drink's id}) or ({drink: drink}) as onClick in DrinkCard
     //Then here we could localStorage.getState and either cdM with id or setState with whole drink obj
 
@@ -200,11 +203,9 @@ class Drink extends Component{
             )
         // debugger
         console.log("DrinkClass props DRINK TO SHOW",this.props.drinkToShow)
-        // console.log("DrinkClass state",this.state)
+        console.log("DrinkClass state",this.state)
         window.scrollTo(0, 0)
-        if (window.scrollY === 0) {
-
-        }
+        
         {this.reRenderIfStateDifferentThanStore()}
         
         // console.log("L",window.location.href)

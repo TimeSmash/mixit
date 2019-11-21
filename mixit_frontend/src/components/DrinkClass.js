@@ -1,19 +1,23 @@
+ 
+
 import React, {Component} from 'react'
 import { connect } from 'react-redux';
 import {BACKEND_URL} from '../constants'
 import DrinkCard from './DrinkCard'
 
 import {setDrinkToShow} from '../actions/drink-actions'
+import {setDrinkSuggestions} from '../actions/drink-actions'
 
 class Drink extends Component{
     //THIS DOES NOT RERENDER OR REMOUNT UPON HITTING BACK/FORWARD IN BROWSER
 
     // by saying al the components of drink in state, I can avoid use of ifNotUndefinedReturnData
-    state = {drink: this.props.drinkToShow,
-             similarGeneralDrinks: [],
-             similarAlcoholDrinks: [],
-             similarFlavorDrinks: [],
-             similarTypeDrinks: []
+    state = {drink: {},
+        resolved:false,
+             similarGeneralDrinks:[],
+             similarAlcoholDrinks:[],
+             similarFlavorDrinks:[],
+             similarTypeDrinks:[],
             }
 
                      
@@ -51,86 +55,21 @@ class Drink extends Component{
 
     ingId = 1
 
-    getAllSimilarDrinkArrays = () =>{
-        //if the url's drink id doesn't match the store.drinkToShowId, favor the url
-        if (this.idFromLocation() !== this.props.drinkToShow.id){
-            fetch(BACKEND_URL+'/similar_drinks/'+this.idFromLocation())
-            .then(res => res.json())
-            .then(json => {
-                console.log(json)
-                this.setState({similarAlcoholDrinks: json.drinks_with_same_alc,
-                    similarFlavorDrinks: json.drinks_with_same_flav,
-                    similarTypeDrinks: json.drinks_with_same_type,
-                    similarGeneralDrinks: json.similar_drinks
-                })
-            })
-        } else {
-        fetch(BACKEND_URL+'/similar_drinks/'+this.props.drinkToShow.id)
-            .then(res => res.json())
-            .then(json => {
-                console.log(json)
-                this.setState({similarAlcoholDrinks: json.drinks_with_same_alc,
-                    similarFlavorDrinks: json.drinks_with_same_flav,
-                    similarTypeDrinks: json.drinks_with_same_type,
-                    similarGeneralDrinks: json.similar_drinks
-                })
-            })
-        }   
-    }
-
-    getDrinkArrays = (id) =>{
-        fetch(BACKEND_URL+'/similar_drinks/'+id)
-            .then(res => res.json())
-            .then(json => {
-                console.log(json)
-                this.setState({similarAlcoholDrinks: json.drinks_with_same_alc,
-                    similarFlavorDrinks: json.drinks_with_same_flav,
-                    similarTypeDrinks: json.drinks_with_same_type,
-                    similarGeneralDrinks: json.similar_drinks
-                })
-            })
-    }
-
-    componentWillMount(){
-        console.log("component about to mount")
-    }
-
-    // USING URL TO GET THE DRINK WITH FETCH
-    //EASIER BUT SLOWER, NOT GREAT WAY OF TRANSFERRING DATA THROUGHOUT APP
-    // componentDidMount() {
-    //     // covers url and storw.drinkToShow id discrepancies (see render for more info)
-    //     console.log("ComponentDidMount about to take action \n \n")
-        
-    //     //if url endpath is same as Redux's store id
-    //     if (this.idFromLocation() === this.props.drinkToShow.id){
-    //         //Then the data being presented is correct, only get the similar drink recommendations
-    //         console.log("Url endpoint matches store.drinkToShow.id")
-    //         return this.getAllSimilarDrinkArrays()
-    //     } else if (this.idFromLocation() !== this.props.drinkToShow.id && typeof this.idFromLocation() === "number"){
-    //         // Then fetch the right drink that matches with the url, and also get drink recommendations based off that
-    //         console.log("Url doesn't match store.drinkToShow.id. URL ID",this.idFromLocation())
-    //         fetch(BACKEND_URL+'/drinks/'+this.idFromLocation())
-    //         .then(res => res.json())
-    //         .then(json => {
-    //             console.log("cDM",json)
-    //             this.setState({drink: json.data.attributes})
-    //         })
-    //         this.getAllSimilarDrinkArrays()
-    //     } else {
-    //         console.log("CDM NO-SELL HIT")
-    //         debugger
-    //         this.getAllSimilarDrinkArrays()
-    //     }
-    //     console.log("componentDidMount finished")
+    
+    
+    // componentWillMount(){
+    //     console.log("DrinkClass component about to mount")
     // }
 
-    componentWillUnmount() {
-        console.log("component will unmount soon")
-    }
 
-    componentWillUpdate(){
-        console.log("component going to update")
-    }
+ 
+    // componentWillUnmount() {
+    //     console.log("DrinkClass component will unmount soon")
+    // }
+
+    // componentWillUpdate(){
+    //     console.log("DrinkClass component going to update")
+    // }
 
     //Problem: Drink loads fine from Drink Card under related drinks arrays,
     // BUT when go back, drink info stays the same
@@ -155,47 +94,89 @@ class Drink extends Component{
         }
     }
 
+    //   getDrinkArrays = (id) =>{
+    //       console.log("ID IS", id)
+    //     fetch(BACKEND_URL+'/similar_drinks/'+id)
+    //         .then(res => res.json())
+    //         .then(json => {
+    //             console.log("getDrinkArrays",json)
+    //             this.setState({similarAlcoholDrinks: json.drinks_with_same_alc,
+    //                 similarFlavorDrinks: json.drinks_with_same_flav,
+    //                 similarTypeDrinks: json.drinks_with_same_type,
+    //                 similarGeneralDrinks: json.similar_drinks
+    //             })
+    //         })
+    // }
+
     reRenderIfStateDifferentThanStore = () => {
         
-        // if (this.idFromLocation() !== this.props.drinkToShow.id) {
-            
-        //     console.log("store id", this.props.drinkToShow.id)
-        //     console.log("url id", this.idFromLocation())
-        //     // this.props.history.push('/'+this)
-        //     fetch(BACKEND_URL+'/drinks/'+this.idFromLocation())
-        //     .then(res => res.json())
-        //     .then(json => {
-        //         console.log("cDM",json)
-        //         this.props.dispatch(setDrinkToShow(json.data.attributes))
-        //         this.setState({drink: json.data.attributes})
-        //     })
-            
-
-        //  } else 
-        if (this.idFromLocation() !== this.props.drinkToShow.id){
+        
+        if (this.idFromLocation() !== parseInt(this.props.drinkToShow.id) && this.state.resolved == false){
+            //If the ID from url does not match store.drinkToShow.id, then get the drink/suggestions using id in fetch
+            //This part covers if someone tries to get a drink by typing in its id in url
             console.log("No match, id of url drink", this.idFromLocation())
-            console.log("No match, store drink", this.props.drinkToShow)
+            console.log("No match, store drink", parseInt(this.props.drinkToShow.id))
             console.log("reRender fxn triggered, drink url and store no match")
             
-            //get and set the right drink based on url
-            fetch(BACKEND_URL+'/drinks/'+this.idFromLocation())
+            this.setState({resolved: true})
+             fetch(BACKEND_URL+'/get_drink_and_suggestions/'+this.idFromLocation())
             .then(res => res.json())
             .then(json => {
-                console.log("cDM",json)
-                this.props.dispatch(setDrinkToShow(json.data.attributes))
-                this.getDrinkArrays(this.idFromLocation())
+                
+                console.log("Fetched data (drink/arrays) using url ID",json)
+                console.log("fetched drink", JSON.parse(json.drink).data)
+                
+                this.props.dispatch(setDrinkToShow(JSON.parse(json.drink).data))
+                this.props.dispatch(setDrinkSuggestions(json.drink_suggestions))
+                // this.getDrinkArrays(this.idFromLocation())
             })
+            
             // this.setState({drink: this.props.drinkToShow})
-        } else{
-            //if they match, get from store.drinkToShow
-            console.log("Url and  and store.drink match")
+        } 
+
+         else if (this.state.similarTypeDrinks.length === 0) {
+            //if they match, get check to see if drink suggestions are populated
             //ONLY set state (again) if the types array is 0 (at least 1 item in this array for all drinks as checked in backend)
-            if (this.state.similarTypeDrinks.length ===0) {
-                console.log("YOU SHOULD ONLY SEE THIS RERENDER ONCE \n")
-                this.getDrinkArrays(this.props.drinkToShow.id)
+            
+            // this.getDrinkArrays(this.props.drinkToShow.id)
+            
+                console.log("Url and  and store.drink match")
+                console.log("similarTypes length = 0, get suggestions and put in store and state")
+                fetch(BACKEND_URL+'/get_drink_and_suggestions/'+this.idFromLocation())
+            .then(res => res.json())
+            .then(json => {
+                console.log("Fetched data (drink/arrays) using url ID (typeLength = 0)",json)
+
+                // this.props.dispatch(setDrinkToShow(JSON.parse(json.drink).data))
+                this.props.dispatch(setDrinkSuggestions(json.drink_suggestions))
+                
+                this.setState({
+                    similarAlcoholDrinks: json.drink_suggestions.drinks_with_same_alc,
+                    similarTypeDrinks: json.drink_suggestions.drinks_with_same_type,
+                    similarFlavorDrinks: json.drink_suggestions.drinks_with_same_flav,
+                    similarGeneralDrinks: json.drink_suggestions.similar_drinks
+                })
+                // this.getDrinkArrays(this.idFromLocation())
+            })
+            } else if (//any suggestions include drink name
+                this.state.drink.id !== this.props.drinkToShow.id
+                || 
+                this.state.similarTypeDrinks[0].name === this.props.drinkSuggestions.drinks_with_same_type[0].name
+                ) {
+                    console.log("Url and store id matched, look at names in state and type")
+                    console.log(this.state.similarTypeDrinks[0].name)
+                    console.log(this.props.drinkSuggestions.drinks_with_same_type[0].name)
+                    alert("HEY")
+                    // this.setState({drink: this.props.drinkToShow})
+                    this.props.dispatch(setDrinkSuggestions(this.props.drinkToShow))
+            } else {
+                console.log("URL ID and store.drinkToShow ID match", this.idFromLocation() === parseInt(this.props.drinkToShow.id) )
+                console.log("this.state.similarTypeDrinks is not empty", !!this.state.similarTypeDrinks)
+
+                alert("HELLO")
             }
-        }
     }
+
     
     render(){
         console.log("New RENDER at " +  (new Date()).getHours() + ":" + (new Date()).getMinutes() + ":" + (new Date()).getSeconds())
@@ -203,10 +184,12 @@ class Drink extends Component{
             )
         // debugger
         console.log("DrinkClass props DRINK TO SHOW",this.props.drinkToShow)
+        console.log("DrinkClass props DRINK SUGGESTIONS",this.props.drinkSuggestions)
+
         console.log("DrinkClass state",this.state)
         window.scrollTo(0, 0)
         
-        {this.reRenderIfStateDifferentThanStore()}
+        this.reRenderIfStateDifferentThanStore()
         
         // console.log("L",window.location.href)
         // if (this.idFromLocation() === this.props.drinkToShow.id){
@@ -222,6 +205,7 @@ class Drink extends Component{
         
     return (
             <div className="col s12 m7"style={{fontFamily:"Josefin Sans"}}>
+                
                 {/* Use ternary to check if id in url is same as one in store.drinkToShow.
                 If not, fetch the drink. The additional fetch should really only activate in the
                 case user did not click DrinkCard to get to DrinkClass (e.g. typed url in) */}
@@ -236,6 +220,7 @@ class Drink extends Component{
                 <div className="card horizontal" style={{fontFamily:"Josefin Sans",height:"auto",border:"5px solid yellow",paddingBottom:"5%"}}>
                     <div>FUCKING HELLO</div>
                     <div className="card-image">
+                        
                         <img src={this.props.drinkToShow.picture_url} style={{float: "left",borderRadius:"10px",marginLeft:"1em",marginTop:"3em",position: "absolute",borderTop:"1px solid lightgrey",height:"25em",width:"25em",overflow:"visible",boxShadow:"0 20px 10px rgba(0, 0, 0, 0.3), 0px 0px 0px rgba(0, 0, 0, 0.1) inset"}}></img>
                         {/* <caption style={{clear:"right",border:"1px solid black",display:"inline"}}>loooooooooo</caption> */}
                     </div>
@@ -257,7 +242,7 @@ class Drink extends Component{
                                 <li key={6}><span style={{fontWeight:"bolder"}}>Ingredients: </span>
                                     <ul>{this.ifNotUndefinedReturnData(this.props.drinkToShow.recipe,"string").split(",").map( ingred => <li key={"ing"+this.ingId++} style={{fontSize:"0.7em"}}>{ingred}</li>)}</ul></li>
 
-                                <li key={7}><span style={{fontWeight:"bolder"}}>Recipe Link: </span><a href={this.props.drinkToShow.recipe_url}style={{color:"blue"}} target="_blank">Click Here!</a></li>
+                                <li key={7}><span style={{fontWeight:"bolder"}}>Recipe Link: </span><a href={this.props.drinkToShow.recipe_url}style={{color:"blue"}} target="_blank"rel="noopener noreferrer" >Click Here!</a></li>
                                 <li key={8}><span style={{fontWeight:"bolder"}}>Additional Notes: </span>{this.props.drinkToShow.additional_notes}</li>
                             </ul>
                         </div> {/* end card-content */}
@@ -289,7 +274,7 @@ class Drink extends Component{
 
 }
 function mapStateToProps(state){
-    return {drinkToShow: state.drinkToLoad}
+    return {drinkToShow: state.drinkToLoad, drinkSuggestions: state.drinkSuggestions}
   }
   
   export default connect(mapStateToProps)(Drink);
@@ -394,3 +379,31 @@ function mapStateToProps(state){
 //     </div>
 //     }
 // </div>
+    // USING URL TO GET THE DRINK WITH FETCH
+    //EASIER BUT SLOWER, NOT GREAT WAY OF TRANSFERRING DATA THROUGHOUT APP
+    // componentDidMount() {
+    //     // covers url and storw.drinkToShow id discrepancies (see render for more info)
+    //     console.log("ComponentDidMount about to take action \n \n")
+        
+    //     //if url endpath is same as Redux's store id
+    //     if (this.idFromLocation() === this.props.drinkToShow.id){
+    //         //Then the data being presented is correct, only get the similar drink recommendations
+    //         console.log("Url endpoint matches store.drinkToShow.id")
+    //         return this.getAllSimilarDrinkArrays()
+    //     } else if (this.idFromLocation() !== this.props.drinkToShow.id && typeof this.idFromLocation() === "number"){
+    //         // Then fetch the right drink that matches with the url, and also get drink recommendations based off that
+    //         console.log("Url doesn't match store.drinkToShow.id. URL ID",this.idFromLocation())
+    //         fetch(BACKEND_URL+'/drinks/'+this.idFromLocation())
+    //         .then(res => res.json())
+    //         .then(json => {
+    //             console.log("cDM",json)
+    //             this.setState({drink: json.data.attributes})
+    //         })
+    //         this.getAllSimilarDrinkArrays()
+    //     } else {
+    //         console.log("CDM NO-SELL HIT")
+    //         debugger
+    //         this.getAllSimilarDrinkArrays()
+    //     }
+    //     console.log("componentDidMount finished")
+    // }

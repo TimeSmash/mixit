@@ -2,9 +2,15 @@ class UsersController < ApplicationController
     
     
     def create
+        # byebug
         @user = User.create(user_params)
-        token = JWT.encode({user_id: @user.id}, ENV["MIXIT_SECRET"], 'HS384')
-        render json: {token: token, user: @user.name}
+        if @user.invalid? 
+            render json: {error_messages: @user.errors.messages}
+        else 
+
+            token = JWT.encode({user_id: @user.id}, ENV["MIXIT_SECRET"], 'HS384')
+            render json: {token: token, user: @user.name}
+        end
     end
     
     def update

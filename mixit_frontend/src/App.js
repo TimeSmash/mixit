@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
  
 
 // COMPONENTS //
-import Welcome from './components/Welcome.js';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import FourOFour from './components/FourOFour';
@@ -24,7 +23,9 @@ import {BACKEND_URL} from './constants.js'
 
 class App extends React.Component {
 
-  state = {user: {}}
+  state = {user: {},
+              formValid: true,
+              formErrors: {} }
 
   // userLoggedIn = (AppStateUser) =>{
   //   if (Object.keys(AppStateUser).length>=1){
@@ -60,9 +61,15 @@ exampleProps = "I got this sentence from App"
     .then(res => res.json())
     .then(data => {
       console.log("data rec'd from Signup fetch", data)
-      debugger
-      localStorage.setItem("token", data.token);
-      this.setState({user: data.user});
+      if (data.error_messages) {
+        // alert("SOMETHING BAD IN FORM")
+        console.log("Errors", Object.values(data.error_messages))
+        this.setState({formValid: false, formErrors: data.error_messages})
+      } else {
+        localStorage.setItem("token", data.token);
+        this.setState({user: data.user});
+      }
+      // debugger
       // this.props.history.push('/welcome')
     })
   }
@@ -86,7 +93,7 @@ exampleProps = "I got this sentence from App"
       if (data.user){
         localStorage.setItem("token", data.token)
         this.setState({user: data.user})
-        // REDIRECT SOMEWHERE
+        // REDIRECT SOMEWHERE LIKE WELCOME PAGE
       } else {
         // CAN DEFF BE MODIFIED
         // Redirect to Login but showing message?
@@ -154,7 +161,7 @@ exampleProps = "I got this sentence from App"
               }
           />
           
-          <Route path='/signup' render={() => <SignUp submitHandler={this.signUp}/>}/>
+          <Route path='/signup' render={() => <SignUp submitHandler={this.signUp} formValid={this.state.formValid} formErrors={this.state.formErrors}/>}/>
             {/* <Login submitHandler={this.login}/> */}
             {/* <SignUp submitHandler={this.signUp}/> */}
           

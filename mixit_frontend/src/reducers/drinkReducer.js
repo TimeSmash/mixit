@@ -8,7 +8,7 @@ import {showDrink} from "../actions/drink-actions"
 // action is being sent to drink reducer in format of {type: TYPE, drinkToShow: {Drink obj}}
 
 //in rootReducer, drinkToLoad: action.drinkToShow
-
+ 
 function drinkReducer(state = {}, action) {
     // debugger
     switch(action.type) {

@@ -1,10 +1,13 @@
 import React, {Component} from 'react'
+import FormErrors from './FormErrors'
+import FormHeader from './FormHeader'
 
 class SignUp extends Component {
     state = { name: "",
               password: "",
               email: "",
-              date: {} }
+              date: {}
+            }
 
     changeHandler = (event) =>{
         // sets state.key's value to whatever is in input immediately
@@ -15,7 +18,12 @@ class SignUp extends Component {
         return (
             //  
             <form onSubmit={(e) => {this.props.submitHandler(e, this.state)}}>
+                <FormHeader/>
+            {this.props.formValid? null
+            // <p>Form Valid is true</p>
+            : <FormErrors errors={this.props.formErrors}/>}
                 <p>Thanks for signing up!</p>
+                <p>Please fill out the following information.</p>
                 <label>
                     Username
                     <input name ="name" type="text" placeholder="Username" onChange={(event) => this.changeHandler(event)}></input>

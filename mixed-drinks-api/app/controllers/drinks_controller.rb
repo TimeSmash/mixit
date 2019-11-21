@@ -169,6 +169,23 @@ class DrinksController < ApplicationController
         }
     end
 
+    
+
+    def get_drink_and_suggestions
+        # byebug
+        @id = params[:id]
+        @drink = Drink.find(@id)
+        serialized_data = DrinkSerializer.new(@drink).serialized_json
+        render json: { drink: serialized_data,
+            drink_suggestions: {
+            drinks_with_same_flav: drinks_with_same_flav(@id),
+            drinks_with_same_alc: drinks_with_same_alc(@id),
+            drinks_with_same_type: drinks_with_same_type(@id),
+            similar_drinks: similar_drinks(@id) 
+            }
+        }
+    end
+
     def show_random_drink
         @random_drink = Drink.find( rand((Drink.first.id)..(Drink.last.id)) )
 

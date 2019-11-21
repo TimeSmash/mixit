@@ -1,6 +1,15 @@
+.navbar{
+    background: blanchedalmond;
+    position:fixed;
+    width:100%;
+    top:0;
+    z-index: 1;
+
+    
+}
 .nav-link {
     font-family: "Josefin Sans";
-    font-size: 3em;
+    font-size: 2em;
     display:inline;
 }
 

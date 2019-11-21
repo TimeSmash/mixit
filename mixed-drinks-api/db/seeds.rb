@@ -860,30 +860,35 @@ toronto = Drink.create( name: "Toronto",
      recipe_url: " https://www.seriouseats.com/recipes/2017/06/perfect-michelada-mexican-beer-cocktail-recipe.html"
      additional_notes: "The rim of this drink can either be salt or a chili-salt mix."
 )
+bitter_giuseppe= Drink.create(
+    name: "Bitter Giuseppe",
+    alcohols: [cynar, vermouth],
+    flavors: [citrus,bitter],
+    types: [classic, apertif],
+    color: brown,
+    picture_url: "https://static01.nyt.com/images/2016/10/05/dining/AMARO2/AMARO2-articleLarge.jpg",
+    picture_credit: "cooking.nytimes.com",
+    recipe: "
+2 oz Cynar
+1 oz Sweet vermouth, Carpano Antica Formula
+1⁄4	oz Lemon juice
+6 ds Orange bitters, Regans' orange bitters",
+    recipe_url: "https://kindredcocktails.com/cocktail/bitter-giuseppe",
+    additional_notes: "The Bitter Giuseppe gets its origins from The Violet Hour, a bar in Chicago."
+)
+blue_moon= Drink.create(
+    name: "Blue Moon",
+    alcohols: [gin, creme_de_violette],
+    flavors: ,
+    types: ,
+    color: ,
+    picture_url: ,
+    picture_credit: ,
+    recipe: ,
+    recipe_url: ,
+    additional_notes:
+)
 # # = Drink.create(
-# #     name: ,
-
-# #     alcohols: ,
-# #     flavors: ,
-# #     types: ,
-# #     color: ,
-# #     picture_url: ,
-# #     picture_credit: ,
-# #     recipe: ,
-# #     recipe_url: ,
-# #     additional_notes:
-# # )# # = Drink.create(
-# #     name: ,
-# #     alcohols: ,
-# #     flavors: ,
-# #     types: ,
-# #     color: ,
-# #     picture_url: ,
-# #     picture_credit: ,
-# #     recipe: ,
-# #     recipe_url: ,
-# #     additional_notes:
-# # )# # = Drink.create(
 # #     name: ,
 # #     alcohols: ,
 # #     flavors: ,

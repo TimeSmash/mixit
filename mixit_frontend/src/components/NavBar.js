@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
 import {NavLink, withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {setDrinkToShow} from '../actions/drink-actions'
+// import {setDrinkToShow} from '../actions/drink-actions'
 import "../css/NavBar.css"
 
-import {BACKEND_URL} from '../constants'
+// import {BACKEND_URL} from '../constants'
 
 class NavBar extends Component {
 
@@ -53,7 +53,7 @@ class NavBar extends Component {
     render() {
         console.log("NavBar rendering, random id is "+this.state.randomId)
         return (
-            <div className="NavBar">
+            <div className="navbar">
                 <span>HomePage Icon</span>
                 <span>About</span>
                 <NavLink className="nav-link" to="/drinks/all_drinks/1">All Drinks</NavLink>

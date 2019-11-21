@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 import ReactPaginate from 'react-paginate';
 import {withRouter} from 'react-router-dom'
 import DrinkCard from './DrinkCard' 
-import DrinkCard2 from './DrinkCard2' 
+
 
 import Loader from './Loader' 
 
@@ -24,8 +24,12 @@ class AllDrinks extends Component {
         // }
 
     componentDidMount(){
+        // The route '/drinks' (see DrinksContainer) will give AllDrinks a props of startingPage = 1
+        //When a user types in url '/drinks'. This ensures that typing/clicking NavBar link 
+        //always has drinks page start off on page 1
         // console.log("cDM says this.state.page is", this.state.page)
         this.getDrinksAndInfoFromPage(this.props.startingPage)
+        console.log("component Mounted")
     }
 
     // componentDidUpdate(){
@@ -38,7 +42,7 @@ class AllDrinks extends Component {
         // First get info from clicked page #
         
         // this.setState({loading:true})
-        console.log("Page's value in getDrinsAndInfo is ",page)
+        // console.log("Page's value in getDrinksAndInfo is ",page)
         fetch(BACKEND_URL+"/all_drinks_paginated/"+page,
         {
             method: "GET",
@@ -51,32 +55,34 @@ class AllDrinks extends Component {
         .then(res=> res.json())
         .then(json=> {
         // console.log("data retrieved from page "+page,json) //gets/shows new array of Drink objects
+        
         // Then set dAPI to json, page to current page
         this.setState({drinkAndPageInfo: json, loading: false})
-        // Could also do: this.setState({drinkAndPageInfo: json, page: json.drinks.page, loading: false}) to get data from backend for current page
-        // this.setState({drinkAndPageInfo: json, loading: false})   
         
-        //active starts off as 1 always, then changes based on url. Previous-Disabled doesn't follow this change
-        //So if the url's page number is NOT 1, remove disabled so it can be clicked when correct page is active 
-        // if (document.getElementsByClassName('active')[0].innerText === "1" && page !== 1) {
-        //     // debugger
-        //     document.getElementsByClassName('disabled')[0].classList.remove("disabled")
-        //     //if we are going to go to the last page though, add disabled onto the Next button
-        //     if (page === json.page_count) {
-        //         document.getElementsByClassName('next')[0].classList.add("disabled")
-        //     }
-        // } 
-
-        // document.getElementsByClassName('active')[0].classList.remove("active")
-        // var headings = document.evaluate(`//li[contains(., ${page})]`, document, null, XPathResult.ANY_TYPE, null );
-        // var thisHeading = headings.iterateNext()
-        // thisHeading.className += " active"
+        // Could also do: this.setState({drinkAndPageInfo: json, page: json.drinks.page, loading: false}) to get data from backend for current page
+          
+        
     })
+    { //CAN PROBS DELETE THIS OLD CRAP, review later then toss
+        //active starts off as 1 always, then changes based on url. Previous-Disabled doesn't follow this change
+    //So if the url's page number is NOT 1, remove disabled so it can be clicked when correct page is active 
+    // if (document.getElementsByClassName('active')[0].innerText === "1" && page !== 1) {
+    //     // debugger
+    //     document.getElementsByClassName('disabled')[0].classList.remove("disabled")
+    //     //if we are going to go to the last page though, add disabled onto the Next button
+    //     if (page === json.page_count) {
+    //         document.getElementsByClassName('next')[0].classList.add("disabled")
+    //     }
+    // } 
+
+    // document.getElementsByClassName('active')[0].classList.remove("active")
+    // var headings = document.evaluate(`//li[contains(., ${page})]`, document, null, XPathResult.ANY_TYPE, null );
+    // var thisHeading = headings.iterateNext()
+    // thisHeading.className += " active")
+    }
 }
 
-    // click cuse this.state.page = whatever NUM
-    // setState triggers rerender
-    // 
+    
 
     allDrinks = () => {
         
@@ -91,10 +97,9 @@ class AllDrinks extends Component {
 
     handlePageClick = (event) => {
         //Points to the route using page # as arg, Route loads AllDrinks using page # as startingPage prop
-        //So when click page #, /drinks/all_drinks/# is route, startingPage is
+        //So when click page #, /drinks/all_drinks/# is route, startingPage is #
         // document.getElementsByClassName('active')[0].classList.remove("active")
         this.setState({loading:true})
-        // if (event.selected !== 4) {document.getElementsByClassName('next')[0].classList.remove("disabled")}
         this.props.history.push("/drinks/all_drinks/"+(event.selected+1))
         console.log("page clicked",event)
         this.getDrinksAndInfoFromPage(event.selected+1)
@@ -107,7 +112,7 @@ class AllDrinks extends Component {
     render() {
         console.log("RENDER: New state of AllDrinks",this.state)
         console.log("AllDrinks props",this.props)
-        
+        window.scroll(0,290)
         return (
             <div>
             <h1>All Drinks--</h1>

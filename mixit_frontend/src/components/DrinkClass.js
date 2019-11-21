@@ -79,16 +79,31 @@ class Drink extends Component{
 
     
 
+    // makeDrinkCardsWithSame = (quality) =>{
+    //     switch(quality){
+    //         case "alcohol":
+    //             return this.state.similarAlcoholDrinks.map(drink => <DrinkCard key={drink.id} drink={drink}/>)
+    //         case "flavor":
+    //             return this.state.similarFlavorDrinks.map(drink => <DrinkCard key={drink.id} drink={drink}/>)
+    //         case "type":
+    //             return this.state.similarTypeDrinks.map(drink => <DrinkCard key={drink.id} drink={drink}/>)
+    //         case "generalities":
+    //             return this.state.similarGeneralDrinks.map(drink => <DrinkCard key={drink.id} drink={drink}/>)
+    //         default:
+    //             return null
+    //     }
+    // }
+
     makeDrinkCardsWithSame = (quality) =>{
         switch(quality){
             case "alcohol":
-                return this.state.similarAlcoholDrinks.map(drink => <DrinkCard key={drink.id} drink={drink}/>)
+                return this.props.drinkSuggestions.drinks_with_same_alc.map(drink => <DrinkCard key={drink.id} drink={drink}/>)
             case "flavor":
-                return this.state.similarFlavorDrinks.map(drink => <DrinkCard key={drink.id} drink={drink}/>)
+                return this.props.drinkSuggestions.drinks_with_same_flav.map(drink => <DrinkCard key={drink.id} drink={drink}/>)
             case "type":
-                return this.state.similarTypeDrinks.map(drink => <DrinkCard key={drink.id} drink={drink}/>)
+                return this.props.drinkSuggestions.drinks_with_same_type.map(drink => <DrinkCard key={drink.id} drink={drink}/>)
             case "generalities":
-                return this.state.similarGeneralDrinks.map(drink => <DrinkCard key={drink.id} drink={drink}/>)
+                return this.props.drinkSuggestions.similar_drinks.map(drink => <DrinkCard key={drink.id} drink={drink}/>)
             default:
                 return null
         }
@@ -111,14 +126,14 @@ class Drink extends Component{
     reRenderIfStateDifferentThanStore = () => {
         
         
-        if (this.idFromLocation() !== parseInt(this.props.drinkToShow.id) && this.state.resolved == false){
+        if (this.idFromLocation() !== parseInt(this.props.drinkToShow.id)){
             //If the ID from url does not match store.drinkToShow.id, then get the drink/suggestions using id in fetch
             //This part covers if someone tries to get a drink by typing in its id in url
             console.log("No match, id of url drink", this.idFromLocation())
             console.log("No match, store drink", parseInt(this.props.drinkToShow.id))
-            console.log("reRender fxn triggered, drink url and store no match")
+            console.log("reRender fxn triggered, drink url and store no match (get drink and suggestions)")
             
-            this.setState({resolved: true})
+            // this.setState({resolved: true})
              fetch(BACKEND_URL+'/get_drink_and_suggestions/'+this.idFromLocation())
             .then(res => res.json())
             .then(json => {
@@ -126,61 +141,64 @@ class Drink extends Component{
                 console.log("Fetched data (drink/arrays) using url ID",json)
                 console.log("fetched drink", JSON.parse(json.drink).data)
                 
-                this.props.dispatch(setDrinkToShow(JSON.parse(json.drink).data))
+                this.props.dispatch(setDrinkToShow(JSON.parse(json.drink).data.attributes))
                 this.props.dispatch(setDrinkSuggestions(json.drink_suggestions))
+                // this.setState({resolved:true})
                 // this.getDrinkArrays(this.idFromLocation())
             })
             
             // this.setState({drink: this.props.drinkToShow})
-        } 
+        }  else if (this.idFromLocation() === parseInt(this.props.drinkToShow.id) && this.props.drinkSuggestions){
+            console.log("URL ID and drinkToShow.id match")
+        }
 
-         else if (this.state.similarTypeDrinks.length === 0) {
-            //if they match, get check to see if drink suggestions are populated
-            //ONLY set state (again) if the types array is 0 (at least 1 item in this array for all drinks as checked in backend)
+        //  else if (this.state.similarTypeDrinks.length === 0) {
+        //     //if they match, get check to see if drink suggestions are populated
+        //     //ONLY set state (again) if the types array is 0 (at least 1 item in this array for all drinks as checked in backend)
             
-            // this.getDrinkArrays(this.props.drinkToShow.id)
+        //     // this.getDrinkArrays(this.props.drinkToShow.id)
             
-                console.log("Url and  and store.drink match")
-                console.log("similarTypes length = 0, get suggestions and put in store and state")
-                fetch(BACKEND_URL+'/get_drink_and_suggestions/'+this.idFromLocation())
-            .then(res => res.json())
-            .then(json => {
-                console.log("Fetched data (drink/arrays) using url ID (typeLength = 0)",json)
+        //         console.log("Url and  and store.drink match")
+        //         console.log("similarTypes length = 0, get suggestions and put in store and state")
+        //         fetch(BACKEND_URL+'/get_drink_and_suggestions/'+this.idFromLocation())
+        //     .then(res => res.json())
+        //     .then(json => {
+        //         console.log("Fetched data (drink/arrays) using url ID (typeLength = 0)",json)
 
-                // this.props.dispatch(setDrinkToShow(JSON.parse(json.drink).data))
-                this.props.dispatch(setDrinkSuggestions(json.drink_suggestions))
+        //         // this.props.dispatch(setDrinkToShow(JSON.parse(json.drink).data))
+        //         this.props.dispatch(setDrinkSuggestions(json.drink_suggestions))
                 
-                this.setState({
-                    similarAlcoholDrinks: json.drink_suggestions.drinks_with_same_alc,
-                    similarTypeDrinks: json.drink_suggestions.drinks_with_same_type,
-                    similarFlavorDrinks: json.drink_suggestions.drinks_with_same_flav,
-                    similarGeneralDrinks: json.drink_suggestions.similar_drinks
-                })
-                // this.getDrinkArrays(this.idFromLocation())
-            })
-            } else if (//any suggestions include drink name
-                this.state.drink.id !== this.props.drinkToShow.id
-                || 
-                this.state.similarTypeDrinks[0].name === this.props.drinkSuggestions.drinks_with_same_type[0].name
-                ) {
-                    console.log("Url and store id matched, look at names in state and type")
-                    console.log(this.state.similarTypeDrinks[0].name)
-                    console.log(this.props.drinkSuggestions.drinks_with_same_type[0].name)
-                    alert("HEY")
-                    // this.setState({drink: this.props.drinkToShow})
-                    this.props.dispatch(setDrinkSuggestions(this.props.drinkToShow))
-            } else {
-                console.log("URL ID and store.drinkToShow ID match", this.idFromLocation() === parseInt(this.props.drinkToShow.id) )
-                console.log("this.state.similarTypeDrinks is not empty", !!this.state.similarTypeDrinks)
+        //         this.setState({
+        //             similarAlcoholDrinks: json.drink_suggestions.drinks_with_same_alc,
+        //             similarTypeDrinks: json.drink_suggestions.drinks_with_same_type,
+        //             similarFlavorDrinks: json.drink_suggestions.drinks_with_same_flav,
+        //             similarGeneralDrinks: json.drink_suggestions.similar_drinks
+        //         })
+        //         // this.getDrinkArrays(this.idFromLocation())
+        //     })
+        //     } else if (//any suggestions include drink name
+        //         this.state.drink.id !== this.props.drinkToShow.id
+        //         || 
+        //         this.state.similarTypeDrinks[0].name === this.props.drinkSuggestions.drinks_with_same_type[0].name
+        //         ) {
+        //             console.log("Url and store id matched, look at names in state and type")
+        //             console.log(this.state.similarTypeDrinks[0].name)
+        //             console.log(this.props.drinkSuggestions.drinks_with_same_type[0].name)
+        //             alert("HEY")
+        //             // this.setState({drink: this.props.drinkToShow})
+        //             this.props.dispatch(setDrinkSuggestions(this.props.drinkToShow))
+        //     } else {
+        //         console.log("URL ID and store.drinkToShow ID match", this.idFromLocation() === parseInt(this.props.drinkToShow.id) )
+        //         console.log("this.state.similarTypeDrinks is not empty", !!this.state.similarTypeDrinks)
 
-                alert("HELLO")
-            }
+        //         alert("HELLO")
+        //     }
     }
 
     
     render(){
-        console.log("New RENDER at " +  (new Date()).getHours() + ":" + (new Date()).getMinutes() + ":" + (new Date()).getSeconds())
-        console.log( this.idFromLocation() === null ? console.log(window.location.href) : "Rendering, id of url is", this.idFromLocation()
+        console.log("New DrinksClass RENDER at " +  (new Date()).getHours() + ":" + (new Date()).getMinutes() + ":" + (new Date()).getSeconds())
+        console.log( this.idFromLocation() === null ? console.log(window.location.href) : "DrinkClass Rendering, id of url is", this.idFromLocation()
             )
         // debugger
         console.log("DrinkClass props DRINK TO SHOW",this.props.drinkToShow)
@@ -254,15 +272,15 @@ class Drink extends Component{
                     {this.makeDrinkCardsWithSame("generalities")}
                 </div>
                 <div style={{display:"inline",textAlign:"left",clear:"both"}}>
-                    <h1 style={{clear:"both"}}>Other Drinks With {this.props.drinkToShow.alcohols[0]}</h1>
+                    <h1 style={{clear:"both"}}>Other Drinks With {this.ifNotUndefinedReturnData(this.props.drinkToShow.alcohols,"array")[0]}</h1>
                     {this.makeDrinkCardsWithSame("alcohol")}
                 </div>
                 <div style={{display:"inline",textAlign:"left",clear:"both"}}>
-                    <h1 style={{clear:"both"}}>Other {this.props.drinkToShow.flavors[0]} Drinks </h1>
+                    <h1 style={{clear:"both"}}>Other {this.ifNotUndefinedReturnData(this.props.drinkToShow.flavors,"array")[0]} Drinks </h1>
                     {this.makeDrinkCardsWithSame("flavor")}
                 </div>
                 <div style={{display:"inline",textAlign:"left",clear:"both"}}>
-                    <h1 style={{clear:"both"}}>Other {this.props.drinkToShow.types[0]} Drinks</h1>
+                    <h1 style={{clear:"both"}}>Other {this.ifNotUndefinedReturnData(this.props.drinkToShow.types,"array")[0]} Drinks</h1>
                     {this.makeDrinkCardsWithSame("type")}
                 </div>
                 </div>

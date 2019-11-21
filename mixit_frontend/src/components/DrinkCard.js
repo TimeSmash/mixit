@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import { connect } from 'react-redux';
 import {setDrinkToShow} from '../actions/drink-actions'
-
+import {BACKEND_URL} from '../constants'
+import {setDrinkSuggestions} from '../actions/drink-actions'
 
 import '../css/DrinkCard.css'
 
@@ -33,8 +34,18 @@ class DrinkCard extends Component {
 
            <Link className="card-link" to={`/drinks/${this.props.drink.id}`} 
                onClick={() =>{
+                 console.log("DrinkCard clciked")
                  this.props.dispatch(setDrinkToShow(this.props.drink))
-                //  this.props.dispatch(setDrinkSuggestions)
+                 fetch(BACKEND_URL+'/return_drink_arrays/'+this.props.drink.id)
+                 .then(res => res.json())
+                 .then(json => {
+                     
+                     console.log("DrinkCard: Fetched arrays using url ID",json)
+                     // {drinks_with_same_flav: Array(5), drinks_with_same_alc: Array(5), drinks_with_same_type: Array(5), similar_drinks: Array(2)}
+                     // debugger
+                    //  this.setState({resolved:true})
+                     this.props.dispatch(setDrinkSuggestions(json))
+                 })
                  }}>
               <div className="card" style={{"width": "10rem", display:"block"}}>
                 <img src={this.props.drink.picture_url} className="card-img-top" alt={this.props.drink.name}></img>

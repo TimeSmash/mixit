@@ -3,12 +3,13 @@ Rails.application.routes.draw do
   get 'sessions/destory'
   resources :users
   resources :drinks
-  # get '/all_drinks_paginated', to: 'drinks#paginated_drinks'
+  
   get '/all_drinks_paginated/:page', to: 'drinks#paginated_drinks'
   get '/all_drinks', to: 'drinks#index'
   get '/random_drink', to: 'drinks#show_random_drink'
   get '/get_id_ranges', to: 'drinks#get_id_ranges'
   get '/get_drink_and_suggestions/:id', to: 'drinks#get_drink_and_suggestions'
+  get '/return_drink_arrays/:id', to: 'drinks#return_drink_arrays'
   
   get '/drinks_with_same_flav/:id', to: 'drinks#drinks_with_same_flav'
   get '/similar_drinks/:id', to: 'drinks#return_drink_arrays'

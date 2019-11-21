@@ -46,12 +46,12 @@ class NavBar extends Component {
     
     //Get id ranges when App initializes, store in Redux store then get radnom num from store
     componentDidMount(){
-        console.log("NavBar mounted")
+        // console.log("NavBar mounted")
         this.getRandomDrinkId()
     }
 
     render() {
-        console.log("NavBar rendering, random id is "+this.state.randomId)
+        // console.log("NavBar rendering, random id is "+this.state.randomId)
         return (
             <div className="navbar">
                 <span>HomePage Icon</span>

@@ -11,6 +11,7 @@ import FourOFour from './components/FourOFour';
 import ExampleFunctionalComponent from './components/ExampleFunctionalComponent';
 import DrinksContainer from './components/DrinksContainer';
 import DrinkClass from './components/DrinkClass';
+import About from './components/About';
 import NavBar from './components/NavBar';
 
 // REDUX ACTION CREATORS
@@ -170,6 +171,8 @@ exampleProps = "I got this sentence from App"
               }
             />
             <Route path ='/random_drink' render={() => <DrinkClass
+            />}/>
+            <Route path ='/about' render={() => <About
             />}/>
 
           <Route path ='/examplefunctionalcomponent' render={() => <ExampleFunctionalComponent 

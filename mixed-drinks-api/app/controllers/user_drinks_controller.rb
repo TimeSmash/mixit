@@ -23,28 +23,33 @@ class UserDrinksController < ApplicationController
         return !!user_drink
     end
 
-    def flag_as_favorited
-        user_drink = UserDrink.find_by(user_id: FROM_FRONTEND, drink_id: ALSO_FROM_FRONTEND) #not found => nil
+    def favorite_toggle
+        user_id = JWT.decode(token, ENV["MIXIT_SECRET"], true, {algorithm: 'HS384'})[0]["user_id"]
+
+        user_drink = UserDrink.find_by(user_id: user_id, drink_id: ALSO_FROM_FRONTEND) #not found => nil
         # If drink exists in UserDrinks already, and is NOT favorited already, then favorite it
         if already_exists?(user_drink) && user_drink.favorited != true
             user_drink.update(favorited: true)
         elsif already_exists?(user_drink) && user_drink.favorited === true
-            return null
+            # If user_drink is in UserDrinks, but is ALREADY favorited, unfavorite it
+            user_drink.update(favorited: false)
         else
-            # If drink doesn't exist in UserDrinks
+            # If drink doesn't exist in UserDrinks, then make a new entry and mark as favorited
             UserDrink.create(
-                user_id: FROM_FRONTEND,
+                user_id: user_id,
                 drink_id: ALSO_FROM_FRONTEND,
                 favorited: true
             )
         end
+        # Finally, render the favorited state of the drink
+        render json: {favorited: user_drink.favorited}
     end
     
-    def unflag_favorited
-        user_drink = UserDrink.find_by(user_id: PARAMS_FROM_FRONTEND, drink_id: ALSO_FROM_FRONTEND)
-        user_drink.update(favorited: false)
-        destroy_if_all_false(user_drink)
-    end
+    # def unflag_favorited
+    #     user_drink = UserDrink.find_by(user_id: PARAMS_FROM_FRONTEND, drink_id: ALSO_FROM_FRONTEND)
+    #     user_drink.update(favorited: false)
+    #     destroy_if_all_false(user_drink)
+    # end
 
     def flag_as_made
         user_drink = UserDrink.find_by(user_id: FROM_FRONTEND, drink_id: ALSO_FROM_FRONTEND)

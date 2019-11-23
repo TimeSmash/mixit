@@ -3,7 +3,9 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux';
 import {BACKEND_URL} from '../constants'
+import {withRouter} from 'react-router-dom'
 import DrinkCard from './DrinkCard'
+import InteractionBar from './InteractionBar'
 
 import {setDrinkToShow} from '../actions/drink-actions'
 import {setDrinkSuggestions} from '../actions/drink-actions'
@@ -79,20 +81,7 @@ class Drink extends Component{
 
     
 
-    // makeDrinkCardsWithSame = (quality) =>{
-    //     switch(quality){
-    //         case "alcohol":
-    //             return this.state.similarAlcoholDrinks.map(drink => <DrinkCard key={drink.id} drink={drink}/>)
-    //         case "flavor":
-    //             return this.state.similarFlavorDrinks.map(drink => <DrinkCard key={drink.id} drink={drink}/>)
-    //         case "type":
-    //             return this.state.similarTypeDrinks.map(drink => <DrinkCard key={drink.id} drink={drink}/>)
-    //         case "generalities":
-    //             return this.state.similarGeneralDrinks.map(drink => <DrinkCard key={drink.id} drink={drink}/>)
-    //         default:
-    //             return null
-    //     }
-    // }
+   
 
     makeDrinkCardsWithSame = (quality) =>{
         switch(quality){
@@ -109,19 +98,7 @@ class Drink extends Component{
         }
     }
 
-    //   getDrinkArrays = (id) =>{
-    //       console.log("ID IS", id)
-    //     fetch(BACKEND_URL+'/similar_drinks/'+id)
-    //         .then(res => res.json())
-    //         .then(json => {
-    //             console.log("getDrinkArrays",json)
-    //             this.setState({similarAlcoholDrinks: json.drinks_with_same_alc,
-    //                 similarFlavorDrinks: json.drinks_with_same_flav,
-    //                 similarTypeDrinks: json.drinks_with_same_type,
-    //                 similarGeneralDrinks: json.similar_drinks
-    //             })
-    //         })
-    // }
+   
 
     reRenderIfStateDifferentThanStore = () => {
         
@@ -133,21 +110,26 @@ class Drink extends Component{
             console.log("No match, store drink", parseInt(this.props.drinkToShow.id))
             console.log("reRender fxn triggered, drink url and store no match (get drink and suggestions)")
             
-            // this.setState({resolved: true})
+
              fetch(BACKEND_URL+'/get_drink_and_suggestions/'+this.idFromLocation())
             .then(res => res.json())
             .then(json => {
                 
                 console.log("Fetched data (drink/arrays) using url ID",json)
-                console.log("fetched drink", JSON.parse(json.drink).data)
+                if(json.status === undefined) {
+
+                    console.log("fetched drink", JSON.parse(json.drink).data)
+                    
+                    this.props.dispatch(setDrinkToShow(JSON.parse(json.drink).data.attributes))
+                    this.props.dispatch(setDrinkSuggestions(json.drink_suggestions))
+                } else {
+                    //If you're hitting this, then it means there was a 404, so redirect to 404
+                    return this.props.history.push(`/drinks/bad_drink`)
+                }
                 
-                this.props.dispatch(setDrinkToShow(JSON.parse(json.drink).data.attributes))
-                this.props.dispatch(setDrinkSuggestions(json.drink_suggestions))
-                // this.setState({resolved:true})
-                // this.getDrinkArrays(this.idFromLocation())
             })
             
-            // this.setState({drink: this.props.drinkToShow})
+            
         }  else if (this.idFromLocation() === parseInt(this.props.drinkToShow.id) && this.props.drinkSuggestions){
             console.log("URL ID and drinkToShow.id match")
         }
@@ -192,7 +174,7 @@ class Drink extends Component{
         //         console.log("this.state.similarTypeDrinks is not empty", !!this.state.similarTypeDrinks)
 
         //         alert("HELLO")
-        //     }
+        //     }}
     }
 
     
@@ -203,7 +185,7 @@ class Drink extends Component{
         // debugger
         console.log("DrinkClass props DRINK TO SHOW",this.props.drinkToShow)
         console.log("DrinkClass props DRINK SUGGESTIONS",this.props.drinkSuggestions)
-
+        
         console.log("DrinkClass state",this.state)
         window.scrollTo(0, 0)
         
@@ -235,8 +217,10 @@ class Drink extends Component{
                 <div>
                 <h2 className="header">{this.props.drinkToShow.name}</h2>
                 
-                <div className="card horizontal" style={{fontFamily:"Josefin Sans",height:"auto",border:"5px solid yellow",paddingBottom:"5%"}}>
-                    <div>FUCKING HELLO</div>
+                <div className="card horizontal" style={{fontFamily:"Josefin Sans",height:"auto",border:"5px solid yellow",paddingBottom:"2%"}}>
+                    
+                        
+                    
                     <div className="card-image">
                         
                         <img src={this.props.drinkToShow.picture_url} style={{float: "left",borderRadius:"10px",marginLeft:"1em",marginTop:"3em",position: "absolute",borderTop:"1px solid lightgrey",height:"25em",width:"25em",overflow:"visible",boxShadow:"0 20px 10px rgba(0, 0, 0, 0.3), 0px 0px 0px rgba(0, 0, 0, 0.1) inset"}}></img>
@@ -263,9 +247,11 @@ class Drink extends Component{
                                 <li key={7}><span style={{fontWeight:"bolder"}}>Recipe Link: </span><a href={this.props.drinkToShow.recipe_url}style={{color:"blue"}} target="_blank"rel="noopener noreferrer" >Click Here!</a></li>
                                 <li key={8}><span style={{fontWeight:"bolder"}}>Additional Notes: </span>{this.props.drinkToShow.additional_notes}</li>
                             </ul>
+                            <InteractionBar drink={this.props.drinkToShow}/>
                         </div> {/* end card-content */}
                     </div> {/* end card-stacked */}
                 </div>{/* end card-horizontal (the whole card) */}
+                
                 {/* Consider making DRYer */}
                 <div style={{display:"inline",textAlign:"left",clear:"both"}}>
                     <h1 style={{clear:"both"}}>If you like this, check out these drinks:</h1>
@@ -295,7 +281,7 @@ function mapStateToProps(state){
     return {drinkToShow: state.drinkToLoad, drinkSuggestions: state.drinkSuggestions}
   }
   
-  export default connect(mapStateToProps)(Drink);
+  export default connect(mapStateToProps)(withRouter(Drink));
 
 // export default Drink;
 

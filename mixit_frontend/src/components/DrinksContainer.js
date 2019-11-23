@@ -31,6 +31,7 @@ class DrinksContainer extends Component {
                 <Route path ='/drinks/random_drink' render={()=><DrinkClass/>}/> 
                 
                 <Route exact path='/drinks/' render={() =><AllDrinks startingPage={1}/>}/>
+                <Route path = '/bad_drink' component={FourOFour}/>
                 <Route component={FourOFour}/>
             </Switch>
             <button onClick={() => showProps(this)}>Console.log props (DrinksContainer)</button>

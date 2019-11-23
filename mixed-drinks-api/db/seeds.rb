@@ -876,10 +876,11 @@ bitter_giuseppe= Drink.create(
     recipe_url: "https://kindredcocktails.com/cocktail/bitter-giuseppe",
     additional_notes: "The Bitter Giuseppe gets its origins from The Violet Hour, a bar in Chicago."
 )
+
 blue_moon= Drink.create(
     name: "Blue Moon",
     alcohols: [gin, creme_de_violette],
-    flavors: ,
+    flavors: [floral],
     types: ,
     color: ,
     picture_url: ,
@@ -888,18 +889,36 @@ blue_moon= Drink.create(
     recipe_url: ,
     additional_notes:
 )
+
+midnight_snowstorm= Drink.create(
+    name: "Midnight Snowstorm",
+    alcohols: [creme_de_menthe],
+    flavors: [minty,creamy],
+    types: [casual],
+    color: brown,
+    picture_url: "https://www.thespruceeats.com/thmb/jeiT7VjwZsGi0BcKpY2XtaJ3aZw=/960x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/507850193-565997633df78c6ddf4e1f92.jpg",
+    picture_credit: "thespruceeats.com",
+    recipe: "2 ounces crème de menthe (white)
+                5 ounces hot chocolate (or enough to fill)
+                1 dollop whipped cream
+                1/2 ounce crème de menthe (green)",
+    recipe_url: "https://www.thespruceeats.com/midnight-snowstorm-cocktail-recipe-759732",
+    additional_notes: "Because white " + creme_de_menthe " and green " + creme_de_menthe " are similar in flavor, you can just use one or the other if needed."
+)
+
+stinger = Drink.create(
+    name: "Stinger",
+    alcohols: [brandy, creme_de_menthe],
+    flavors: [minty],
+    types: [casual, iba_unforgettable],
+    color: amber,
+    picture_url: "https://www.thespruceeats.com/thmb/84ah26Phq-ULA7FVJ8Byk58mJNo=/960x0/filters:no_upscale():max_bytes(150000):strip_icc()/stinger-cocktail-56a1758f5f9b58b7d0bf7899.jpg",
+    picture_credit: "thespruceeats.com",
+    recipe: "1 3/4 ounces brandy
+                3/4 ounce crème de menthe (white)",
+    recipe_url: "https://www.thespruceeats.com/stinger-cocktail-recipe-760603",
+    additional_notes: "The Stinger pairs well with rich chocolate desserts.")
 # # = Drink.create(
-# #     name: ,
-# #     alcohols: ,
-# #     flavors: ,
-# #     types: ,
-# #     color: ,
-# #     picture_url: ,
-# #     picture_credit: ,
-# #     recipe: ,
-# #     recipe_url: ,
-# #     additional_notes:
-# # )# # = Drink.create(
 # #     name: ,
 # #     alcohols: ,
 # #     flavors: ,

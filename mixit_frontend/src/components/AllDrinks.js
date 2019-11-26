@@ -3,6 +3,7 @@ import React, {Component} from 'react'
 import ReactPaginate from 'react-paginate';
 import {withRouter} from 'react-router-dom'
 import DrinkCard from './DrinkCard' 
+import MetaButton from './MetaButton' 
 
 
 import Loader from './Loader' 
@@ -110,6 +111,7 @@ class AllDrinks extends Component {
     //     name={drinkObj.attributes.name}
 
     render() {
+        // console.log("AllDrinks's name is", typeof this.constructor.name)
         console.log("RENDER: New state of AllDrinks",this.state)
         console.log("AllDrinks props",this.props)
         window.scroll(0,290)
@@ -158,10 +160,13 @@ class AllDrinks extends Component {
                 }
                             </div>
             <button onClick={() => showProps(this)}>Console.log props (AllDrinks)</button>
+            <MetaButton pCompName={"AllDrinks"} pCompProps={this.props} pCompState={this.state}/>
             </div>
         );
     }
 }
+
+
 
 // function mapStateToProps(state){
 //     return {allDrinks: state.allDrinks}

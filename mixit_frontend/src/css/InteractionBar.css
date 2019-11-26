@@ -1,7 +1,9 @@
 .interactive-container{
     margin:auto;
-    
+    border:1 px solid black;
+    z-index:2;
     margin-top:7em;
+    padding-bottom:1em;
 }
 
 

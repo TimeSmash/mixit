@@ -86,13 +86,29 @@ class Drink extends Component{
     makeDrinkCardsWithSame = (quality) =>{
         switch(quality){
             case "alcohol":
-                return this.props.drinkSuggestions.drinks_with_same_alc.map(drink => <DrinkCard key={drink.id} drink={drink}/>)
+                if (this.props.drinkSuggestions.drinks_with_same_alc.length === 0) {
+                    return <p>Nothing in our database matches yet. Stay tuned!</p>
+                } else {
+                    return this.props.drinkSuggestions.drinks_with_same_alc.map(drink => <DrinkCard key={drink.id} drink={drink}/>)
+                }
             case "flavor":
-                return this.props.drinkSuggestions.drinks_with_same_flav.map(drink => <DrinkCard key={drink.id} drink={drink}/>)
+                if (this.props.drinkSuggestions.drinks_with_same_flav.length === 0) {
+                    return <p>Nothing in our database matches yet. Stay tuned!</p>
+                } else {
+                    return this.props.drinkSuggestions.drinks_with_same_flav.map(drink => <DrinkCard key={drink.id} drink={drink}/>)
+                }
             case "type":
-                return this.props.drinkSuggestions.drinks_with_same_type.map(drink => <DrinkCard key={drink.id} drink={drink}/>)
+                if (this.props.drinkSuggestions.drinks_with_same_type.length === 0) {
+                    return <p>Nothing in our database matches yet. Stay tuned!</p>
+                } else {
+                    return this.props.drinkSuggestions.drinks_with_same_type.map(drink => <DrinkCard key={drink.id} drink={drink}/>)
+                }
             case "generalities":
-                return this.props.drinkSuggestions.similar_drinks.map(drink => <DrinkCard key={drink.id} drink={drink}/>)
+                if (this.props.drinkSuggestions.similar_drinks.length === 0) {
+                    return <p>Nothing in our database matches yet. Stay tuned!</p>
+                } else {
+                    return this.props.drinkSuggestions.similar_drinks.map(drink => <DrinkCard key={drink.id} drink={drink}/>)
+                }
             default:
                 return null
         }

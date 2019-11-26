@@ -33,7 +33,7 @@ cognac = "Cognac"
 rum = "Rum"
 absinthe = "Absinthe"
 cachaca = "Cachaça"
-
+fernet = "Fernet"
 scotch = "Scotch"
 vermouth = "Vermouth"
 soju = "Soju"
@@ -66,9 +66,10 @@ raki = "Raki"
 # LIQUERS
 
 chambord = "Chambord (raspberry liqueur)" 
-cynar = "Cynar (artichoke-based liqueur" #digestif but also apertif? b/c it's bittersweet
+cynar = "Cynar (artichoke-based liqueur)" #digestif but also apertif? b/c it's bittersweet
 amaretto = "Amaretto Liqueur" 
 rasp_liquer = "Raspberry Liqueur"
+peach_liqueur = "Peach Liqueur"
 coffee_liqueur = "Coffee Liqueur"
 maraschino_liqueur = "Maraschino liqueur"
 creme_de_cassis = "Crème de cassis"
@@ -846,7 +847,7 @@ toronto = Drink.create( name: "Toronto",
   michelada = Drink.create( name: "Michelada",
      alcohols:[beer],
      flavors:[spicy, savory, citrus],
-     types:[casual],
+     types:[party,casual],
      color: amber,
      picture_url:" https://www.seriouseats.com/recipes/images/2017/06/20170621-michelada-chelada-vicky-wasik-8.jpg",
      picture_credit: "seriouseats.com",
@@ -857,7 +858,7 @@ toronto = Drink.create( name: "Toronto",
      2 tsp hot sauce,
      1 tsp Worcestershire sauce,
      1 12-oz can or bottle light Mexican beer",
-     recipe_url: " https://www.seriouseats.com/recipes/2017/06/perfect-michelada-mexican-beer-cocktail-recipe.html"
+     recipe_url: " https://www.seriouseats.com/recipes/2017/06/perfect-michelada-mexican-beer-cocktail-recipe.html",
      additional_notes: "The rim of this drink can either be salt or a chili-salt mix."
 )
 bitter_giuseppe= Drink.create(
@@ -877,18 +878,18 @@ bitter_giuseppe= Drink.create(
     additional_notes: "The Bitter Giuseppe gets its origins from The Violet Hour, a bar in Chicago."
 )
 
-blue_moon= Drink.create(
-    name: "Blue Moon",
-    alcohols: [gin, creme_de_violette],
-    flavors: [floral],
-    types: ,
-    color: ,
-    picture_url: ,
-    picture_credit: ,
-    recipe: ,
-    recipe_url: ,
-    additional_notes:
-)
+# blue_moon= Drink.create(
+#     name: "Blue Moon",
+#     alcohols: [gin, creme_de_violette],
+#     flavors: [floral],
+#     types: ,
+#     color: ,
+#     picture_url: ,
+#     picture_credit: ,
+#     recipe: ,
+#     recipe_url: ,
+#     additional_notes:
+# )
 
 midnight_snowstorm= Drink.create(
     name: "Midnight Snowstorm",
@@ -903,7 +904,7 @@ midnight_snowstorm= Drink.create(
                 1 dollop whipped cream
                 1/2 ounce crème de menthe (green)",
     recipe_url: "https://www.thespruceeats.com/midnight-snowstorm-cocktail-recipe-759732",
-    additional_notes: "Because white " + creme_de_menthe " and green " + creme_de_menthe " are similar in flavor, you can just use one or the other if needed."
+    additional_notes: "Because white crème de menthe and green crème de menthe are similar in flavor, you can just use one or the other if needed."
 )
 
 stinger = Drink.create(
@@ -918,92 +919,187 @@ stinger = Drink.create(
                 3/4 ounce crème de menthe (white)",
     recipe_url: "https://www.thespruceeats.com/stinger-cocktail-recipe-760603",
     additional_notes: "The Stinger pairs well with rich chocolate desserts.")
-# # = Drink.create(
-# #     name: ,
-# #     alcohols: ,
-# #     flavors: ,
-# #     types: ,
-# #     color: ,
-# #     picture_url: ,
-# #     picture_credit: ,
-# #     recipe: ,
-# #     recipe_url: ,
-# #     additional_notes:
-# # )# # = Drink.create(
-# #     name: ,
-# #     alcohols: ,
-# #     flavors: ,
-# #     types: ,
-# #     color: ,
-# #     picture_url: ,
-# #     picture_credit: ,
-# #     recipe: ,
-# #     recipe_url: ,
-# #     additional_notes:
-# # )# # = Drink.create(
-# #     name: ,
-# #     alcohols: ,
-# #     flavors: ,
-# #     types: ,
-# #     color: ,
-# #     picture_url: ,
-# #     picture_credit: ,
-# #     recipe: ,
-# #     recipe_url: ,
-# #     additional_notes:
-# # )# # = Drink.create(
-# #     name: ,
-# #     alcohols: ,
-# #     flavors: ,
-# #     types: ,
-# #     color: ,
-# #     picture_url: ,
-# #     picture_credit: ,
-# #     recipe: ,
-# #     recipe_url: ,
-# #     additional_notes:
-# # )# # = Drink.create(
-# #     name: ,
-# #     alcohols: ,
-# #     flavors: ,
-# #     types: ,
-# #     color: ,
-# #     picture_url: ,
-# #     picture_credit: ,
-# #     recipe: ,
-# #     recipe_url: ,
-# #     additional_notes:
-# # )# # = Drink.create(
-# #     name: ,
-# #     alcohols: ,
-# #     flavors: ,
-# #     types: ,
-# #     color: ,
-# #     picture_url: ,
-# #     picture_credit: ,
-# #     recipe: ,
-# #     recipe_url: ,
-# #     additional_notes:
-# # )# # = Drink.create(
-# #     name: ,
-# #     alcohols: ,
-# #     flavors: ,
-# #     types: ,
-# #     color: ,
-# #     picture_url: ,
-# #     picture_credit: ,
-# #     recipe: ,
-# #     recipe_url: ,
-# #     additional_notes:
-# # )# # = Drink.create(
-# #     name: ,
-# #     alcohols: ,
-# #     flavors: ,
-# #     types: ,
-# #     color: ,
-# #     picture_url: ,
-# #     picture_credit: ,
-# #     recipe: ,
-# #     recipe_url: ,
-# #     additional_notes:
-# # )
+
+   missionarys_downfall = Drink.create(
+    name: "Missionary's Downfall",
+    alcohols: [white_rum, peach_liqueur],
+    flavors: [fruity, sweet],
+    types: [casual],
+    color: yellow,
+    picture_url: "https://d32miag6ta013h.cloudfront.net/master_cocktails/1864/en-uk/small/missionarys-downfall_sml_580x820..png",
+    picture_credit: "bacardi.com",
+    recipe: "60 ml BACARDÍ Carta Blanca Rum
+15 ml peach liqueur
+30 ml freshly squeezed lime juice
+60 ml freshly pressed pineapple juice
+15 ml sugar syrup
+8 to 10 fresh mint leaves",
+    recipe_url: "https://www.bacardi.com/uk/en/rum-cocktails/missionarys-downfall/22624/",
+    additional_notes: "The Missionary's Downfall is the perfect drink for a hot summer day."
+)
+
+
+rum_martinez= Drink.create(
+    name: "Rum Martinez",
+    alcohols: [dark_rum, vermouth, maraschino_liqueur],
+    flavors: [bitter, smoky],
+    types: [hard_to_make],
+    color: amber,
+    picture_url: "https://smudgeeats.com/wp-content/uploads/2016/02/Bar_Melbourne_WhiteOaksSaloon_1064-680x780.jpg",
+    picture_credit: "smudgeeats.com",
+    recipe: "1.5oz (45ml) of dark rum
+1.5oz (45ml) of sweet vermouth
+1 barspoon of Maraschino liqueur
+2 dashes of Angostura bitters
+Pinch of applewood",
+    recipe_url: "https://www.cocktailchemistrylab.com/home/rum-martinez",
+    additional_notes: "The Rum Martinez is said to be one of the most complicated cocktails to make."
+)
+
+# = Drink.create(
+#     name: "Rum Martinez",
+#     alcohols: [],
+#     flavors: [],
+#     types: [],
+#     color: ,
+#     picture_url: "",
+#     picture_credit: "",
+#     recipe: "",
+#     recipe_url: "",
+#     additional_notes: ""
+# )
+
+# = Drink.create(
+#     name: "Rum Martinez",
+#     alcohols: [],
+#     flavors: [],
+#     types: [],
+#     color: ,
+#     picture_url: "",
+#     picture_credit: "",
+#     recipe: "",
+#     recipe_url: "",
+#     additional_notes: ""
+# )= Drink.create(
+#     name: "Rum Martinez",
+#     alcohols: [],
+#     flavors: [],
+#     types: [],
+#     color: ,
+#     picture_url: "",
+#     picture_credit: "",
+#     recipe: "",
+#     recipe_url: "",
+#     additional_notes: ""
+# )= Drink.create(
+#     name: "Rum Martinez",
+#     alcohols: [],
+#     flavors: [],
+#     types: [],
+#     color: ,
+#     picture_url: "",
+#     picture_credit: "",
+#     recipe: "",
+#     recipe_url: "",
+#     additional_notes: ""
+# )= Drink.create(
+#     name: "Rum Martinez",
+#     alcohols: [],
+#     flavors: [],
+#     types: [],
+#     color: ,
+#     picture_url: "",
+#     picture_credit: "",
+#     recipe: "",
+#     recipe_url: "",
+#     additional_notes: ""
+# )= Drink.create(
+#     name: "Rum Martinez",
+#     alcohols: [],
+#     flavors: [],
+#     types: [],
+#     color: ,
+#     picture_url: "",
+#     picture_credit: "",
+#     recipe: "",
+#     recipe_url: "",
+#     additional_notes: ""
+# )= Drink.create(
+#     name: "Rum Martinez",
+#     alcohols: [],
+#     flavors: [],
+#     types: [],
+#     color: ,
+#     picture_url: "",
+#     picture_credit: "",
+#     recipe: "",
+#     recipe_url: "",
+#     additional_notes: ""
+# )  
+# # # = Drink.create(
+# # #     name: ,
+# # #     alcohols: ,
+# # #     flavors: ,
+# # #     types: ,
+# # #     color: ,
+# # #     picture_url: ,
+# # #     picture_credit: ,
+# # #     recipe: ,
+# # #     recipe_url: ,
+# # #     additional_notes:
+# # # )# # = Drink.create(
+# # #     name: ,
+# # #     alcohols: ,
+# # #     flavors: ,
+# # #     types: ,
+# # #     color: ,
+# # #     picture_url: ,
+# # #     picture_credit: ,
+# # #     recipe: ,
+# # #     recipe_url: ,
+# # #     additional_notes:
+# # # )# # = Drink.create(
+# # #     name: ,
+# # #     alcohols: ,
+# # #     flavors: ,
+# # #     types: ,
+# # #     color: ,
+# # #     picture_url: ,
+# # #     picture_credit: ,
+# # #     recipe: ,
+# # #     recipe_url: ,
+# # #     additional_notes:
+# # # )# # = Drink.create(
+# # #     name: ,
+# # #     alcohols: ,
+# # #     flavors: ,
+# # #     types: ,
+# # #     color: ,
+# # #     picture_url: ,
+# # #     picture_credit: ,
+# # #     recipe: ,
+# # #     recipe_url: ,
+# # #     additional_notes:
+# # # )# # = Drink.create(
+# # #     name: ,
+# # #     alcohols: ,
+# # #     flavors: ,
+# # #     types: ,
+# # #     color: ,
+# # #     picture_url: ,
+# # #     picture_credit: ,
+# # #     recipe: ,
+# # #     recipe_url: ,
+# # #     additional_notes:
+# # # )# # = Drink.create(
+# # #     name: ,
+# # #     alcohols: ,
+# # #     flavors: ,
+# # #     types: ,
+# # #     color: ,
+# # #     picture_url: ,
+# # #     picture_credit: ,
+# # #     recipe: ,
+# # #     recipe_url: ,
+# # #     additional_notes:
+# # # )

@@ -21,25 +21,63 @@ class InteractionBar extends Component {
               }
 
     toggleStatusOf = (quality) => {
+        // SEND OVER HEADER OF AUTHORIZATION/TOKEN
         fetch(BACKEND_URL+`/${quality}_toggle`+this.props.drink.id)
         .then(res => res.json)
         .then(json => console.log(json))
     }
 
-    // showProperIconFor = (quality) => {
-    //     switch 
-    // }
+    //toggleStatus Of needs to fetch and change quality, then setState to reflect that quality??
+
+    
+    showProperIconFor = (quality) => {
+        switch (quality) {
+            case "favorite":
+                return this.state.favorited ? HeartButtonActive : HeartButton
+            case "made":
+                return this.state.made ? MadeButtonActive : MadeButton
+            case "interested":
+                return this.state.interested ? InterestedButtonActive : InterestedButton
+        }
+    }
+
+    getUserStatsForDrink = () => {
+        fetch(BACKEND_URL+'/get_user_drink', {
+            headers: {
+                "Content-Type":"application/json",
+                "Accept": "application/json",
+                "Authorization": localStorage.getItem("token"),
+                "Drink-Id": this.props.drink.id
+            }
+        })
+        .then(res => res.json())
+        .then(json => 
+            console.log(json)
+            // this.setState({favorited: json.favorited, made: json.made, interested: json.interested})
+            )
+    }
+    
+    componentDidMount(){
+        this.getUserStatsForDrink()
+    }
 
     render() {
         console.log("InteractionBar props",this.props)
         return (
             <div className="interactive-container">
-                <img className="interact-button" 
-                    src={HeartButton} 
+                <img id="favorite"
+                    className="interact-button" 
+                    src={this.showProperIconFor("favorite")} 
                     onClick={()=>{this.toggleStatusOf("favorite")}}
                 ></img>
-                <img className="interact-button" src={MadeButton} onClick={()=>{this.setState({heartImg: "Heart2"})}} ></img>
-                <img className="interact-button" src={InterestedButton} onClick={()=>{this.setState({heartImg: "Heart2"})}} ></img>
+                <img id="made"
+                    className="interact-button" 
+                    src={this.showProperIconFor("made")}
+                    onClick={()=>{this.setState({heartImg: "Heart2"})}} ></img>
+                <img id="interested"
+                    className="interact-button" 
+                    src={this.showProperIconFor("interested")}
+                    onClick={()=>{this.setState({heartImg: HeartButtonActive})}} ></img>
             </div>
         );
     }

@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get '/get_id_ranges', to: 'drinks#get_id_ranges'
   get '/get_drink_and_suggestions/:id', to: 'drinks#get_drink_and_suggestions'
   get '/return_drink_arrays/:id', to: 'drinks#return_drink_arrays'
-  
+  get '/get_user_drink',  to: 'user_drinks#get_user_drink'
   get '/drinks_with_same_flav/:id', to: 'drinks#drinks_with_same_flav'
   get '/similar_drinks/:id', to: 'drinks#return_drink_arrays'
   get '/classy_drinks', to: 'drinks#classy_drinks'

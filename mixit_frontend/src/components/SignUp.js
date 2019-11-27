@@ -3,6 +3,8 @@ import FormErrors from './FormErrors'
 import  {Link} from 'react-router-dom';
 import FormHeader from './FormHeader'
 
+import '../css/Signup.css'
+
 class SignUp extends Component {
     state = { name: "",
               password: "",
@@ -18,44 +20,46 @@ class SignUp extends Component {
         // console.log("SignUp props", this.props)
         return (
             //  
-            <form onSubmit={(e) => {this.props.submitHandler(e, this.state)}}>
-                <FormHeader/>
-            {this.props.formValid? null
-            // <p>Form Valid is true</p>
-            : <FormErrors errors={this.props.formErrors}/>}
-                <p>Thanks for signing up!</p>
-                <p>Please fill out the following information.</p>
-                <label>
-                    Username
-                    <input name ="name" type="text" placeholder="Username" onChange={(event) => this.changeHandler(event)}></input>
-                </label>
-                <br></br>
+            <div id="signup-container">
+                <form id="signup" onSubmit={(e) => {this.props.submitHandler(e, this.state)}}>
+                    <FormHeader/>
+                {this.props.formValid ? null
+                // <p>Form Valid is true</p>
+                : <FormErrors errors={this.props.formErrors}/>}
+                    <h5>Thanks for signing up!</h5>
+                    <h5>Please fill out the following information.</h5>
+                    <label>
+                        Username
+                        <input name ="name" type="text" placeholder="Username" onChange={(event) => this.changeHandler(event)}></input>
+                    </label>
+                    <br></br>
 
-                <label>
-                    Password
-                    <input name ="password" type="password" placeholder="Password" onChange={(event) => this.changeHandler(event)}></input>
-                </label>
-                <br></br>
+                    <label>
+                        Password
+                        <input name ="password" type="password" placeholder="Password" onChange={(event) => this.changeHandler(event)}></input>
+                    </label>
+                    <br></br>
 
-                <label>
-                    Email
-                    <input name ="email" type="email" placeholder="Email" onChange={(event) => this.changeHandler(event)}></input>
-                </label>
-                <br></br>
+                    <label>
+                        Email
+                        <input name ="email" type="email" placeholder="Email" onChange={(event) => this.changeHandler(event)}></input>
+                    </label>
+                    <br></br>
 
-                <label>
-                    Birthday
-                    <input name ="birthday" type="date" onChange={(event) => this.changeHandler(event)}></input>
-                </label>
-                <br></br>
+                    <label>
+                        Birthday
+                        <input name ="birthday" type="date" onChange={(event) => this.changeHandler(event)}></input>
+                    </label>
+                    <br></br>
 
-                <label>
-                    <input type="submit" value="Sign Up"></input>
-                </label>
-                <h5>
-                    Already a member?<Link id='to-login' to='/login' >Log in!</Link>
-                </h5>
-            </form>
+                    <label>
+                        <input type="submit" value="Sign Up"></input>
+                    </label>
+                    <h5>
+                        Already a member?<Link id='to-login' to='/login' >Log in!</Link>
+                    </h5>
+                </form>
+            </div>
         );
     }
 }

@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import FormErrors from './FormErrors'
+import  {Link} from 'react-router-dom';
 import FormHeader from './FormHeader'
 
 class SignUp extends Component {
@@ -51,7 +52,9 @@ class SignUp extends Component {
                 <label>
                     <input type="submit" value="Sign Up"></input>
                 </label>
-
+                <h5>
+                    Already a member?<Link id='to-login' to='/login' >Log in!</Link>
+                </h5>
             </form>
         );
     }

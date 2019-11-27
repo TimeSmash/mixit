@@ -307,14 +307,14 @@ function mapStateToProps(state){
 //     <h2 className="header">{this.props.drinkToShow.name}</h2>
     
 //     <div className="card horizontal" style={{height:"auto",border:"5px solid yellow",paddingBottom:"5%"}}>
-//         <div>FUCKING HELLO</div>
+
 //         <div className="card-image">
 //             <img src={this.props.drinkToShow.picture_url} style={{float: "left",borderRadius:"10px",marginLeft:"1em",marginTop:"3em",position: "absolute",borderTop:"1px solid lightgrey",height:"25em",width:"25em",overflow:"visible",boxShadow:"0 20px 10px rgba(0, 0, 0, 0.3), 0px 0px 0px rgba(0, 0, 0, 0.1) inset"}}></img>
 //             {/* <caption style={{clear:"right",border:"1px solid black",display:"inline"}}>loooooooooo</caption> */}
 //         </div>
 
 //         <div className="card-stacked" style={{minHeight:"27em"}}>
-//             {/* <h1 style={{marginTop:"-1em"}}>BITCH</h1> */}
+
 //             <div className="card-content" >
 //                 <ul style={{marginLeft:"17em",marginTop:"1em",position:"relative",fontSize:"1.5em",textAlign:"left"}}>
 //                     <li><span key={this.ingId++} style={{fontWeight:"bolder"}}>Name: </span>{this.props.drinkToShow.name}</li>
@@ -356,14 +356,13 @@ function mapStateToProps(state){
 //     <h2 className="header">{this.state.drink.name}</h2>
     
 //     <div className="card horizontal" style={{fontFamily:"Josefin Sans",height:"auto",border:"5px solid yellow",paddingBottom:"5%"}}>
-//         <div>FUCKING HELLO</div>
+
 //         <div className="card-image">
 //             <img src={this.state.drink.picture_url} style={{float: "left",borderRadius:"10px",marginLeft:"1em",marginTop:"3em",position: "absolute",borderTop:"1px solid lightgrey",height:"25em",width:"25em",overflow:"visible",boxShadow:"0 20px 10px rgba(0, 0, 0, 0.3), 0px 0px 0px rgba(0, 0, 0, 0.1) inset"}}></img>
 //             {/* <caption style={{clear:"right",border:"1px solid black",display:"inline"}}>loooooooooo</caption> */}
 //         </div>
 
 //         <div className="card-stacked" style={{minHeight:"27em"}}>
-//             {/* <h1 style={{marginTop:"-1em"}}>BITCH</h1> */}
 //             <div className="card-content" >
 //                 <ul style={{marginLeft:"17em",marginTop:"1em",position:"relative",fontSize:"1.5em",textAlign:"left"}}>
 //                     <li><span style={{fontWeight:"bolder"}}>Name: </span>{this.state.drink.name}</li>

@@ -1,7 +1,10 @@
 import React, {Component} from 'react'
 import  {Link} from 'react-router-dom';
+import FormHeader from './FormHeader'
 
 import {showProps} from '../constants'
+
+import '../css/Login.css'
 class Login extends Component {
     state = { name: "",
               password: "" }
@@ -18,9 +21,10 @@ class Login extends Component {
     render() {
         // console.log("render occurring") A rerender occurs every time state is changed
         return (
-            <div>
+            <div id="login-container">
+                <FormHeader/>
                 <h1>Welcome! Please sign in.</h1>
-                <form onSubmit={(e) => {this.props.submitHandler(e, this.state)}}>
+                <form id="login" onSubmit={(e) => {this.props.submitHandler(e, this.state)}}>
                     <label>
                         Username<span> </span> 
                         <input name="name" value={this.state.name} onChange={(event) => this.changeHandler(event)}></input>
@@ -32,12 +36,12 @@ class Login extends Component {
                     </label>
                     <br></br>
                     <input type="submit" value="Submit"></input>
+                <h5>
+                    Not a member?  
+                <Link id='to-signup' to='/signup' >Sign Up!</Link>
+                </h5>
                 </form>
-                <button onClick={() => showProps(this)}>Console.log props</button>
-                <p>
-                    Not a member? 
-                <Link id='to-signup' to='/signup' style={{"textDecoration": "none"}}> Sign Up!</Link>
-                </p>
+                {/* <button onClick={() => showProps(this)}>Console.log props</button> */}
                 
                 
             </div>

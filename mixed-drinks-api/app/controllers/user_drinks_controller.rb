@@ -10,17 +10,18 @@ class UserDrinksController < ApplicationController
 
     def get_user_drink
         token = request.headers["Authorization"]
+        
         user_id = JWT.decode(token, ENV["MIXIT_SECRET"], true, {algorithm: 'HS384'})[0]["user_id"]
 
         drink_id = request.headers["Drink-Id"]
 
-        @user_drink = UserDrink.find_by(user_id: user_id, drink_id: ALSO_FROM_FRONTEND) #not found => nil
+        @user_drink = UserDrink.find_by(user_id: user_id, drink_id: drink_id) #not found => nil
 
-        if user_drink 
+        if @user_drink 
             render json: @user_drink
         else
             # user drink doesn't exist
-            # render json: {} 
+            render json: {does_not_exist: "User Drink does not exist."} 
         end
     end
 
@@ -28,7 +29,7 @@ class UserDrinksController < ApplicationController
         # If all ways of interacting with user_drink are false, it should be 
         # deleted from UserDrinks entirely since the User uses those ways to 
         # have some connection with a Drink
-        if user_drink.favorited === false &&& drink.made === false && drink.interested === false && drink.reviewed === false
+        if user_drink.favorited === false && drink.made === false && drink.interested === false && drink.reviewed === false
             UserDrink.destroy(user_drink)
         end
     end
@@ -136,7 +137,7 @@ class UserDrinksController < ApplicationController
                 user_id: FROM_FRONTEND,
                 drink_id: ALSO_FROM_FRONTEND,
                 reviewed: true,
-                review_content: PARAMS
+                review_content: PARAMS,
                 review_stars: PARAMS
             )
         end

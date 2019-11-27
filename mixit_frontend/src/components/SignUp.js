@@ -7,7 +7,7 @@ class SignUp extends Component {
               password: "",
               email: "",
               date: {}
-            }
+            } 
 
     changeHandler = (event) =>{
         // sets state.key's value to whatever is in input immediately

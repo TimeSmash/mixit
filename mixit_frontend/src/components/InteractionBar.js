@@ -51,9 +51,16 @@ class InteractionBar extends Component {
             }
         })
         .then(res => res.json())
-        .then(json => 
+        .then(json => {
             console.log(json)
-            // this.setState({favorited: json.favorited, made: json.made, interested: json.interested})
+            if (json.does_not_exist) {
+                //do nothing, everything should remain false
+                return null
+            } else {
+                // this.setState({favorited: json.favorited, made: json.made, interested: json.interested})
+
+            }
+        }
             )
     }
     

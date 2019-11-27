@@ -5,22 +5,22 @@ class Welcome extends Component {
 
     BACKEND_URL = "http://localhost:3005"
         
-         classyDrinks = () => {
-            fetch(`${this.BACKEND_URL}/classy_drinks`)
-            .then(res => res.json())
-            .then(json => {
-                console.log("returned from backend",json)
-            })
-        }
+        //  classyDrinks = () => {
+        //     fetch(`${this.BACKEND_URL}/classy_drinks`)
+        //     .then(res => res.json())
+        //     .then(json => {
+        //         console.log("returned from backend",json)
+        //     })
+        // }
 
         
         
         render() {
-            console.log("Welcome props", this.props)
+            // console.log("Welcome props", this.props)
         return (
             <div>
-                {/* <h1>Welcome, ${this.props.user}</h1> */}
-                <h1>Welcome!</h1>
+                
+                <h1>Welcome to Mixit!</h1>
             </div>
         );
     }

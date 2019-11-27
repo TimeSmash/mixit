@@ -1,19 +1,21 @@
 import React, {Component} from 'react'
-import Heart1 from '../images/Heart1.png'
-import Heart2 from '../images/Heart2.png'
-import InteractionBar from './InteractionBar'
+import '../css/About.css'
+
 class About extends Component {
-    state = {heartImg: Heart1}
+    //TURN THIS INTO SLC?
 
 
     render() {
         return (
             <div>
-                <div className="about-links">
-                    <h1>Overview</h1>
-                    <h1>How To Use</h1>
-                    <h1>???</h1>
-                    <InteractionBar/>
+                <div className="about-links-container">
+                    <span className="about-link-separator">■</span>
+                    <h3 className="about-link">Overview</h3>
+                    <span className="about-link-separator">■</span>
+                    <h3 className="about-link">Exploring a Drink</h3>
+                    <span className="about-link-separator">■</span>
+                    <h3 className="about-link">???</h3>
+                    <span className="about-link-separator">■</span>
                 </div>
             </div>
         );

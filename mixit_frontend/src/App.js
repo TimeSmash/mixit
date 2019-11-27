@@ -1,6 +1,6 @@
 import React from 'react';
 import './css/App.css';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch, Redirect, withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
  
 
@@ -13,6 +13,11 @@ import DrinksContainer from './components/DrinksContainer';
 import DrinkClass from './components/DrinkClass';
 import About from './components/About';
 import NavBar from './components/NavBar';
+
+// Note: Reasoning for .js on Welcome
+// For whatever reason, got error (Unhandled Rejection (InvalidCharacterError): Failed to execute 'createElement' on 'Document': The tag name provided is not a valid name)
+// Adding .js for the extension remedies this issue for whatever reason
+import Welcome from './components/Welcome.js';
 
 // REDUX ACTION CREATORS
 
@@ -67,11 +72,13 @@ exampleProps = "I got this sentence from App"
         console.log("Errors", Object.values(data.error_messages))
         this.setState({formValid: false, formErrors: data.error_messages})
       } else {
+        
         localStorage.setItem("token", data.token);
         this.setState({user: data.user});
+        this.props.history.push('/welcome')
+        // return <Redirect to='/welcome'/>
       }
       // debugger
-      // this.props.history.push('/welcome')
     })
   }
 
@@ -154,7 +161,7 @@ exampleProps = "I got this sentence from App"
     // console.log("Store",this.props.store.getState())
     return (
       <div className="App">
-        <NavBar/>
+        {localStorage.getItem("token")? <NavBar/> : null}
         <Switch>
           <Route path='/login' render={() => <Login 
               submitHandler={this.login}
@@ -163,8 +170,8 @@ exampleProps = "I got this sentence from App"
           />
           
           <Route path='/signup' render={() => <SignUp submitHandler={this.signUp} formValid={this.state.formValid} formErrors={this.state.formErrors}/>}/>
-            {/* <Login submitHandler={this.login}/> */}
-            {/* <SignUp submitHandler={this.signUp}/> */}
+          <Route path ='/welcome' render={() => <Welcome
+            />}/>
           
             <Route path ='/drinks' render={() => <DrinksContainer
             store={this.props.store}/>
@@ -204,5 +211,5 @@ function mapStateToProps(state){
 //       turnGreen: () => { dispatch(turnGreen()) }  
 //   }								   
 // }
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(withRouter(App));
 // export default App;

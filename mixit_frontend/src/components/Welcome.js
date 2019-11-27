@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 
+import '../css/welcome.css'
 class Welcome extends Component {
     state = { }
 

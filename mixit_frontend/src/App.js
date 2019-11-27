@@ -115,6 +115,7 @@ exampleProps = "I got this sentence from App"
   getRangeOfDrinkIdsIfNotInStore = () => {
     //use Object.keys.length because store.drinkIdRange may start off as {} (truthy)
     //BUT {} has no keys => length of keys is 0 => zero is falsy => activate
+    // When app initializes, will start off as {} initially, so fire this in cDM to get immediately and have forever (persisted Redux)
     if (this.props.drinkIdRange && Object.keys(this.props.drinkIdRange).length) {
       // if we already have the range, no one cares
       return null

@@ -1,5 +1,3 @@
- 
-
 import React, {Component} from 'react'
 import { connect } from 'react-redux';
 import {BACKEND_URL} from '../constants'
@@ -10,12 +8,15 @@ import InteractionBar from './InteractionBar'
 import {setDrinkToShow} from '../actions/drink-actions'
 import {setDrinkSuggestions} from '../actions/drink-actions'
 
+import "../css/DrinkClass.css"
+
+
+
 class Drink extends Component{
     //THIS DOES NOT RERENDER OR REMOUNT UPON HITTING BACK/FORWARD IN BROWSER
 
     // by saying al the components of drink in state, I can avoid use of ifNotUndefinedReturnData
     state = {drink: {},
-        resolved:false,
              similarGeneralDrinks:[],
              similarAlcoholDrinks:[],
              similarFlavorDrinks:[],
@@ -233,7 +234,7 @@ class Drink extends Component{
                 <div>
                 <h2 className="header">{this.props.drinkToShow.name}</h2>
                 
-                <div className="card horizontal" style={{fontFamily:"Josefin Sans",height:"auto",border:"5px solid yellow",paddingBottom:"2%"}}>
+                <div  id="card-horiz" className="card horizontal" style={{fontFamily:"Josefin Sans",height:"auto",border:"5px solid yellow",paddingBottom:"2%"}}>
                     
                         
                     

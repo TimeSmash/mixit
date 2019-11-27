@@ -22,7 +22,7 @@ class DrinksContainer extends Component {
         
         return (
             <div>
-                <h1>DrinksContainer</h1>
+                {/* <h1>DrinksContainer</h1> */}
             <Switch>
                 {/* <Route path ='/drinks/all_drinks' render={()=><AllDrinks/>}/> */}
                 <Route exact path ='/drinks/all_drinks/:page(\d+)' render={()=><AllDrinks startingPage={parseInt(window.location.href.substring(window.location.href.lastIndexOf('/')+1))}/>}/>
@@ -34,8 +34,8 @@ class DrinksContainer extends Component {
                 <Route path = '/bad_drink' component={FourOFour}/>
                 <Route component={FourOFour}/>
             </Switch>
-            <button onClick={() => showProps(this)}>Console.log props (DrinksContainer)</button>
-            <h1>End of DrinksContainer</h1>
+            {/* <button onClick={() => showProps(this)}>Console.log props (DrinksContainer)</button> */}
+            {/* <h1>End of DrinksContainer</h1> */}
             </div>
         );
     }

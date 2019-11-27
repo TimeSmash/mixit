@@ -41,13 +41,13 @@ class NavBar extends Component {
         //ex. range is 383+1-425 -> diff is 43 -> Math.random()*43 is ~28.816 -> 28.816+383 = 411.816 -floor-> 411
         // Now we use 41 as random Id
         let randomNum =  Math.floor(Math.random() * (max - min + 1)) + min;
-        this.setState({randomId: randomNum})
+        // this.setState({randomId: randomNum})
+        return randomNum
     }
     
     //Get id ranges when App initializes, store in Redux store then get radnom num from store
     componentDidMount(){
         // console.log("NavBar mounted")
-        this.getRandomDrinkId()
     }
 
     render() {
@@ -59,7 +59,7 @@ class NavBar extends Component {
                 <NavLink className="nav-link" to="/drinks/all_drinks/1">All Drinks</NavLink>
                 <NavLink className="nav-link" to="/alcohols">Alcohols</NavLink>
                 {/* <NavLink className="nav-link" to="/random_drink" onClick={()=>{this.getRandomDrink()}}>Random Drink</NavLink> */}
-                <NavLink className="nav-link" to={`/drinks/${this.state.randomId}`}
+                <NavLink className="nav-link" to={`/drinks/${this.getRandomDrinkId()}`}
                 onClick={()=>{this.goToRandomDrink()}}
                 >Random Drink</NavLink>
                 

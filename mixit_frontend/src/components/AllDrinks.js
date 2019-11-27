@@ -117,9 +117,9 @@ class AllDrinks extends Component {
         window.scroll(0,290)
         return (
             <div>
-            <h1>All Drinks--</h1>
+            {/* <h1>All Drinks--</h1> */}
 
-            <div>
+            <div style={{paddingBottom:"2%"}}>
                 {this.state.loading ? 
                     <Loader/> : 
                     
@@ -158,9 +158,9 @@ class AllDrinks extends Component {
                         </div>
                     </div>
                 }
-                            </div>
-            <button onClick={() => showProps(this)}>Console.log props (AllDrinks)</button>
-            <MetaButton pCompName={"AllDrinks"} pCompProps={this.props} pCompState={this.state}/>
+            </div>
+            {/* <button onClick={() => showProps(this)}>Console.log props (AllDrinks)</button> */}
+            {/* <MetaButton pCompName={"AllDrinks"} pCompProps={this.props} pCompState={this.state}/> */}
             </div>
         );
     }

@@ -65,6 +65,7 @@ class NavBar extends Component {
                 <NavLink className="nav-link" to={`/drinks/${this.getRandomDrinkId()}`}
                 onClick={()=>{this.goToRandomDrink()}}
                 >Random Drink</NavLink>
+                <NavLink className="nav-link" to="/contact">Contact</NavLink>
                 
                 {/* Search Bar */}
                 {/* Profile Crap */}

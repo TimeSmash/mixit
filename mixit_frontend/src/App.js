@@ -13,6 +13,7 @@ import DrinksContainer from './components/DrinksContainer';
 import DrinkClass from './components/DrinkClass';
 import About from './components/About';
 import NavBar from './components/NavBar';
+import Contact from './components/Contact';
 
 // Note: Reasoning for .js on Welcome
 // For whatever reason, got error (Unhandled Rejection (InvalidCharacterError): Failed to execute 'createElement' on 'Document': The tag name provided is not a valid name)
@@ -181,6 +182,8 @@ exampleProps = "I got this sentence from App"
             <Route path ='/random_drink' render={() => <DrinkClass
             />}/>
             <Route path ='/about' render={() => <About
+            />}/>
+            <Route path ='/contact' render={() => <Contact
             />}/>
 
           <Route path ='/examplefunctionalcomponent' render={() => <ExampleFunctionalComponent 

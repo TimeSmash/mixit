@@ -54,7 +54,10 @@ class NavBar extends Component {
         // console.log("NavBar rendering, random id is "+this.state.randomId)
         return (
             <div className="navbar">
-                <NavLink className="home-link" to="/welcome">Mixit</NavLink>
+                <div className="home-link-container">
+                    <NavLink className="home-link" to="/welcome">Mixit</NavLink>
+                    <p id="welcome-user">Welcome, {this.props.username}!</p>
+                </div>
                 <NavLink className="nav-link" to="/about">About</NavLink>
                 <NavLink className="nav-link" to="/drinks/all_drinks/1">All Drinks</NavLink>
                 <NavLink className="nav-link" to="/alcohols">Alcohols</NavLink>

@@ -118,7 +118,7 @@ class AllDrinks extends Component {
         window.scroll(0,290)
         return (
             <div>
-            {/* <h1>All Drinks--</h1> */}
+            <h1>All Drinks</h1>
 
             <div style={{paddingBottom:"2%"}}>
                 {this.state.loading ? 

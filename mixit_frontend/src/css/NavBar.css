@@ -10,7 +10,12 @@
 
 .home-link {
     font-family: 'Leckerli One', cursive;
-    font-size: 2em;
+    font-size: 2.5em;
+    display:inline;
+}
+
+.home-link-container{
+    margin-bottom:-1em;
 }
 
 .home-link:hover{
@@ -29,3 +34,7 @@
     color:red;  
 }
 
+#welcome-user{
+    font-size:0.8em;
+    margin-top:-0.9em;
+}

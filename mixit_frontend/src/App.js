@@ -29,7 +29,7 @@ import {BACKEND_URL} from './constants.js'
 
 class App extends React.Component {
 
-  state = {user: {},
+  state = {user: "",
               formValid: true,
               formErrors: {} }
 
@@ -162,7 +162,7 @@ exampleProps = "I got this sentence from App"
     // console.log("Store",this.props.store.getState())
     return (
       <div className="App">
-        {localStorage.getItem("token")? <NavBar/> : null}
+        {localStorage.getItem("token")? <NavBar username={this.state.user}/> : null}
         <Switch>
           <Route path='/login' render={() => <Login 
               submitHandler={this.login}

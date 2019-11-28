@@ -956,6 +956,20 @@ Pinch of applewood",
     additional_notes: "The Rum Martinez is said to be one of the most complicated cocktails to make."
 )
 
+lynchburg_lemonade = Drink.create( name: "Lynchburg Lemonade",
+     alcohols:[whiskey, triple_sec],
+     flavors:[citrus],
+     types:[casual],
+     color: yellow,
+     picture_url:" https://res.cloudinary.com/hjqklbxsu/image/upload/f_auto,fl_lossy,q_auto/v1536085852/recipe/recipe/JD_Lynchburg_Lemonade_FullSize.png",
+     picture_credit: "jackdaniels.com",
+     recipe: "1.5 oz. Jack Daniel's Old No. 7,
+     0.5 oz. triple sec,
+     0.5 oz. fresh lemon juice,
+     lemonade",
+     recipe_url: " https://www.jackdaniels.com/en-us/recipes/lynchburg-lemonade",
+     additional_notes: "Lemon lime soda is a common addition to this drink."
+)
 # = Drink.create(
 #     name: "Rum Martinez",
 #     alcohols: [],

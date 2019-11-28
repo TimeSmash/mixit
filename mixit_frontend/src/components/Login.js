@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import  {Link} from 'react-router-dom';
 import FormHeader from './FormHeader'
 
-import {showProps} from '../constants'
+// import {showProps} from '../constants'
 
 import '../css/Login.css'
 

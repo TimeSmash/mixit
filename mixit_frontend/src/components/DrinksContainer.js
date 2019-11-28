@@ -11,7 +11,7 @@ import DrinkClass from './DrinkClass';
 import FourOFour from './FourOFour';
  
 // OTHER
-import {showProps} from '../constants'
+// import {showProps} from '../constants'
 
 class DrinksContainer extends Component {
     

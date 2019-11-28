@@ -3,13 +3,13 @@ import React, {Component} from 'react'
 import ReactPaginate from 'react-paginate';
 import {withRouter} from 'react-router-dom'
 import DrinkCard from './DrinkCard' 
-import MetaButton from './MetaButton' 
+// import MetaButton from './MetaButton' 
 
 
 import Loader from './Loader' 
 
 import {BACKEND_URL} from '../constants'
-import {showProps} from '../constants'
+// import {showProps} from '../constants'
 
 import '../css/ReactPaginate.css'
 
@@ -64,6 +64,7 @@ class AllDrinks extends Component {
           
         
     })
+    // eslint-disable-next-line
     { //CAN PROBS DELETE THIS OLD CRAP, review later then toss
         //active starts off as 1 always, then changes based on url. Previous-Disabled doesn't follow this change
     //So if the url's page number is NOT 1, remove disabled so it can be clicked when correct page is active 

@@ -40,6 +40,8 @@ class Drink extends Component{
                         return 0
                     case "boolean":
                         return false
+                    default:
+                        return null
                 }
 
             }
@@ -240,7 +242,10 @@ class Drink extends Component{
                     
                     <div className="card-image">
                         
-                        <img src={this.props.drinkToShow.picture_url} style={{float: "left",borderRadius:"10px",marginLeft:"1em",marginTop:"3em",position: "absolute",borderTop:"1px solid lightgrey",height:"25em",width:"25em",overflow:"visible",boxShadow:"0 20px 10px rgba(0, 0, 0, 0.3), 0px 0px 0px rgba(0, 0, 0, 0.1) inset"}}></img>
+                        <img src={this.props.drinkToShow.picture_url} 
+                        style={{float: "left",borderRadius:"10px",marginLeft:"1em",marginTop:"3em",position: "absolute",borderTop:"1px solid lightgrey",height:"25em",width:"25em",overflow:"visible",boxShadow:"0 20px 10px rgba(0, 0, 0, 0.3), 0px 0px 0px rgba(0, 0, 0, 0.1) inset"}}
+                        alt={this.props.drinkToShow.name}
+                        ></img>
                         {/* <caption style={{clear:"right",border:"1px solid black",display:"inline"}}>loooooooooo</caption> */}
                     </div>
 

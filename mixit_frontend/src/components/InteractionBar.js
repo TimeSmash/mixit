@@ -38,6 +38,8 @@ class InteractionBar extends Component {
                 return this.state.made ? MadeButtonActive : MadeButton
             case "interested":
                 return this.state.interested ? InterestedButtonActive : InterestedButton
+            default:
+                return null
         }
     }
 
@@ -76,15 +78,18 @@ class InteractionBar extends Component {
                     className="interact-button" 
                     src={this.showProperIconFor("favorite")} 
                     onClick={()=>{this.toggleStatusOf("favorite")}}
+                    alt ="Mark this drink as favorite" 
                 ></img>
                 <img id="made"
                     className="interact-button" 
                     src={this.showProperIconFor("made")}
-                    onClick={()=>{this.setState({heartImg: "Heart2"})}} ></img>
+                    onClick={()=>{this.setState({heartImg: "Heart2"})}}
+                    alt ="Mark this drink as made" ></img> 
                 <img id="interested"
                     className="interact-button" 
                     src={this.showProperIconFor("interested")}
-                    onClick={()=>{this.setState({heartImg: HeartButtonActive})}} ></img>
+                    onClick={()=>{this.setState({heartImg: HeartButtonActive})}}
+                    alt ="Mark this drink as interested" ></img> 
             </div>
         );
     }

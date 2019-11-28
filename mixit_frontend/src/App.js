@@ -102,7 +102,7 @@ exampleProps = "I got this sentence from App"
       if (data.user){
         localStorage.setItem("token", data.token)
         this.setState({user: data.user})
-        // REDIRECT SOMEWHERE LIKE WELCOME PAGE
+        this.props.history.push('/welcome')
       } else {
         // CAN DEFF BE MODIFIED
         // Redirect to Login but showing message?

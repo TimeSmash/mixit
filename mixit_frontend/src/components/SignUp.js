@@ -25,7 +25,7 @@ class SignUp extends Component {
                     <FormHeader/>
                 {this.props.formValid ? null
                 // <p>Form Valid is true</p>
-                : <FormErrors errors={this.props.formErrors}/>}
+                : <FormErrors errors={this.props.formErrors} fromSignup={true}/>}
                     <h5>Thanks for signing up!</h5>
                     <h5>Please fill out the following information.</h5>
                     <label>

@@ -2,6 +2,7 @@ class UsersController < ApplicationController
     
     
     def create
+        # remember creating a user is essentially signing up
         # byebug
         @user = User.create(user_params)
         if @user.invalid? 

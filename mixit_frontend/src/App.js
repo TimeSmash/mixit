@@ -73,7 +73,6 @@ exampleProps = "I got this sentence from App"
         console.log("Errors", Object.values(data.error_messages))
         this.setState({formValid: false, formErrors: data.error_messages})
       } else {
-        
         localStorage.setItem("token", data.token);
         this.setState({user: data.user});
         this.props.history.push('/welcome')
@@ -101,12 +100,22 @@ exampleProps = "I got this sentence from App"
       console.log("login retrieve", data)
       if (data.user){
         localStorage.setItem("token", data.token)
+        localStorage.setItem("username", data.user)
         this.setState({user: data.user})
         this.props.history.push('/welcome')
       } else {
         // CAN DEFF BE MODIFIED
-        // Redirect to Login but showing message?
-        // Could have showInvalidMessage be boolean in state of App, pass as prosp to Login
+        // REFER to SIGNUP FXN FORMVALID
+        // if (data.error_messages) {
+        //   // alert("SOMETHING BAD IN FORM")
+        //   console.log("Errors", Object.values(data.error_messages))
+        //   this.setState({formValid: false, formErrors: data.error_messages})
+        // } else {
+        //   localStorage.setItem("token", data.token);
+        //   this.setState({user: data.user});
+        //   this.props.history.push('/welcome')
+        //   // return <Redirect to='/welcome'/>
+        // }
         alert(data.invalid_message)
       }
     })

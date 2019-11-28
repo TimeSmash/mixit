@@ -56,7 +56,7 @@ class NavBar extends Component {
             <div className="navbar">
                 <div className="home-link-container">
                     <NavLink className="home-link" to="/welcome">Mixit</NavLink>
-                    <p id="welcome-user">Welcome, {this.props.username}!</p>
+                    <p id="welcome-user">Welcome, {localStorage.getItem("username")}!</p>
                 </div>
                 <NavLink className="nav-link" to="/about">About</NavLink>
                 <NavLink className="nav-link" to="/drinks/all_drinks/1">All Drinks</NavLink>

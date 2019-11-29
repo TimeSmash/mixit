@@ -142,7 +142,7 @@ class Drink extends Component{
                     this.props.dispatch(setDrinkToShow(JSON.parse(json.drink).data.attributes))
                     this.props.dispatch(setDrinkSuggestions(json.drink_suggestions))
                 } else {
-                    //If you're hitting this, then it means there was a 404, so redirect to 404
+                    //If you're hitting this, json.status="404" or something, then it means there was a 404, so redirect to 404
                     return this.props.history.push(`/drinks/bad_drink`)
                 }
                 
@@ -201,6 +201,8 @@ class Drink extends Component{
         console.log("New DrinksClass RENDER at " +  (new Date()).getHours() + ":" + (new Date()).getMinutes() + ":" + (new Date()).getSeconds())
         console.log( this.idFromLocation() === null ? console.log(window.location.href) : "DrinkClass Rendering, id of url is", this.idFromLocation()
             )
+            //Match is responsible for second rerender, due to https://github.com/ReactTraining/react-router/issues/5099
+        // console.log("MATCH",this.props.match)
         // debugger
         console.log("DrinkClass props DRINK TO SHOW",this.props.drinkToShow)
         console.log("DrinkClass props DRINK SUGGESTIONS",this.props.drinkSuggestions)
@@ -432,3 +434,13 @@ function mapStateToProps(state){
     //     }
     //     console.log("componentDidMount finished")
     // }
+
+    //
+// When typing in URL:
+// First realizes id != url
+// triggers first dispatch -> rerender
+// First dispatch not done even though component is rendering, so another rerender occurs because id and url still no match
+// Correct Drink/id gotten, suggestions still wrong, now do second dispatch -> rerender
+// 
+//
+//

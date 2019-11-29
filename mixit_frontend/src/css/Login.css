@@ -1,0 +1,26 @@
+#login-container{
+    background-image: url("../images/login-bg.jpg");
+    background-size: cover;
+    font-family: "Josefin Sans";
+    color:white;
+    height:50em;
+    margin-top:-8em;
+    padding-top:0.4em;
+}
+
+#login{
+    background: white;
+    width:20em;
+    margin:auto;
+    border-radius:10px;
+    padding:0.4em;
+    color:black;
+}
+
+#to-signup {
+    text-decoration: "underline"; 
+    margin-left: 0.2em;
+    color:teal;
+    
+}
+

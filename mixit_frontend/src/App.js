@@ -99,7 +99,7 @@ exampleProps = "I got this sentence from App"
     .then(data => {
       console.log("login retrieve", data)
       if (data.user){
-        localStorage.setItem("token", data.token)
+        localStorage.setItem("token", data.jwt)
         localStorage.setItem("username", data.user)
         this.setState({user: data.user})
         this.props.history.push('/welcome')

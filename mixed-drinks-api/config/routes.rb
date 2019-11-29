@@ -10,13 +10,22 @@ Rails.application.routes.draw do
   get '/get_id_ranges', to: 'drinks#get_id_ranges'
   get '/get_drink_and_suggestions/:id', to: 'drinks#get_drink_and_suggestions'
   get '/return_drink_arrays/:id', to: 'drinks#return_drink_arrays'
-  get '/get_user_drink',  to: 'user_drinks#get_user_drink'
-  get '/drinks_with_same_flav/:id', to: 'drinks#drinks_with_same_flav'
   get '/similar_drinks/:id', to: 'drinks#return_drink_arrays'
   get '/classy_drinks', to: 'drinks#classy_drinks'
+  get '/favorite_toggle/:id', to: 'user_drinks#favorite_toggle'
+  get '/made_toggle/:id', to: 'user_drinks#made_toggle'
+  get '/interested_toggle/:id', to: 'user_drinks#interested_toggle'
+
+
+  get '/drinks_with_same_flav/:id', to: 'drinks#drinks_with_same_flav'
   get '/see_secret', to: 'drinks#see_secret'
+
+  get '/get_user_drink',  to: 'user_drinks#get_user_drink'
+
   post '/signup', to: 'users#create'
+
   post '/login', to: 'sessions#create'
+
   get '/retrieve_user', to: 'auth#retrieve_user'
   # get '/drinks', to: 'drinks#index'    /drinks(.:format) 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

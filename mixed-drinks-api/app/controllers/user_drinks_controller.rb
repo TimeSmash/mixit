@@ -35,6 +35,7 @@ class UserDrinksController < ApplicationController
     end
     
     def already_exists?(user_drink)
+        # return the boolean, this fxn is used to appear more semantic
         # Is the drink already an exisiting object in UserDrinks?
         # The result of UserDrink.find/find_by will always be the user_drink arg (#<> or nil)
         return !!user_drink
@@ -43,26 +44,30 @@ class UserDrinksController < ApplicationController
     
 
     def favorite_toggle
+        # 1. get token
+        # byebug
         token = request.headers["Authorization"]
+        # 2. Decode token to get user info, specifically the id
         user_id = JWT.decode(token, ENV["MIXIT_SECRET"], true, {algorithm: 'HS384'})[0]["user_id"]
-
-        user_drink = UserDrink.find_by(user_id: user_id, drink_id: ALSO_FROM_FRONTEND) #not found => nil
+        # 3. Using the user_id and the drink_id, see if a userDrink already exists in UserDrink.all
+        @user_drink = UserDrink.find_by(user_id: user_id, drink_id: params[:id]) #not found => nil
+        #
         # If drink exists in UserDrinks already, and is NOT favorited already, then favorite it
-        if already_exists?(user_drink) && user_drink.favorited != true
-            user_drink.update(favorited: true)
-        elsif already_exists?(user_drink) && user_drink.favorited === true
-            # If user_drink is in UserDrinks, but is ALREADY favorited, unfavorite it
-            user_drink.update(favorited: false)
+        if already_exists?(@user_drink) && @user_drink.favorited != true
+            @user_drink.update(favorited: true)
+        elsif already_exists?(@user_drink) && @user_drink.favorited === true
+            # If @user_drink is in UserDrinks, but is ALREADY favorited, unfavorite it
+            @user_drink.update(favorited: false)
         else
             # If drink doesn't exist in UserDrinks, then make a new entry and mark as favorited
-            UserDrink.create(
+            @user_drink = UserDrink.create(
                 user_id: user_id,
-                drink_id: ALSO_FROM_FRONTEND,
+                drink_id: params[:id],
                 favorited: true
             )
         end
         # Finally, render the favorited state of the drink
-        render json: {favorited: user_drink.favorited}
+        render json: @user_drink
     end
     
     # def unflag_favorited

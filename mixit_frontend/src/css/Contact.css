@@ -1,0 +1,49 @@
+#contact-container{
+    margin:auto;
+    background-image: url("../images/contact-bg.jpg");
+    padding:2em;
+    margin-top:-1em;
+}
+
+#contact-container h3{
+    margin:auto;
+    /* width:auto; */
+    background:white;
+}
+
+#contact-inner{
+    margin:auto;
+    background:white;
+    padding-bottom:6em;
+    width:70em;
+    border-radius:10px;
+}
+#contact-heading{
+    font-size:4em;
+    padding-top:1em;
+    border-radius:10px;
+    background:white;
+}   
+
+.contact-table{
+    margin:auto;
+    width:auto;
+    background:white;
+}
+
+.contact-table th{
+    font-size:3em;
+}
+
+.contact-table img{
+   height:2.5em;
+   width:2.5em; 
+}
+
+.contact-table img:hover{
+    filter:opacity(50%)
+}
+
+#medium-logo{
+    border-radius:60px
+}

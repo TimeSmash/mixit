@@ -22,9 +22,13 @@ class InteractionBar extends Component {
 
     toggleStatusOf = (quality) => {
         // SEND OVER HEADER OF AUTHORIZATION/TOKEN
-        fetch(BACKEND_URL+`/${quality}_toggle`+this.props.drink.id)
-        .then(res => res.json)
-        .then(json => console.log(json))
+        fetch(BACKEND_URL+`/${quality}_toggle/`+this.props.drink.id,{
+            headers: {"Authorization": localStorage.getItem("token")}
+        })
+        .then(res => res.json())
+        .then(json => {
+            console.log("toggleStatusOf fired",json)
+        })
     }
 
     //toggleStatus Of needs to fetch and change quality, then setState to reflect that quality??
@@ -54,11 +58,12 @@ class InteractionBar extends Component {
         })
         .then(res => res.json())
         .then(json => {
-            console.log(json)
             if (json.does_not_exist) {
                 //do nothing, everything should remain false
+                console.log("UserDrink for user" + localStorage.getItem("username") + "does not exist")
                 return null
             } else {
+                console.log("UserDrink for user " + localStorage.getItem("username"),json)
                 // this.setState({favorited: json.favorited, made: json.made, interested: json.interested})
 
             }

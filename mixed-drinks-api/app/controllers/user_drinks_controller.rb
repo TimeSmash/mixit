@@ -8,6 +8,12 @@ class UserDrinksController < ApplicationController
     
     end
 
+    # WIP of DRYer way of getting user_id and drink_id
+    # def get_user_id_from_token(token)
+    #     @user_id = JWT.decode(token, ENV["MIXIT_SECRET"], true, {algorithm: 'HS384'})[0]["user_id"]
+    #     return @user_id
+    # end
+
     def get_user_drink
         token = request.headers["Authorization"]
         
@@ -124,6 +130,29 @@ class UserDrinksController < ApplicationController
         render json: @user_drink
     end
     
+    def get_drinks_from_quality(user, quality)
+         user.user_drinks.select do |u_drink|
+            u_drink["#{quality}"] === true
+        end.map do |fave_user_drink|
+            Drink.find(fave_user_drink.drink_id)
+        end
+    end
+
+    def marked_drinks
+        # marked meaning favorited, made, and interested
+        # Get the token
+        token = request.headers["Authorization"]
+        # Get the user id from the token
+        user = User.find(JWT.decode(token, ENV["MIXIT_SECRET"], true, {algorithm: 'HS384'})[0]["user_id"])
+        
+        # The actual Drink objects will be returned below
+        
+
+        render json: {favorited_drinks: get_drinks_from_quality(user, "favorited"),
+        made_drinks: get_drinks_from_quality(user, "made"),
+        interested_drinks: get_drinks_from_quality(user, "interested")}
+    end
+
     def create_review
         user_drink = UserDrink.find_by(user_id: FROM_FRONTEND, drink_id: ALSO_FROM_FRONTEND)
         # If drink exists in UserDrinks already, and is NOT flagged as reviewed, then flag it as reviewed
@@ -137,7 +166,7 @@ class UserDrinksController < ApplicationController
         elsif already_exists?(user_drink) && user_drink.reviewed === true
             return null
         else
-            # If drink doesn't exist in UserDrinks
+            # If drink doesn't exist in UserDrinks, make a new UserDrink object
             UserDrink.create(
                 user_id: FROM_FRONTEND,
                 drink_id: ALSO_FROM_FRONTEND,
@@ -159,6 +188,8 @@ class UserDrinksController < ApplicationController
         user_drink.update(reviewed: false, review_content: "", review_stars: 0)
         destroy_if_all_false(user_drink)
     end
+
+
     # CONSIDER DELETING THIS CRAP
 
     # def unflag_favorited

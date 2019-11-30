@@ -10,4 +10,6 @@
 
 .interact-button:hover{
     cursor: pointer;
+    transition: opacity 0.3s;
+    opacity:0.5;
 }

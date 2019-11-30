@@ -2,18 +2,10 @@
   text-align: center;
   margin-top:6em;
   font-family: 'Josefin Sans', cursive;
+  /* background:black; */
 }
 
 a:hover{
   cursor: pointer;
 }
 
-.App-logo {
-  height: 40vmin;
-}
-
-
-
-.App-link {
-  color: #09d3ac;
-}

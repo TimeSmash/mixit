@@ -27,7 +27,8 @@ class InteractionBar extends Component {
         })
         .then(res => res.json())
         .then(json => {
-            console.log("toggleStatusOf fired",json)
+            // console.log("toggleStatusOf fired",json)
+            this.setState({[quality]: json[`${quality}`]})
         })
     }
 
@@ -61,11 +62,16 @@ class InteractionBar extends Component {
             if (json.does_not_exist) {
                 //do nothing, everything should remain false
                 console.log("UserDrink for user" + localStorage.getItem("username") + "does not exist")
-                return null
+                if (this.state.favorited !== false || this.state.made !== false || this.state.interested !== false ){
+                    this.setState({favorited: false, made: false, interested: false})
+                }
             } else {
                 console.log("UserDrink for user " + localStorage.getItem("username"),json)
-                // this.setState({favorited: json.favorited, made: json.made, interested: json.interested})
-
+                if (this.state.favorited !== json.favorited || this.state.made !== json.made || this.state.interested !== json.interested ){
+                    this.setState({favorited: json.favorited, made: json.made, interested: json.interested})
+                } else {
+                    return null
+                }
             }
         }
             )
@@ -76,24 +82,25 @@ class InteractionBar extends Component {
     }
 
     render() {
-        console.log("InteractionBar props",this.props)
+        // console.log("InteractionBar props",this.props)
+        this.getUserStatsForDrink()
         return (
             <div className="interactive-container">
                 <img id="favorite"
                     className="interact-button" 
                     src={this.showProperIconFor("favorite")} 
-                    onClick={()=>{this.toggleStatusOf("favorite")}}
+                    onClick={()=>{this.toggleStatusOf("favorited")}}
                     alt ="Mark this drink as favorite" 
                 ></img>
                 <img id="made"
                     className="interact-button" 
                     src={this.showProperIconFor("made")}
-                    onClick={()=>{this.setState({heartImg: "Heart2"})}}
+                    onClick={()=>{this.toggleStatusOf("made")}}
                     alt ="Mark this drink as made" ></img> 
                 <img id="interested"
                     className="interact-button" 
                     src={this.showProperIconFor("interested")}
-                    onClick={()=>{this.setState({heartImg: HeartButtonActive})}}
+                    onClick={()=>{this.toggleStatusOf("interested")}}
                     alt ="Mark this drink as interested" ></img> 
             </div>
         );

@@ -35,15 +35,15 @@ class UserDrinksController < ApplicationController
     end
     
     def already_exists?(user_drink)
-        # return the boolean, this fxn is used to appear more semantic
+        # return the boolean of a specificed user_drink, this fxn is used to appear more semantic
         # Is the drink already an exisiting object in UserDrinks?
         # The result of UserDrink.find/find_by will always be the user_drink arg (#<> or nil)
         return !!user_drink
     end
 
     
-
-    def favorite_toggle
+# TOGGLES CAN BE MADE DRIER
+    def favorited_toggle
         # 1. get token
         # byebug
         token = request.headers["Authorization"]
@@ -70,6 +70,97 @@ class UserDrinksController < ApplicationController
         render json: @user_drink
     end
     
+    def made_toggle
+        # 1. get token
+        # byebug
+        token = request.headers["Authorization"]
+        # 2. Decode token to get user info, specifically the id
+        user_id = JWT.decode(token, ENV["MIXIT_SECRET"], true, {algorithm: 'HS384'})[0]["user_id"]
+        # 3. Using the user_id and the drink_id, see if a userDrink already exists in UserDrink.all
+        @user_drink = UserDrink.find_by(user_id: user_id, drink_id: params[:id]) #not found => nil
+        #
+        # If drink exists in UserDrinks already, and is NOT made already, then favorite it
+        if already_exists?(@user_drink) && @user_drink.made != true
+            @user_drink.update(made: true)
+        elsif already_exists?(@user_drink) && @user_drink.made === true
+            # If @user_drink is in UserDrinks, but is ALREADY made, unfavorite it
+            @user_drink.update(made: false)
+        else
+            # If drink doesn't exist in UserDrinks, then make a new entry and mark as made
+            @user_drink = UserDrink.create(
+                user_id: user_id,
+                drink_id: params[:id],
+                made: true
+            )
+        end
+        # Finally, render the made state of the drink
+        render json: @user_drink
+    end
+
+    def interested_toggle
+        # 1. get token
+        # byebug
+        token = request.headers["Authorization"]
+        # 2. Decode token to get user info, specifically the id
+        user_id = JWT.decode(token, ENV["MIXIT_SECRET"], true, {algorithm: 'HS384'})[0]["user_id"]
+        # 3. Using the user_id and the drink_id, see if a userDrink already exists in UserDrink.all
+        @user_drink = UserDrink.find_by(user_id: user_id, drink_id: params[:id]) #not found => nil
+        #
+        # If drink exists in UserDrinks already, and is NOT interested already, then favorite it
+        if already_exists?(@user_drink) && @user_drink.interested != true
+            @user_drink.update(interested: true)
+        elsif already_exists?(@user_drink) && @user_drink.interested === true
+            # If @user_drink is in UserDrinks, but is ALREADY interested, unfavorite it
+            @user_drink.update(interested: false)
+        else
+            # If drink doesn't exist in UserDrinks, then make a new entry and mark as interested
+            @user_drink = UserDrink.create(
+                user_id: user_id,
+                drink_id: params[:id],
+                interested: true
+            )
+        end
+        # Finally, render the interested state of the drink
+        render json: @user_drink
+    end
+    
+    def create_review
+        user_drink = UserDrink.find_by(user_id: FROM_FRONTEND, drink_id: ALSO_FROM_FRONTEND)
+        # If drink exists in UserDrinks already, and is NOT flagged as reviewed, then flag it as reviewed
+        # Ex favorited G+T (making it exist), but didn't leave review
+        if already_exists?(user_drink) && user_drink.reviewed != true
+            user_drink.update(
+                reviewed: true,
+                review_content: PARAMS,
+                review_stars: PARAMS
+            )
+        elsif already_exists?(user_drink) && user_drink.reviewed === true
+            return null
+        else
+            # If drink doesn't exist in UserDrinks
+            UserDrink.create(
+                user_id: FROM_FRONTEND,
+                drink_id: ALSO_FROM_FRONTEND,
+                reviewed: true,
+                review_content: PARAMS,
+                review_stars: PARAMS
+            )
+        end
+    end
+
+    def edit_review
+        # Remember this can only be selected once review is made, no need to check if user_drink exists
+        user_drink = UserDrink.find_by(user_id: PARAMS_FROM_FRONTEND, drink_id: ALSO_FROM_FRONTEND)
+        user_drink.update(review_content: PARAMS, review_stars: PARAMS)
+    end
+
+    def delete_review
+        user_drink = UserDrink.find_by(user_id: PARAMS_FROM_FRONTEND, drink_id: ALSO_FROM_FRONTEND)
+        user_drink.update(reviewed: false, review_content: "", review_stars: 0)
+        destroy_if_all_false(user_drink)
+    end
+    # CONSIDER DELETING THIS CRAP
+
     # def unflag_favorited
     #     user_drink = UserDrink.find_by(user_id: PARAMS_FROM_FRONTEND, drink_id: ALSO_FROM_FRONTEND)
     #     user_drink.update(favorited: false)
@@ -124,41 +215,8 @@ class UserDrinksController < ApplicationController
         destroy_if_all_false(user_drink)
     end
 
-    def create_review
-        user_drink = UserDrink.find_by(user_id: FROM_FRONTEND, drink_id: ALSO_FROM_FRONTEND)
-        # If drink exists in UserDrinks already, and is NOT flagged as reviewed, then flag it as reviewed
-        # Ex favorited G+T (making it exist), but didn't leave review
-        if already_exists?(user_drink) && user_drink.reviewed != true
-            user_drink.update(
-                reviewed: true,
-                review_content: PARAMS,
-                review_stars: PARAMS
-            )
-        elsif already_exists?(user_drink) && user_drink.reviewed === true
-            return null
-        else
-            # If drink doesn't exist in UserDrinks
-            UserDrink.create(
-                user_id: FROM_FRONTEND,
-                drink_id: ALSO_FROM_FRONTEND,
-                reviewed: true,
-                review_content: PARAMS,
-                review_stars: PARAMS
-            )
-        end
-    end
 
-    def edit_review
-        # Remember this can only be selected once review is made, no need to check if user_drink exists
-        user_drink = UserDrink.find_by(user_id: PARAMS_FROM_FRONTEND, drink_id: ALSO_FROM_FRONTEND)
-        user_drink.update(review_content: PARAMS, review_stars: PARAMS)
-    end
 
-    def delete_review
-        user_drink = UserDrink.find_by(user_id: PARAMS_FROM_FRONTEND, drink_id: ALSO_FROM_FRONTEND)
-        user_drink.update(reviewed: false, review_content: "", review_stars: 0)
-        destroy_if_all_false(user_drink)
-    end
 
    
 

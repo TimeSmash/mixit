@@ -204,10 +204,10 @@ class Drink extends Component{
             //Match is responsible for second rerender, due to https://github.com/ReactTraining/react-router/issues/5099
         // console.log("MATCH",this.props.match)
         // debugger
-        console.log("DrinkClass props DRINK TO SHOW",this.props.drinkToShow)
-        console.log("DrinkClass props DRINK SUGGESTIONS",this.props.drinkSuggestions)
+        // console.log("DrinkClass props DRINK TO SHOW",this.props.drinkToShow)
+        // console.log("DrinkClass props DRINK SUGGESTIONS",this.props.drinkSuggestions)
         
-        console.log("DrinkClass state",this.state)
+        // console.log("DrinkClass state",this.state)
         window.scrollTo(0, 0)
         
         this.reRenderIfStateDifferentThanStore()

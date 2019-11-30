@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get '/return_drink_arrays/:id', to: 'drinks#return_drink_arrays'
   get '/similar_drinks/:id', to: 'drinks#return_drink_arrays'
   get '/classy_drinks', to: 'drinks#classy_drinks'
-  get '/favorite_toggle/:id', to: 'user_drinks#favorite_toggle'
+  get '/favorited_toggle/:id', to: 'user_drinks#favorited_toggle'
   get '/made_toggle/:id', to: 'user_drinks#made_toggle'
   get '/interested_toggle/:id', to: 'user_drinks#interested_toggle'
 

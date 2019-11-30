@@ -58,15 +58,15 @@ class NavBar extends Component {
                     <NavLink className="home-link" to="/welcome">Mixit</NavLink>
                     <p id="welcome-user">Welcome, {localStorage.getItem("username")}!</p>
                 </div>
-                <NavLink className="nav-link" to="/about">About</NavLink>
-                <NavLink className="nav-link" to="/drinks/all_drinks/1">All Drinks</NavLink>
-                <NavLink className="nav-link" to="/alcohols">Alcohols</NavLink>
-                {/* <NavLink className="nav-link" to="/random_drink" onClick={()=>{this.getRandomDrink()}}>Random Drink</NavLink> */}
-                <NavLink className="nav-link" to={`/drinks/${this.getRandomDrinkId()}`}
+                <NavLink className="nav-link" activeClassName="active-nl" to="/about">About</NavLink>
+                <NavLink className="nav-link" activeClassName="active-nl" to="/drinks/all_drinks/1">All Drinks</NavLink>
+                <NavLink className="nav-link" activeClassName="active-nl" to="/alcohols">Alcohols</NavLink>
+                {/* <NavLink className="nav- activeClassName="active-nl"link" to="/random_drink" onClick={()=>{this.getRandomDrink()}}>Random Drink</NavLink> */}
+                <NavLink className="nav-link" activeClassName="active-nl" to={`/drinks/${this.getRandomDrinkId()}`}
                 onClick={()=>{this.goToRandomDrink()}}
                 >Random Drink</NavLink>
-                <NavLink className="nav-link" to="/contact">Contact</NavLink>
-                <NavLink className="nav-link" to='/login' onClick={()=>localStorage.clear()}>Logout</NavLink>
+                <NavLink className="nav-link" activeClassName="active-nl" to="/contact">Contact</NavLink>
+                <NavLink className="nav-link" activeClassName="active-nl" to='/login' onClick={()=>localStorage.clear()}>Logout</NavLink>
                 {/* Search Bar */}
                 {/* Profile Crap */}
             </div>

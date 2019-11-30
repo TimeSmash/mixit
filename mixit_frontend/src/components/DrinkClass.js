@@ -5,6 +5,7 @@ import {withRouter} from 'react-router-dom'
 import DrinkCard from './DrinkCard'
 import InteractionBar from './InteractionBar'
 
+
 import {setDrinkToShow} from '../actions/drink-actions'
 import {setDrinkSuggestions} from '../actions/drink-actions'
 
@@ -239,7 +240,6 @@ class Drink extends Component{
                 <h2 className="header">{this.props.drinkToShow.name}</h2>
                 
                 <div  id="card-horiz" className="card horizontal" style={{fontFamily:"Josefin Sans",height:"auto",border:"5px solid yellow",paddingBottom:"2%"}}>
-                    
                         
                     
                     <div className="card-image">

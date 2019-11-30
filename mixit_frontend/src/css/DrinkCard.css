@@ -17,10 +17,13 @@
     width: 100%;
     height: 10rem;
     object-fit: cover;
+    border-radius: 1px 1px 0px 0px
 }
 
 .card{
     margin-top:2em;
+    border:none;
+    /* border:1px solid transparent; */
 }
 
 .card-deck{
@@ -44,7 +47,8 @@
 .card:hover{
     transition: 0.3s;
     /* opacity:1; */
-    background:#F0F0F0;
+    /* filter: brightness(110%); */
+    background:#c0c0c0;
     
 }
 

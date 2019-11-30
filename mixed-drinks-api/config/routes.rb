@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get '/favorited_toggle/:id', to: 'user_drinks#favorited_toggle'
   get '/made_toggle/:id', to: 'user_drinks#made_toggle'
   get '/interested_toggle/:id', to: 'user_drinks#interested_toggle'
-  get '/marked_drinks/:id', to: 'user_drinks#marked_drinks'
+  get '/marked_drinks/', to: 'user_drinks#marked_drinks'
 
 
   get '/drinks_with_same_flav/:id', to: 'drinks#drinks_with_same_flav'

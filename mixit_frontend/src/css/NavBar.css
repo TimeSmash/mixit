@@ -1,10 +1,14 @@
 .navbar{
-    background: blanchedalmond;
+  background: linear-gradient(270deg, rgba(0,212,255,1) 23%, rgba(62,119,235,1) 81%);
+  /* background: linear-gradient(270deg, rgba(164,164,164,1) 20%, rgba(17,17,18,1) 72%); */
+  /* background: linear-gradient(270deg, rgba(186,186,186,1) 12%, rgba(83,83,84,1) 94%); */
+  
+
     position:fixed;
     width:100%;
     top:0;
     z-index: 1;
-
+  color:white;
     
 }
 
@@ -12,6 +16,7 @@
     font-family: 'Leckerli One', cursive;
     font-size: 2.5em;
     display:inline;
+    color:white;
 }
 
 .home-link-container{
@@ -42,10 +47,19 @@
     font-family: "Josefin Sans";
     font-size: 2em;
     display:inline;
+    color:white;
+}
+
+.active-nl{
+  font-weight:bold;
+  font-size:2.1em;
+  color:blue;
+  background:white;
+  border-radius:30px;
 }
 
 .nav-link:hover{
-    color:red;  
+    color:navy;  
 }
 
 #welcome-user{

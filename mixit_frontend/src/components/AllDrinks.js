@@ -12,6 +12,7 @@ import {BACKEND_URL} from '../constants'
 // import {showProps} from '../constants'
 
 import '../css/ReactPaginate.css'
+import '../css/AllDrinks.css'
 
 class AllDrinks extends Component {
     state = { loading: true,
@@ -117,7 +118,7 @@ class AllDrinks extends Component {
         console.log("AllDrinks props",this.props)
         window.scroll(0,290)
         return (
-            <div>
+            <div className="all-drinks">
             <h1>All Drinks</h1>
 
             <div style={{paddingBottom:"2%"}}>

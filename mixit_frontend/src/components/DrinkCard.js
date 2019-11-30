@@ -29,7 +29,7 @@ class DrinkCard extends Component {
 
     // debugger
     return(
-      <div style={{width:"11rem",display:"inline-block",float:"left"}}
+      <div className="overall-card"style={{width:"11rem",display:"inline-block",float:"left"}}
       >
 
            <Link className="card-link" to={`/drinks/${this.props.drink.id}`} 

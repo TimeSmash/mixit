@@ -75,6 +75,7 @@ exampleProps = "I got this sentence from App"
         this.setState({formValid: false, formErrors: data.error_messages})
       } else {
         localStorage.setItem("token", data.token);
+        localStorage.setItem("username", data.user);
         this.setState({user: data.user});
         this.props.history.push('/welcome')
         // return <Redirect to='/welcome'/>

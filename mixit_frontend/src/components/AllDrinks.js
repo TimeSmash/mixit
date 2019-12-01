@@ -31,6 +31,7 @@ class AllDrinks extends Component {
         //always has drinks page start off on page 1
         // console.log("cDM says this.state.page is", this.state.page)
         this.getDrinksAndInfoFromPage(this.props.startingPage)
+        
         console.log("component Mounted")
     }
 

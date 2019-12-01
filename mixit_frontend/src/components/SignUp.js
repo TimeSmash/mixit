@@ -17,15 +17,16 @@ class SignUp extends Component {
         this.setState({[event.target.name]: event.target.value})
     }
     render() {
+        const { formValid, formErrors, submitHandler} = this.props;
         // console.log("SignUp props", this.props)
         return (
             //  
             <div id="signup-container">
-                <form id="signup" onSubmit={(e) => {this.props.submitHandler(e, this.state)}}>
+                <form id="signup" onSubmit={(e) => {submitHandler(e, this.state)}}>
                     <FormHeader/>
-                {this.props.formValid ? null
+                {formValid ? null
                 // <p>Form Valid is true</p>
-                : <FormErrors errors={this.props.formErrors} fromSignup={true}/>}
+                : <FormErrors errors={formErrors} fromSignup={true}/>}
                     <h5>Thanks for signing up!</h5>
                     <h5>Please fill out the following information.</h5>
                     <label>
@@ -53,7 +54,7 @@ class SignUp extends Component {
                     <br></br>
 
                     <label>
-                        <input type="submit" value="Sign Up"></input>
+                        <input id="signup-submit" type="submit" value="Sign Up"></input>
                     </label>
                     <h5>
                         Already a member?<Link id='to-login' to='/login' >Log in!</Link>

@@ -19,6 +19,17 @@
     color:black;
 }
 
+#signup-submit{
+    font-family: "Josefin Sans";
+    background: white;
+    margin:auto;
+    border-radius:20px;
+    padding:0.4em;
+    font-size: 2em;
+    color:black;
+}
+
+
 #to-login {
     font-family: "Josefin Sans";
     color:teal;

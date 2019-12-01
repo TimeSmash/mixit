@@ -5,6 +5,7 @@ class About extends Component {
     //TURN THIS INTO SLC?
 
     render() {
+        window.scroll(0,0)
         return (
             <div className="about">
                 <div className="about-links-container">
@@ -56,6 +57,12 @@ class About extends Component {
                         </p>
                         
                         <br></br>
+                            <ul>
+                                <li>React</li>
+                                <li>Redux (with persist)</li>
+                                <li>will_paginate</li>
+                                <li>aginate</li><li>aginate</li>
+                            </ul>
                 </div>
             </div>
         );

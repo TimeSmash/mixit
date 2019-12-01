@@ -47,8 +47,8 @@
 .card:hover{
     transition: 0.3s;
     /* opacity:1; */
-    /* filter: brightness(110%); */
-    background:#c0c0c0;
+    filter: brightness(110%);
+    background:#A0A0A0;
     
 }
 

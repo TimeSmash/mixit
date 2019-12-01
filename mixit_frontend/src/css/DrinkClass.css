@@ -1,3 +1,4 @@
 #card-horiz:hover{
     background:none;
+    filter: brightness(100%);
 }

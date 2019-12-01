@@ -24,13 +24,22 @@ class DrinkCard extends Component {
   //   }
   // }
 
+  removeMarkedStatus = (e) => {
+    e.preventDefault()
+    fetch(BACKEND_URL+`/${this.props.qual}_toggle/`+this.props.drink.id,{
+        headers: {"Authorization": localStorage.getItem("token")}
+    })
+        this.props.removeDrinkFromArray(this.props.qual, this.props.drink.id)
+
+  }
+
   render() {
   // console.log("DrinkCard's drink prop from AllDrinks",this.props.drink)
+    console.log("DrinkCard props", this.props)
 
     // debugger
     return(
-      <div className="overall-card"style={{width:"11rem",display:"inline-block",float:"left"}}
-      >
+      <div className="overall-card"style={{width:"11rem",display:"inline-block",float:"left"}}>
 
            <Link className="card-link" to={`/drinks/${this.props.drink.id}`} 
                onClick={() =>{
@@ -48,10 +57,15 @@ class DrinkCard extends Component {
                  })
                  }}>
               <div className="card" style={{"width": "10rem", display:"block"}}>
+                <div className="img-and-text-container">
+                <div>
                 <img src={this.props.drink.picture_url} className="card-img-top" alt={this.props.drink.name}></img>
+                </div>
                 <div className="card-block">
                   <p className="card-text">{this.props.drink.name}</p>
                 </div>
+                </div>
+                  {this.props.showButton ? <button className="remove-mark" onClick={(e)=> {this.removeMarkedStatus(e)}}>X</button> : null}
               </div>
            </Link>
            

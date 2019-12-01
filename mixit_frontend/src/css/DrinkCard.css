@@ -40,19 +40,33 @@
 
 .card-link:hover{
     text-decoration:none;
+    
 }
 
 /* The use of transition and opacity gives a fade-in effect */
 
-.card:hover{
+.img-and-text-container:hover{
     transition: 0.3s;
-    /* opacity:1; */
-    filter: brightness(110%);
     background:#A0A0A0;
-    
+    opacity:0.6;
 }
 
-.card-img-top:hover{
-    transition: 0.3s;
-    opacity:0.6;
+
+.remove-mark{
+    
+    font-family: 'Varela Round', sans-serif;
+    font-weight:bold;
+    border-radius:0px;
+    /* opacity:1; */
+    border:2px solid red;
+    color:red;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.remove-mark:active{
+   background:grey;
+   
+    
 }

@@ -22,6 +22,7 @@ class Drink extends Component{
              similarAlcoholDrinks:[],
              similarFlavorDrinks:[],
              similarTypeDrinks:[],
+             loading: true
             }
 
                      

@@ -95,6 +95,7 @@ class AllDrinks extends Component {
             return this.state.drinkAndPageInfo.drinks.map(drinkObj => <DrinkCard
                 drink={drinkObj}
                 key={drinkObj.id}
+                showButton={false}
         />)
         } else {return null}
     }

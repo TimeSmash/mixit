@@ -17,6 +17,8 @@ class SignUp extends Component {
         this.setState({[event.target.name]: event.target.value})
     }
     render() {
+        // Destructured props make it so you do not have to type this.props everywhere
+        // so now when you use formValid as a variable it really is this.props.formValid
         const { formValid, formErrors, submitHandler} = this.props;
         // console.log("SignUp props", this.props)
         return (

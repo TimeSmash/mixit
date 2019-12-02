@@ -10,13 +10,13 @@ function ErrorMessage(props) {
             return capitalize(errorName)
         }
     }
-
+    console.log("Error message props", props)
     return <div>
                 <h5 className="error-message">
                     {showHeading(props.errorName)} 
                 </h5>
                 {/* //eslint-disable-next-line */}
-                <ul>{props.errorList.map(error=> <li>{error}</li>)}</ul>
+                <ul>{props.errorList.map(error=> <li key={props.errorName}>{error}</li>)}</ul>
             </div>
 }
 

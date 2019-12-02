@@ -9,9 +9,10 @@ class SessionsController < ApplicationController
       # Comparing both password_digests via authenticate
       if (user && user.authenticate(params[:password]))
           # make a token to pass to front end with encrypted user id
+          # byebug
           token = JWT.encode({ user_id: user.id }, ENV["MIXIT_SECRET"], 'HS384')
           # This crap can be used for App.setState
-          render json: { user: user.name, jwt: token }
+          render json: { user: user.name, token: token }
       else
           render json: {invalid_message: "Invalid username/password combination. Please try again."}
       end

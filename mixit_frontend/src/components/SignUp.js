@@ -16,6 +16,8 @@ class SignUp extends Component {
         // sets state.key's value to whatever is in input immediately
         this.setState({[event.target.name]: event.target.value})
     }
+
+
     render() {
         // Destructured props make it so you do not have to type this.props everywhere
         // so now when you use formValid as a variable it really is this.props.formValid
@@ -26,7 +28,7 @@ class SignUp extends Component {
             <div id="signup-container">
                 <form id="signup" onSubmit={(e) => {submitHandler(e, this.state)}}>
                     <FormHeader/>
-                {formValid ? null
+                {formValid ? null 
                 // <p>Form Valid is true</p>
                 : <FormErrors errors={formErrors} fromSignup={true}/>}
                     <h5>Thanks for signing up!</h5>
@@ -59,7 +61,7 @@ class SignUp extends Component {
                         <input id="signup-submit" type="submit" value="Sign Up"></input>
                     </label>
                     <h5>
-                        Already a member?<Link id='to-login' to='/login' >Log in!</Link>
+                        Already a member?<Link id='to-login' to='/login' onClick={() => this.props.resetFormErrors()} >Log in!</Link>
                     </h5>
                 </form>
             </div>

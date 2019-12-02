@@ -1,5 +1,7 @@
 #form-errors{
     border:5px solid red;
+    /* background:white; */
+    margin-bottom:2em;
     border-radius:10px;
     width:90%;
     margin:auto;

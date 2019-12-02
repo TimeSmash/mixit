@@ -32,7 +32,7 @@ class Profile1 extends Component {
 
     showDrinkArray = (quality) => {
         if (this.state[`${quality}Drinks`].length === 0){
-            return <p>You haven't marked any drinks as {quality} yet. Go find some!</p>
+            return <p style={{clear:"both",textAlign:"center"}}>You haven't marked any drinks as {quality} yet. Go find some!</p>
         } else{
             return this.getDrinksThatUserMarkedAs(quality)
         }
@@ -60,14 +60,18 @@ class Profile1 extends Component {
         return (
             <div style={{paddingLeft: "4em", paddingRight: "4em",}}>
                 <h1>Profile</h1>
+
                 <div className="user-drink-container" style={{margin: "auto",display:"inline",textAlign:"left",clear:"both"}}>
                     <h3 style={{clear:"both",textAlign:"center"}}>Here is a list of the drinks you favorited:</h3>
                     {this.showDrinkArray("favorited")}
                 </div>
+
                 <div className="user-drink-container" style={{display:"inline",textAlign:"left",clear:"both"}}>
                 <h3 style={{clear:"both",textAlign:"center"}}>Here is a list of the drinks you made:</h3>
                     {this.showDrinkArray("made")}
+                    
                 </div>
+
                 <div className="user-drink-container" style={{display:"inline",textAlign:"left",clear:"both"}}>
                 <h3 style={{clear:"both",textAlign:"center"}}>Here is a list of the drinks you are interested in:</h3>
                     {this.showDrinkArray("interested")}

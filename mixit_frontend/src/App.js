@@ -45,6 +45,18 @@ class App extends React.Component {
 
 exampleProps = "I got this sentence from App"
 
+
+  //this is needed because formErrors were not resetting correctly.
+  // When the user clicks to-signup/to-login in Login/Signup (respectively) this function fires
+  resetFormErrors = () =>{
+    console.log("Resetting form Errors to {}")
+    if (Object.keys(this.state.formErrors).length) {
+      return this.setState({formErrors: {}, formValid: true}) 
+    } else {
+     return null
+    }
+  }
+
   signUp = (e, userObj) => {
     e.preventDefault()
     console.log("user stats", userObj)
@@ -75,7 +87,7 @@ exampleProps = "I got this sentence from App"
         this.setState({formValid: false, formErrors: data.error_messages})
       } else {
         localStorage.setItem("token", data.token);
-        localStorage.setItem("username", data.user);
+        localStorage.setItem("user", data.user);
         this.setState({user: data.user});
         this.props.history.push('/welcome')
         // return <Redirect to='/welcome'/>
@@ -100,25 +112,17 @@ exampleProps = "I got this sentence from App"
     .then(res => res.json())
     .then(data => {
       console.log("login retrieve", data)
-      if (data.user){
-        localStorage.setItem("token", data.jwt)
-        localStorage.setItem("username", data.user)
-        this.setState({user: data.user})
-        this.props.history.push('/welcome')
+      if (data.invalid_message) {
+        // invalid message says "invalid user/password combination" and received from backend
+        // In the event this is returned, console.log the erros and also set formValid to false and formErrors to the invalid message
+        //Login component will look at App.state.formValid, spit out invalid message if  formValid is false
+        console.log("Errors", data.invalid_message)
+        this.setState({formValid: false, formErrors: data.invalid_message})
       } else {
-        // CAN DEFF BE MODIFIED
-        // REFER to SIGNUP FXN FORMVALID
-        // if (data.error_messages) {
-        //   // alert("SOMETHING BAD IN FORM")
-        //   console.log("Errors", Object.values(data.error_messages))
-        //   this.setState({formValid: false, formErrors: data.error_messages})
-        // } else {
-        //   localStorage.setItem("token", data.token);
-        //   this.setState({user: data.user});
-        //   this.props.history.push('/welcome')
-        //   // return <Redirect to='/welcome'/>
-        // }
-        alert(data.invalid_message)
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", data.user);
+        this.setState({user: data.user});
+        this.props.history.push('/welcome')
       }
     })
   }
@@ -174,15 +178,19 @@ exampleProps = "I got this sentence from App"
     // console.log("Store",this.props.store.getState())
     return (
       <div className="App">
-        {localStorage.getItem("token")? <NavBar username={this.state.user}/> : null}
+        {localStorage.getItem("token")? <NavBar/> : null}
         <Switch>
           <Route path='/login' render={() => <Login 
               submitHandler={this.login}
+              formErrors={this.state.formErrors}
+              formValid={this.state.formValid} 
+              resetFormErrors={this.resetFormErrors}
               />
               }
           />
           
-          <Route path='/signup' render={() => <SignUp submitHandler={this.signUp} formValid={this.state.formValid} formErrors={this.state.formErrors}/>}/>
+          <Route path='/signup' render={() => <SignUp submitHandler={this.signUp} formValid={this.state.formValid} 
+          resetFormErrors={this.resetFormErrors} formErrors={this.state.formErrors}/>}/>
           <Route path ='/welcome' render={() => <Welcome
             />}/>
           

@@ -115,6 +115,7 @@ class AllDrinks extends Component {
     //     name={drinkObj.attributes.name}
 
     render() {
+        //Use this to see how name property works
         // console.log("AllDrinks's name is", typeof this.constructor.name)
         console.log("RENDER: New state of AllDrinks",this.state)
         console.log("AllDrinks props",this.props)

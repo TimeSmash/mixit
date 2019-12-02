@@ -212,8 +212,6 @@ exampleProps = "I got this sentence from App"
             }
           />
 
-
-            
             <Route component={FourOFour}/>
         </Switch>
       </div>

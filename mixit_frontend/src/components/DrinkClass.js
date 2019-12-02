@@ -4,7 +4,7 @@ import {BACKEND_URL} from '../constants'
 import {withRouter} from 'react-router-dom'
 import DrinkCard from './DrinkCard'
 import InteractionBar from './InteractionBar'
-
+import Loader from './Loader' 
 
 import {setDrinkToShow} from '../actions/drink-actions'
 import {setDrinkSuggestions} from '../actions/drink-actions'
@@ -143,6 +143,7 @@ class Drink extends Component{
                     
                     this.props.dispatch(setDrinkToShow(JSON.parse(json.drink).data.attributes))
                     this.props.dispatch(setDrinkSuggestions(json.drink_suggestions))
+                    return this.state.loading ? this.setState({loading:false}) : null
                 } else {
                     //If you're hitting this, json.status="404" or something, then it means there was a 404, so redirect to 404
                     return this.props.history.push(`/drinks/bad_drink`)
@@ -153,6 +154,7 @@ class Drink extends Component{
             
         }  else if (this.idFromLocation() === parseInt(this.props.drinkToShow.id) && this.props.drinkSuggestions){
             console.log("URL ID and drinkToShow.id match")
+            return this.state.loading ? this.setState({loading:false}) : null   
         }
 
         //  else if (this.state.similarTypeDrinks.length === 0) {
@@ -228,15 +230,16 @@ class Drink extends Component{
         
     return (
             <div className="col s12 m7"style={{fontFamily:"Josefin Sans"}}>
+               {this.state.loading ? 
+                    <Loader/> :  
+                // {/* Use ternary to check if id in url is same as one in store.drinkToShow.
+                // If not, fetch the drink. The additional fetch should really only activate in the
+                // case user did not click DrinkCard to get to DrinkClass (e.g. typed url in) */}
                 
-                {/* Use ternary to check if id in url is same as one in store.drinkToShow.
-                If not, fetch the drink. The additional fetch should really only activate in the
-                case user did not click DrinkCard to get to DrinkClass (e.g. typed url in) */}
-                
-                {/* //Clicking on link changes store's drinkToShow */}
+                // {/* //Clicking on link changes store's drinkToShow */}
 
 
-                {/* // Drink is fetched, set in state instead  */}
+                // {/* // Drink is fetched, set in state instead  */}
                 <div>
                 <h2 className="header">{this.props.drinkToShow.name}</h2>
                 
@@ -295,7 +298,7 @@ class Drink extends Component{
                     {this.makeDrinkCardsWithSame("type")}
                 </div>
                 </div>
-                
+               }
             </div>
         
     )

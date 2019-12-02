@@ -31,7 +31,7 @@ import {BACKEND_URL} from './constants.js'
 
 class App extends React.Component {
 
-  state = {user: "",
+  state = {
               formValid: true,
               formErrors: {} }
 
@@ -88,7 +88,6 @@ exampleProps = "I got this sentence from App"
       } else {
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", data.user);
-        this.setState({user: data.user});
         this.props.history.push('/welcome')
         // return <Redirect to='/welcome'/>
       }
@@ -121,7 +120,6 @@ exampleProps = "I got this sentence from App"
       } else {
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", data.user);
-        this.setState({user: data.user});
         this.props.history.push('/welcome')
       }
     })
@@ -159,7 +157,6 @@ exampleProps = "I got this sentence from App"
       })
       .then(res => res.json())
       .then(data => {
-        this.setState({user: data.user}) //name of user is given from backend
         console.log("App state after cDM", this.state)
         // this.props.history.push('/welcome')
       })
@@ -169,6 +166,7 @@ exampleProps = "I got this sentence from App"
       console.log("No token, MAKE REDIRECT FUNCTION TO LOGIN PAGE")
       // remove this later, using now for testing purposes
       this.getRangeOfDrinkIdsIfNotInStore()
+      this.props.history.push('/login')
     }
   }
 
@@ -215,6 +213,7 @@ exampleProps = "I got this sentence from App"
           />
 
 
+            
             <Route component={FourOFour}/>
         </Switch>
       </div>

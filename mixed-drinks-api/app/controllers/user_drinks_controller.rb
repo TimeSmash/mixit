@@ -31,6 +31,126 @@ class UserDrinksController < ApplicationController
         end
     end
 
+  def make_obj_into_array_of_objs(obj)
+   array_of_objs = obj.map do |k,v|
+       {k=>v}
+   end
+   return array_of_objs
+  end
+  
+
+
+    def most_marked(quality)
+        # The whole point of this thing is to return the three highest marked drinks in array of objs
+        #   drink_counts = []
+      drink_and_count = {}
+      most_marked_drinks = []
+      
+      Drink.all.each do |drink|
+        counter = 0
+        drink.user_drinks.each do |user_drink|
+            if user_drink[quality] === true
+                counter += 1
+            end
+        end
+        # puts drink.name + " was " + quality + " " + counter.to_s + " times"
+        drink_and_count[drink.name] = counter # ex. G&T with 3 faves = {G&T=>3, ..., ...} 
+        # drink_counts.push(counter)
+      end
+        # puts drink_and_count {"Kir"=>0, "Kir Royale"=>0,...}
+    highest_count = drink_and_count.values.max
+    
+    
+    # slice the last 3 of drink_and_count.values to get highest 3 counts by using .last(3) or equiv below via slice
+    three_highest_counts = drink_and_count.values.sort.slice(drink_and_count.values-3,drink_and_count.values-1)
+    # [64,77,77]
+      
+    # most_marked_drinks should hold the drinks (as objs) with highest counts
+    # ex. It could end up looking like ["G&T"=>77}, "Aperol Spritz"=>77}, "French Martini"=>64}]
+    
+    
+    # if three_highest_counts.uniq.length === 1
+    #     # if the three highest scores are all equal...
+    # Then just find the drinks that have this count, randomly take three and set them as marked drinks
+    
+    # EXPLAINATION PURPOSE ONLY
+    # most_marked_drinks = drink_and_count.select do |drink, count| 
+    #   count === three_highest_counts.uniq[0] # This gives you a giant obj {G&T=>77,Aperol Spritz=>77,...} so turn into array
+    # end.map do |k,v|
+    # {k=>v} end #Now you have array of objs [{}{}{}]
+    
+    
+    # In actual code, use this:
+    # highest_drink_obj = drink_and_count.select do |drink, count| 
+    #   count === three_highest_counts.uniq[0] 
+    # end
+    #most_marked_drinks= make_obj_into_array_of_objs(highest_drink_obj).shuffle().slice(0,3)
+    # return most_marked_drinks
+    
+    # If the scores differ, then...
+    # If >=2 drinks have the same count and are one of the three highest counts, then make it so
+    # both/all those drinks are in the highest counts array
+      tier_1_ranked_drinks = make_obj_into_array_of_objs(drink_and_count.select do |drink, count|
+        # Get all drinks that have the highest count 
+        # ex. G&T has 77 likes, so does Aperol Spritz, French Martini has 64
+        # Therefore the three_highest_counts should be 64,77,77
+        
+        # Find all the drinks in drink_and_counts whose count is 77
+        count === three_highest_counts.last #Gives you {G&T=>77,Aperol Spritz=>77,...}  so make into array
+      end) # Ends up as [{G&T=>77},{}{}] in our example
+    
+      # Depending on the length of that array, do one of the following
+      
+      if tier_1_ranked_drinks.length === 1 
+        # Ideally, only one drink will have the highest amount of F/M/I
+        # If there's only 1 drink that has the highest count, set it as the 1st item in most_marked_drinks
+        most_marked_drinks[0] = tier_1_ranked_drinks[0]
+        # 1st (highest) drink set.
+        
+        # Then we need to account for second and third drinks...
+        
+        # Compare the counts left in three highest counts
+        if three_highest_counts[0] === three_highest_counts[1] 
+            # If the two remaining counts are the same...
+            # Find Drinks with that count, set one as most_marked 2nd place and on as most_marked 3rd place
+            second_and_third_place = make_obj_into_array_of_objs(drink_and_count.select {|k,v| v === three_highest_counts[1]}).shuffle().slice(0,2)
+            most_marked_drinks[1] = second_and_third_place[0]
+            most_marked_drinks[2] = second_and_third_place[1]
+            # return most_marked_drinks
+        else 
+            # If the two remaining counts are the same...
+      elsif tier_1_ranked_drinks.length === 2
+        # If there's 2 drinks that has the highest count, this means two drinks are tied for highest count
+        # Set one as the first in marked_drinks, then one as the second in marked_drinks
+        most_marked_drinks[0] = tier_1_ranked_drinks[0]
+        most_marked_drinks[1] = tier_1_ranked_drinks[1]
+        # But then you need to account for third drink...
+            # 
+            # tier_2_ranked_drinks = three_highest_counts[three_highest_counts.length-2]
+      else #tier1 is 3 or more
+        # Three or more drinks in tier_1 means many drinks tied for the highest count
+        # In that case, randomly take three from the tied drinks and set it as most_marked_drinks
+        most_marked_drinks = tier_1_ranked_drinks.shuffle().slice(0,3)
+        return most_marked_drinks
+      end
+
+    # second_highest_count
+    # third_highest_count
+   
+    # An array of the drink names that have the highest AND ONLY THE HIGHEST F M or I count
+    # drinks_with_highest_count = drink_and_count.select do |drink,count|
+    #     count === highest_count
+    # end.map do |key,value|
+    #     key
+    # end
+
+    # return drinks_with_highest_count #["" "" ""]
+    byebug
+    # Write a var here that returns names of drinks with three highest counts
+    end
+    
+    
+
     def destroy_if_all_false(user_drink)
         # If all ways of interacting with user_drink are false, it should be 
         # deleted from UserDrinks entirely since the User uses those ways to 
@@ -246,7 +366,26 @@ class UserDrinksController < ApplicationController
         destroy_if_all_false(user_drink)
     end
 
+    def amount_of_drinks_marked(quality)
+        UserDrink.all.select do |ud|
+            ud[quality] === true
+        end.length
+    end
 
+    def drink_that_is_most(quality)
+    # Find the drink that is most F M or I
+    # To do that go thru all Drinks
+    # Then look at that Drink's user_drinks
+    # For every user_drink that Drink has that is marked, increase a counter by 1
+    end
+
+    def stats
+        render json: {
+            total_favorited_drinks: amount_of_drinks_marked("favorited")
+            total_made_drinks: amount_of_drinks_marked("made")
+            total_interested_drinks: amount_of_drinks_marked("interested")
+        }
+    end
 
 
    

@@ -66,6 +66,7 @@ class NavBar extends Component {
                 onClick={()=>{this.goToRandomDrink()}}
                 >Random Drink</NavLink>
                 <NavLink className="nav-link" activeClassName="active-nl" to="/contact">Contact</NavLink>
+                <NavLink className="nav-link" activeClassName="active-nl" to="/profile">Profile</NavLink>
                 <NavLink className="nav-link" activeClassName="active-nl" to='/login' onClick={()=>localStorage.clear()}>Logout</NavLink>
                 {/* Search Bar */}
                 {/* Profile Crap */}

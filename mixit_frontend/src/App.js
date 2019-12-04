@@ -176,7 +176,7 @@ exampleProps = "I got this sentence from App"
     // console.log("Store",this.props.store.getState())
     return (
       <div className="App">
-        {localStorage.getItem("token")? <NavBar/> : null}
+        {localStorage.getItem("token")? <NavBar resetFormErrors={this.resetFormErrors}/> : null}
         <Switch>
           <Route path='/login' render={() => <Login 
               submitHandler={this.login}

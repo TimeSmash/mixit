@@ -1,0 +1,60 @@
+.welcome{
+    font-family: 'Josefin Sans', cursive;
+    background-image: url("../images/welcome-bg.jpg");
+    background-size: 100%;
+    margin-top:-1em;
+    height:100%;
+    padding-top:1em;
+}
+
+.welcome-chunk{
+    width: 45em;
+    border-radius:10px;
+    margin:auto;
+    background:white;
+    font-size: 1.5em;
+    /* Use padding here to prevent underflow into NavBar */
+    /* padding-top: 50px; */
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    margin-bottom:0.5em;
+}
+
+.welcome-chunk h1{
+    padding-top:0.5em;
+    /* border: 1px solid black; */
+}
+
+.welcome-chunk td{
+    margin-top:2em;
+    text-align:center;
+    /* border: 1px solid black; */
+}
+
+.statbox{
+    padding:0.5em;
+    color:white;
+    border-radius:10px;
+}
+
+.first-row td:nth-child(1) div {background: #2b5fd6; }
+.first-row td:nth-child(2) div {background: green; }
+.first-row td:nth-child(3) div {background: red; }
+
+.second-row td:nth-child(1) div {background: #2b5fd6; }
+.second-row td:nth-child(2) div {background: green; }
+.second-row td:nth-child(3) div {background: red; }
+
+.third-row td:nth-child(1) div {background: #2b5fd6; }
+.third-row td:nth-child(2) div {background: green; }
+.third-row td:nth-child(3) div {background: red; }
+
+.big-number{
+    font-size:3em;
+    font-weight:bolder;
+    /* margin-bottom:-2em; */
+}
+.total{
+    margin-top:-2em;
+}

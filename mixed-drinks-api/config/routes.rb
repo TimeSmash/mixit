@@ -16,8 +16,8 @@ Rails.application.routes.draw do
   get '/made_toggle/:id', to: 'user_drinks#made_toggle'
   get '/interested_toggle/:id', to: 'user_drinks#interested_toggle'
   get '/marked_drinks/', to: 'user_drinks#marked_drinks'
-
-
+  get '/stats', to: 'dashboard#stats'
+  get 'top_drinks', to: 'user_drinks#get_top_drinks_from_each_quality'
   get '/drinks_with_same_flav/:id', to: 'drinks#drinks_with_same_flav'
   get '/see_secret', to: 'drinks#see_secret'
 

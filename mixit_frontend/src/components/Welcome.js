@@ -1,30 +1,57 @@
 import React, {Component} from 'react'
 
 import '../css/welcome.css'
+import { BACKEND_URL } from '../constants'
 class Welcome extends Component {
     state = { }
 
     BACKEND_URL = "http://localhost:3005"
         
-        //  classyDrinks = () => {
-        //     fetch(`${this.BACKEND_URL}/classy_drinks`)
-        //     .then(res => res.json())
-        //     .then(json => {
-        //         console.log("returned from backend",json)
-        //     })
-        // }
+        getStats = () => {
+            fetch(BACKEND_URL+'/stats')
+            .then(res => res.json())
+            .then(json => this.setState({totalUsers: json.user_count, totalDrinks: json.drink_count}))
+        }
 
         
-        
+        componentDidMount(){
+            this.getStats()
+        }
+
         render() {
             // console.log("Welcome props", this.props)
         return (
-            <div>
-                <h1>Welcome to Mixit!</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                <p>Proin sagittis nisl rhoncus mattis rhoncus urna. Orci nulla pellentesque dignissim enim sit amet venenatis urna. Scelerisque viverra mauris in aliquam sem fringilla ut morbi tincidunt. Eget felis eget nunc lobortis mattis. Bibendum enim facilisis gravida neque convallis. Neque sodales ut etiam sit amet nisl purus. Sed adipiscing diam donec adipiscing. Cursus mattis molestie a iaculis at erat pellentesque adipiscing. Neque vitae tempus quam pellentesque nec nam. Interdum consectetur libero id faucibus nisl tincidunt eget nullam. Tristique sollicitudin nibh sit amet commodo nulla facilisi nullam vehicula. Neque ornare aenean euismod elementum nisi. Enim praesent elementum facilisis leo. Nunc eget lorem dolor sed viverra ipsum nunc. In tellus integer feugiat scelerisque varius morbi. Sollicitudin ac orci phasellus egestas tellus. Diam donec adipiscing tristique risus nec feugiat in fermentum. In massa tempor nec feugiat nisl pretium fusce id velit.</p>
-                <p>Interdum consectetur libero id faucibus. Commodo quis imperdiet massa tincidunt. Morbi tempus iaculis urna id volutpat lacus laoreet. Laoreet suspendisse interdum consectetur libero id faucibus nisl tincidunt eget. Mauris in aliquam sem fringilla ut. Egestas maecenas pharetra convallis posuere morbi leo. Velit euismod in pellentesque massa. Dui nunc mattis enim ut tellus elementum sagittis vitae et. At augue eget arcu dictum varius duis at consectetur lorem. Eu turpis egestas pretium aenean pharetra magna ac. Nunc sed augue lacus viverra. Elit pellentesque habitant morbi tristique senectus et.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat s eget nunc lobortis mattis. Bibendum. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <div className="welcome">
+                <div className="welcome-chunk">
+                    <h1>Welcome to <span style={{fontFamily:"Leckerli One"}}>Mixit</span>, {localStorage.getItem("user")}!</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>                    
+                    <table>
+                        <tbody>
+                        <tr className="first-row">
+                            <td>
+                                <div className="statbox">
+        <p className="big-number">{this.state.totalUsers}</p>
+                                    <p className="total">total users</p>
+                                </div>
+                            </td>
+                            <td><div className="statbox"><p className="big-number">{this.state.totalDrinks}</p>
+                                    <p className="total">total drinks</p></div></td>
+                            <td><div className="statbox"><p className="big-number">50</p>
+                                    <p className="total">total users</p></div></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>3</td>
+                            <td>3</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         );
     }

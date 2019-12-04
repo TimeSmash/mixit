@@ -60,7 +60,7 @@ class NavBar extends Component {
                 </div>
                 <NavLink className="nav-link" activeClassName="active-nl" to="/about">About</NavLink>
                 <NavLink className="nav-link" activeClassName="active-nl" to="/drinks/all_drinks/1">All Drinks</NavLink>
-                <NavLink className="nav-link" activeClassName="active-nl" to="/alcohols">Alcohols</NavLink>
+                {/* <NavLink className="nav-link" activeClassName="active-nl" to="/alcohols">Alcohols</NavLink> */}
                 {/* <NavLink className="nav- activeClassName="active-nl"link" to="/random_drink" onClick={()=>{this.getRandomDrink()}}>Random Drink</NavLink> */}
                 <NavLink className="nav-link" activeClassName="active-nl" to={`/drinks/${this.getRandomDrinkId()}`}
                 onClick={()=>{this.goToRandomDrink()}}

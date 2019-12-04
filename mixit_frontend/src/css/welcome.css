@@ -8,11 +8,11 @@
 }
 
 .welcome-chunk{
-    width: 45em;
+    width: 85em;
     border-radius:10px;
     margin:auto;
     background:white;
-    font-size: 1.5em;
+    /* font-size: 1.5em; */
     /* Use padding here to prevent underflow into NavBar */
     /* padding-top: 50px; */
     padding-left: 10px;
@@ -34,6 +34,8 @@
 
 .statbox{
     padding:0.5em;
+    overflow:hidden;
+    /* margin:auto; */
     color:white;
     border-radius:10px;
 }
@@ -42,9 +44,9 @@
 .first-row td:nth-child(2) div {background: green; }
 .first-row td:nth-child(3) div {background: red; }
 
-.second-row td:nth-child(1) div {background: #2b5fd6; }
-.second-row td:nth-child(2) div {background: green; }
-.second-row td:nth-child(3) div {background: red; }
+.second-row td:nth-child(1) div {background: pink; }
+.second-row td:nth-child(2) div {background: aquamarine; }
+.second-row td:nth-child(3) div {background: lavender; }
 
 .third-row td:nth-child(1) div {background: #2b5fd6; }
 .third-row td:nth-child(2) div {background: green; }

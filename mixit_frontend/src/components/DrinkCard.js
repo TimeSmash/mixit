@@ -32,14 +32,15 @@ class DrinkCard extends Component {
         this.props.removeDrinkFromArray(this.props.qual, this.props.drink.id)
 
   }
-
+  widthHeight = this.props.reduceSize ? "7em" : "10em"
+  overallCardWidth = this.props.reduceSize ? "8rem" : "11rem"
   render() {
   // console.log("DrinkCard's drink prop from AllDrinks",this.props.drink)
-    console.log("DrinkCard props", this.props)
+    // console.log("DrinkCard props", this.props)
 
     // debugger
     return(
-      <div className="overall-card"style={{width:"11rem",display:"inline-block",float:"left"}}>
+      <div className="overall-card"style={{width:this.overallCardWidth,display:"inline-block",float:"left"}}>
 
            <Link className="card-link" to={`/drinks/${this.props.drink.id}`} 
                onClick={() =>{
@@ -56,13 +57,13 @@ class DrinkCard extends Component {
                      this.props.dispatch(setDrinkSuggestions(json))
                  })
                  }}>
-              <div className="card" style={{"width": "10rem", display:"block"}}>
+              <div className="card" style={{"width": this.widthHeight, display:"block", marginLeft:"0"}}>
                 <div className="img-and-text-container">
                 <div>
-                <img src={this.props.drink.picture_url} className="card-img-top" alt={this.props.drink.name}></img>
+                <img src={this.props.drink.picture_url} className="card-img-top" alt={this.props.drink.name} style={{"width": this.widthHeight, height:this.widthHeight}}></img>
                 </div>
                 <div className="card-block">
-                  <p className="card-text">{this.props.drink.name}</p>
+                  <p className="card-text" style={{background:"#EEE"}}>{this.props.drink.name}</p>
                 </div>
                 </div>
                   {this.props.showButton ? <button className="remove-mark" onClick={(e)=> {this.removeMarkedStatus(e)}}>X</button> : null}

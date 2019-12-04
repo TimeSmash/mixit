@@ -57,7 +57,16 @@ def most_marked(quality)
             highest_drink_obj = drink_and_count.select do |drink, count| 
             count === three_highest_counts.uniq[0] 
             end
-            most_marked_drinks= make_obj_into_array_of_objs(highest_drink_obj).shuffle().slice(0,3)
+            # most_marked_drinks= make_obj_into_array_of_objs(highest_drink_obj).shuffle().slice(0,3) #[G&T=>7]
+            
+            
+            # {"Aperol Spritz"=>4, "Kir Royale"=>3, "Alexander"=>2}
+            
+
+
+            most_marked_drinks = Drink.all.select do |drink| 
+                highest_drink_obj.keys.include?(drink.name)
+            end
         else 
             tier_1_ranked_drinks = make_obj_into_array_of_objs(drink_and_count.select do |drink, count|
             count === three_highest_counts.last 
@@ -95,12 +104,28 @@ def most_marked(quality)
                         count === three_highest_counts[0] 
                     end).shuffle().first
                     most_marked_drinks[2] = second_place
-            # else 
-            #     # Don't need this?
-            #     most_marked_drinks = tier_1_ranked_drinks.shuffle().slice(0,3)
             end
         end
-        return most_marked_drinks
+        # [{d=>#}{}{}]
+
+        most_marked_drinks_obj = {}
+
+        most_marked_drinks.each do |ele|
+            most_marked_drinks_obj[ele.keys[0]] = ele.values[0]
+        end
+
+        # names = most_marked_drinks.map{|drink_obj| drink_obj.keys[0]}
+        names = most_marked_drinks_obj.keys
+
+        drink_objs = names.map{|name| Drink.find_by_name(name)}
+        
+        drink_objs_and_counts = {}
+
+        drink_objs.each do |drink|
+           drink_objs_and_counts[drink.name.split(" ").join("")+"Obj"] = {:drink => drink, :count=>most_marked_drinks_obj[drink.name]}
+        end
+        # return most_marked_drinks
+        return drink_objs_and_counts
 end
 
 def get_top_drinks_from_each_quality

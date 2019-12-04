@@ -3,7 +3,7 @@ import loadingImg from '../images/martini.gif'
 
 function Loader() {
     return(
-    <div className="loader">
+    <div className="loader" style={{height:"inherit"}}>
         {/* {alert("Loading")} */}
         
         <h1>Loading...</h1>

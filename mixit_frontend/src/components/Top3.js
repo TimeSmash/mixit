@@ -24,7 +24,7 @@ class Top3 extends Component {
         // console.log("Drinks below")
     return (
         <div style={{margin:"auto"}}>
-            <h4>Top 3 Whatever</h4>
+            <h4>Top 3 {this.props.type} Drinks</h4>
             <div style={{paddingLeft:"1.5em"}}>
             {this.top3DrinkCards()}
             </div>    

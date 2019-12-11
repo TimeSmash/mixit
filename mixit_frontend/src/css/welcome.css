@@ -3,7 +3,7 @@
     background-image: url("../images/welcome-bg.jpg");
     background-size: 100%;
     margin-top:-1em;
-    height:85em;
+    height:54em;
     padding-top:1em;
 }
 
@@ -11,7 +11,7 @@
     width: 85em;
     border-radius:10px;
     margin:auto;
-    height:75em;
+    height:41em;
     background:white;
     /* font-size: 1.5em; */
     /* Use padding here to prevent underflow into NavBar */
@@ -48,16 +48,25 @@
     border-radius:10px;
 }
 
+#stat-logo{
+    height:7em;
+}
+
+.stats{
+    font-size:4em;    
+    margin-top:0.2em;
+}
+
 .first-row td:nth-child(1) div {background: #80cee1; }
-.first-row td:nth-child(2) div {background: orange; }
-.first-row td:nth-child(3) div {background: red; }
+.first-row td:nth-child(2) div {background: rgb(255, 199, 138); }
+.first-row td:nth-child(3) div {background: #ff6961; }
 
 .second-row td:nth-child(1) div {background: pink; }
 .second-row td:nth-child(2) div {background: aquamarine; }
 .second-row td:nth-child(3) div {background: rgb(208, 171, 240); }
 
 .third-row td:nth-child(1) div {background: #2b5fd6; }
-.third-row td:nth-child(2) div {background: green; }
+.third-row td:nth-child(2) div {background: rgb(255, 154, 46); }
 .third-row td:nth-child(3) div {background: red; }
 
 .big-number{

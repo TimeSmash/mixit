@@ -35,6 +35,7 @@ class Welcome extends Component {
         render() {
             console.log("Welcome props", this.props)
             console.log("Welcome state",this.state)
+            window.scrollTo(0,0);
         return (
             <div className="welcome">
                 
@@ -42,7 +43,7 @@ class Welcome extends Component {
                 {this.state.loading1 === false && this.state.loading2 === false ? 
                 <div>
                     <h1>Welcome to <span style={{fontFamily:"Leckerli One"}}>Mixit</span>, {localStorage.getItem("user")}!</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>                    
+                    <h4>Welcome! Here are some of the most recent statistics for Mixit:</h4>                    
                     <table>
                         <tbody>
                         <tr className="first-row">
@@ -57,9 +58,9 @@ class Welcome extends Component {
                                     <p className="total">total drinks</p></div>
                             </td>
                             <td>
-                                <div className="statbox">
-                                    <p className="big-number">50</p>
-                                    <p className="total">total users</p>
+                                <div className="statbox" id="stat-logo">
+                                    <h3 className="stats"><em><span style={{fontFamily:"Leckerli One"}}>Mixit</span> Stats</em></h3>
+                                    
                                 </div></td>
                         </tr>
                         <tr className="second-row">
@@ -76,15 +77,13 @@ class Welcome extends Component {
                             {Object.keys(this.state.top3Favorited).length ? <Top3 type={"Interested"} top3Drinks={this.state.top3Int}/> : null}
                             </div></td>
                         </tr>
-                        <tr>
+                        {/* <tr>
                             <td>3</td>
                             <td>3</td>
                             <td>3</td>
-                        </tr>
+                        </tr> */}
                         </tbody>
                     </table>
-                    <p>HEY</p>
-                   
                     </div>
         : <Loader/>}
                 </div>

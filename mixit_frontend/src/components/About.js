@@ -56,12 +56,19 @@ class About extends Component {
                             This application utilizes the following:
                         </p>
                         
-                        <br></br>
-                            <ul>
+                        <h4 className="list-header">Frontend</h4>
+                            <ul className="method-list">
                                 <li>React</li>
+                                <li>React-paginate: frontend pagination bar to display paginated data</li>
                                 <li>Redux (with persist)</li>
-                                <li>will_paginate</li>
-                                <li>aginate</li><li>aginate</li>
+                                <li>React Auth (with JWT)</li>
+                            </ul>
+                            <h4 className="list-header">Backend</h4>
+                            <ul className="method-list">
+                                <li>Ruby on Rails</li>
+                                <li>Ruby gem: will_paginate to paginate backend data</li>
+                                <li>Use of environmental variables to provide secret key to JWT</li>
+                                <li>Sorting algorithm to obtain top 3 drinks, accounting for ties on each level.</li>
                             </ul>
                 </div>
             </div>

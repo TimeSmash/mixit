@@ -50,3 +50,14 @@
     padding-top:0px;
     /* border: 1px solid black; */
 }
+
+.list-header{
+    text-decoration:underline;
+}
+.method-list{
+    list-style-type: inside;
+}
+.method-list li{
+    display: list-item;
+    list-style-type: circle;
+}

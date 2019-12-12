@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Top3 from './Top3'
+import DrinkCard from './DrinkCard'
 import Loader from './Loader'
 import { BACKEND_URL } from '../constants'
 
@@ -10,8 +11,12 @@ class Welcome extends Component {
               top3Favorited: {},
               top3Made: {},
               top3Interested: {},
+              mostRecentlyFavorited: {},
+              mostRecentlyMade: {},
+              mostRecentlyInterested: {},
               loading1: true,
-              loading2: true }
+              loading2: true,
+              loading3: true }
 
     BACKEND_URL = "http://localhost:3005"
         
@@ -27,9 +32,16 @@ class Welcome extends Component {
             .then(json => this.setState({top3Favorited: json.top_favorited, top3Made: json.top_made, top3Int: json.top_interested, loading2: false }))
         }
 
+        getMostRecents = () => {
+            fetch(BACKEND_URL+"/most_recents").
+            then(res => res.json()).
+            then(json => this.setState({mostRecentlyFavorited: json.most_recently_favorited, mostRecentlyMade: json.most_recently_made, mostRecentlyInterested: json.most_recently_interested, loading3: false}))
+        }
+
         componentDidMount(){
             this.getStats()
             this.getTopDrinks()
+            this.getMostRecents()
         }
 
         render() {
@@ -77,11 +89,34 @@ class Welcome extends Component {
                             {Object.keys(this.state.top3Favorited).length ? <Top3 type={"Interested"} top3Drinks={this.state.top3Int}/> : null}
                             </div></td>
                         </tr>
-                        {/* <tr>
-                            <td>3</td>
-                            <td>3</td>
-                            <td>3</td>
-                        </tr> */}
+                        <tr className="third-row">
+                            <td>
+                            <div className="statbox">
+                            {Object.keys(this.state.mostRecentlyFavorited).length ?
+                            <div>
+                                <h4>Most Recently Favorited</h4>
+                                <div style={{paddingLeft: "9em"}}><DrinkCard drink={this.state.mostRecentlyFavorited} reduceSize={true}/> </div>
+                            </div>
+                            : null}
+                            </div>
+                            </td>
+                            <td><div className="statbox">
+                            {Object.keys(this.state.mostRecentlyMade).length ?
+                            <div>
+                                <h4>Most Recently Made</h4>
+                                <div style={{paddingLeft: "9em"}}><DrinkCard drink={this.state.mostRecentlyMade} reduceSize={true}/> </div>
+                            </div>
+                            : null}
+                            </div></td>
+                            <td><div className="statbox">
+                            {Object.keys(this.state.mostRecentlyInterested).length ?
+                            <div>
+                                <h4>Most Recently Interested</h4>
+                                <div style={{paddingLeft: "9em"}}><DrinkCard drink={this.state.mostRecentlyInterested} reduceSize={true}/> </div>
+                            </div>
+                            : null}
+                            </div></td>
+                        </tr>
                         </tbody>
                     </table>
                     </div>

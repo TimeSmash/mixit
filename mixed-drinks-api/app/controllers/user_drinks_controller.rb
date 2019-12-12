@@ -357,11 +357,17 @@ end
         end.length
     end
 
-    def drink_that_is_most(quality)
-    # Find the drink that is most F M or I
-    # To do that go thru all Drinks
-    # Then look at that Drink's user_drinks
-    # For every user_drink that Drink has that is marked, increase a counter by 1
+    def most_recently(quality)
+        UserDrink.select do |u_d|
+            u_d[quality] === true
+        end.sort_by{|marked_drink| marked_drink.updated_at}.last.drink
+    end
+
+    def most_recents
+        render json: {most_recently_favorited: most_recently("favorited"),
+            most_recently_made: most_recently("made"),
+            most_recently_interested: most_recently("interested")
+        }
     end
 
     # def stats

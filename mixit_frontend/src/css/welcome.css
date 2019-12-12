@@ -3,7 +3,7 @@
     background-image: url("../images/welcome-bg.jpg");
     background-size: 100%;
     margin-top:-1em;
-    height:54em;
+    height:74em;
     padding-top:1em;
 }
 
@@ -11,7 +11,7 @@
     width: 85em;
     border-radius:10px;
     margin:auto;
-    height:41em;
+    height:61em;
     background:white;
     /* font-size: 1.5em; */
     /* Use padding here to prevent underflow into NavBar */
@@ -41,7 +41,7 @@
 }
 
 .statbox{
-    padding:0.5em;
+    padding:0.4em;
     overflow:hidden;
     /* margin:auto; */
     color:white;
@@ -59,15 +59,15 @@
 
 .first-row td:nth-child(1) div {background: #80cee1; }
 .first-row td:nth-child(2) div {background: rgb(255, 199, 138); }
-.first-row td:nth-child(3) div {background: #ff6961; }
+.first-row td:nth-child(3) div {background: #ff7971; }
 
 .second-row td:nth-child(1) div {background: pink; }
 .second-row td:nth-child(2) div {background: aquamarine; }
 .second-row td:nth-child(3) div {background: rgb(208, 171, 240); }
 
-.third-row td:nth-child(1) div {background: #2b5fd6; }
-.third-row td:nth-child(2) div {background: rgb(255, 154, 46); }
-.third-row td:nth-child(3) div {background: red; }
+.third-row td:nth-child(1) div {background: #ffea8e; }
+.third-row td:nth-child(2) div {background: #c9a084; }
+.third-row td:nth-child(3) div {background: rgb(151, 174, 196); }
 
 .big-number{
     font-size:3em;

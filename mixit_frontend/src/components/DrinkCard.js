@@ -57,13 +57,13 @@ class DrinkCard extends Component {
                      this.props.dispatch(setDrinkSuggestions(json))
                  })
                  }}>
-              <div className="card" style={{"width": this.widthHeight, display:"block", marginLeft:"0"}}>
+              <div className="card" style={{"width": this.widthHeight, display:"block", marginLeft:"0", marginTop:"0em"}}>
                 <div className="img-and-text-container">
                 <div>
                 <img src={this.props.drink.picture_url} className="card-img-top" alt={this.props.drink.name} style={{"width": this.widthHeight, height:this.widthHeight}}></img>
                 </div>
                 <div className="card-block">
-                  <p className="card-text" style={{background:"#EEE"}}>{this.props.drink.name}</p>
+                  <p className="card-text" style={{background:"#EEE"}}>{this.props.drink.name.length > 15 ? this.props.drink.name.slice(0,10)+"..." : this.props.drink.name}</p>
                 </div>
                 </div>
                   {this.props.showButton ? <button className="remove-mark" onClick={(e)=> {this.removeMarkedStatus(e)}}>X</button> : null}

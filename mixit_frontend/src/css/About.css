@@ -55,9 +55,11 @@
     text-decoration:underline;
 }
 .method-list{
-    list-style-type: inside;
+    display: list-item;
+    color:black;
 }
 .method-list li{
     display: list-item;
+    color:black;
     list-style-type: circle;
 }

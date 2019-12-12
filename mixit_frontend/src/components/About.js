@@ -58,17 +58,17 @@ class About extends Component {
                         
                         <h4 className="list-header">Frontend</h4>
                             <ul className="method-list">
-                                <li>React</li>
-                                <li>React-paginate: frontend pagination bar to display paginated data</li>
-                                <li>Redux (with persist)</li>
-                                <li>React Auth (with JWT)</li>
+                                <li><span>-</span>React</li>
+                                <li><span>-</span>React-paginate: frontend pagination bar to display paginated data</li>
+                                <li><span>-</span>Redux (with persist)</li>
+                                <li><span>-</span>React Auth (with JWT)</li>
                             </ul>
                             <h4 className="list-header">Backend</h4>
                             <ul className="method-list">
-                                <li>Ruby on Rails</li>
-                                <li>Ruby gem: will_paginate to paginate backend data</li>
-                                <li>Use of environmental variables to provide secret key to JWT</li>
-                                <li>Sorting algorithm to obtain top 3 drinks, accounting for ties on each level.</li>
+                                <li><span>-</span>Ruby on Rails</li>
+                                <li><span>-</span>Ruby gem: will_paginate to paginate backend data</li>
+                                <li><span>-</span>Use of environmental variables to provide secret key to JWT</li>
+                                <li><span>-</span>Sorting algorithm to obtain top 3 drinks, accounting for ties on each level.</li>
                             </ul>
                 </div>
             </div>
@@ -77,3 +77,7 @@ class About extends Component {
 }
 
 export default About;
+
+
+
+

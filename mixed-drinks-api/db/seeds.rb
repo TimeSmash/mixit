@@ -108,7 +108,7 @@ classic = "Classic"
 casual = "Casual"
 easily_classed_up = "Easily Classed Up"
 easy_to_make = "Easy To Make"
-hard_to_make = "Hard To Make" #!!
+hard_to_make = "Hard To Make" 
 cheap = "Cheap"
 # expensive = "Expensive"
 party = "Party/Celebration"
@@ -970,18 +970,22 @@ lynchburg_lemonade = Drink.create( name: "Lynchburg Lemonade",
      recipe_url: " https://www.jackdaniels.com/en-us/recipes/lynchburg-lemonade",
      additional_notes: "Lemon lime soda is a common addition to this drink."
 )
-# = Drink.create(
-#     name: "Rum Martinez",
-#     alcohols: [],
-#     flavors: [],
-#     types: [],
-#     color: ,
-#     picture_url: "",
-#     picture_credit: "",
-#     recipe: "",
-#     recipe_url: "",
-#     additional_notes: ""
-# )
+
+batia_de_coco= Drink.create(
+    name: "Batida de Coco",
+    alcohols: [cachaca],
+    flavors: [sweet, creamy],
+    types: [casual],
+    color: white,
+    picture_url: "https://www.oliviascuisine.com/wp-content/uploads/2019/08/brazilian-batida-de-coco-683x1024.jpg",
+    picture_credit: "oliviascuisine.com",
+    recipe: "2 ounces Cachaca
+        3 ounces coconut milk
+        2 tsps. simple syrup
+        1 ounce sweetened condensed milk",
+    recipe_url: "https://drinkingwith.wordpress.com/2013/10/07/the-batida-de-coca/",
+    additional_notes: "Not to be confused with the liqueur of the same name, the Batida de Coco may be topped with shredded coconut to provide an additional layer of texture."
+)
 
 # = Drink.create(
 #     name: "Rum Martinez",

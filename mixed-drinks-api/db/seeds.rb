@@ -971,7 +971,7 @@ lynchburg_lemonade = Drink.create( name: "Lynchburg Lemonade",
      additional_notes: "Lemon lime soda is a common addition to this drink."
 )
 
-batia_de_coco= Drink.create(
+batida_de_coco= Drink.create(
     name: "Batida de Coco",
     alcohols: [cachaca],
     flavors: [sweet, creamy],
@@ -987,18 +987,19 @@ batia_de_coco= Drink.create(
     additional_notes: "Not to be confused with the liqueur of the same name, the Batida de Coco may be topped with shredded coconut to provide an additional layer of texture."
 )
 
+blueberry_daiquiri= Drink.create(
+    name: "Blueberry Daiquiri",
+    alcohols: [white_rum],
+    flavors: [sweet, fruity],
+    types: [frozen],
+    color: purple,
+    picture_url: "",
+    picture_credit: "",
+    recipe: "",
+    recipe_url: "",
+    additional_notes: ""
+)
 # = Drink.create(
-#     name: "Rum Martinez",
-#     alcohols: [],
-#     flavors: [],
-#     types: [],
-#     color: ,
-#     picture_url: "",
-#     picture_credit: "",
-#     recipe: "",
-#     recipe_url: "",
-#     additional_notes: ""
-# )= Drink.create(
 #     name: "Rum Martinez",
 #     alcohols: [],
 #     flavors: [],

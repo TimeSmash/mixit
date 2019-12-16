@@ -2,18 +2,14 @@ import React, {Component} from 'react'
 import DrinkCard from './DrinkCard' 
 import '../css/Top3.css'
 class Top3 extends Component {
-    // props is an array of objects [{drink=>count}]
-// top_favorited: {
-    // AlexanderObj: {drink: {<#>}, count: 2}
-    // Aperol SpritzObj: {drink: {…}, count: 4}
-    // Kir RoyaleObj: {drink: {…}, count: 3}
-// }
+    // props.top3Drinks is an array of objects [{drink=>{}, count=>#},{}}]
+
     
-    drinksWithCounts = Object.values(this.props.top3Drinks) //[{drink: <#>, count:#}, {}, {}]
+    drinksWithCounts = this.props.top3Drinks //[{drink: <#>, count:#}, {}, {}]
 
     top3DrinkCards = () => {
         return this.drinksWithCounts.map(drinkCountObj => {
-            return <div style={{float:"left"}}>
+            return <div className="top-3-overall" key={this.drinksWithCounts.indexOf(drinkCountObj)} style={{float:"left"}}>
             <DrinkCard key={drinkCountObj.count} reduceSize={true} drink={drinkCountObj["drink"]}/>
             <div style={{marginRight:"1em"}}>
             <p style={{clear:"both", fontSize:"2.5em",fontWeight:"Bold"}}>{drinkCountObj.count}</p>
@@ -25,7 +21,7 @@ class Top3 extends Component {
 
     // drinksWithCounts.forEach(d => console.log(d["drink"]))
     render(){
-        console.log("HELLO fhrusfbifhj", this.props)
+        console.log("Top3 props", this.props.top3Drinks)
         console.log("drinksWithCounts", this.drinksWithCounts)
         // console.log("HYE", this.top3DrinkCards())
         // console.log("Drinks below")

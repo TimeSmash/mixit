@@ -8,7 +8,7 @@ import '../css/welcome.css'
 class Welcome extends Component {
     state = { totalUsers: "",
               totalDrinks: "",
-              top3Favorited: {},
+              top3Favorited: {}, //[{drink=>{}, count=>#}, {}{}]
               top3Made: {},
               top3Interested: {},
               mostRecentlyFavorited: {},

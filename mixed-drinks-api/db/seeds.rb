@@ -988,16 +988,19 @@ batida_de_coco= Drink.create(
 )
 
 blueberry_daiquiri= Drink.create(
-    name: "Blueberry Daiquiri",
+    name: "Frozen Blueberry Daiquiri",
     alcohols: [white_rum],
     flavors: [sweet, fruity],
     types: [frozen],
     color: purple,
-    picture_url: "",
-    picture_credit: "",
-    recipe: "",
-    recipe_url: "",
-    additional_notes: ""
+    picture_url: "https://www.emerils.com/sites/default/files/styles/wmax-600-sq/public/Blueberry%20Daiquiri.jpeg?itok=TQiP7HZB",
+    picture_credit: "emerils.com",
+    recipe: "1-½ tablespoons lime juice
+½ cup frozen or fresh blueberries
+1-½ ounces light rum
+1 cup crushed ice",
+    recipe_url: "https://www.blueberrycouncil.org/blueberry-recipe/blueberry-daiquiri/",
+    additional_notes: "Consider garnishing this drink with a sprig of mint to provide color contrast and a little extra taste"
 )
 # = Drink.create(
 #     name: "Rum Martinez",

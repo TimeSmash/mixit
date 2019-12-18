@@ -12,11 +12,15 @@ def most_marked(quality)
         drink_and_count[drink.name] = counter 
       end
       
+        # Take values of everything, sort them, then get last three (will be highest counts in ascending order [99,100,101])
         three_highest_counts = drink_and_count.values.sort.slice(drink_and_count.values.length-3,drink_and_count.values.length-1)
+        # If the three numbers are the same...
         if three_highest_counts.uniq.length === 1
+            # Filter the drinks that have that count into new obj
             highest_drink_obj = drink_and_count.select do |drink, count| 
             count === three_highest_counts.uniq[0] 
             end
+            # Turn the obj into an array, randomize it and get three of them
             most_marked_drinks= make_obj_into_array_of_objs(highest_drink_obj).shuffle().slice(0,3)
         else 
             tier_1_ranked_drinks = make_obj_into_array_of_objs(drink_and_count.select do |drink, count|
@@ -190,3 +194,160 @@ end
 
 # end
 # end
+
+# def most_marked(quality)
+#     drink_and_count = {}
+#     most_marked_drinks = []
+#     Drink.all.each do |drink|
+#       counter = 0
+#       drink.user_drinks.each do |user_drink|
+#           if user_drink[quality] === true
+#               counter += 1
+#           end
+#       end
+#       # puts drink.name + " was " + quality + " " + counter.to_s + " times"
+#       drink_and_count[drink] = counter 
+#       # drink_and_count[drink.name] = drink
+#       # drink_and_count["count"] = counter 
+
+#     end
+#     return make_obj_into_array_of_objs(drink_and_count)
+#   end
+
+def most_marked2(quality)
+    drink_and_count = {}
+    most_marked_drinks = []
+    drink_and_count_arr = [] #[drink=>drink_obj, count=>FMI count number]
+    Drink.all.each do |drink|
+      counter = 0
+      drink.user_drinks.each do |user_drink|
+          if user_drink[quality] === true
+              counter += 1
+          end
+      end
+      # puts drink.name + " was " + quality + " " + counter.to_s + " times"
+      # drink_and_count[drink.name] = counter 
+      drink_and_count_arr.push({"drink" => drink, "count" => counter})
+      
+    end
+    # return drink_and_count_arr
+  
+    three_highest_counts = drink_and_count_arr.map{|obj| obj["count"]}.sort.slice(drink_and_count_arr.length-3,drink_and_count_arr.length-1)
+    # If the three highest counts are the same, three or more drinks tied for first
+    if three_highest_counts.uniq.length === 1
+        # So, set most_marked_drinks to the drinks with this count, then randomize and take 3
+        most_marked_drinks = drink_and_count_arr.select do |obj| 
+            obj["count"] === three_highest_counts.uniq[0]
+        end.shuffle().slice(0,3)
+    else 
+        # Only one or two drinks have first place
+        tier_1_ranked_drinks = drink_and_count_arr.select do |obj|
+        obj["count"] === three_highest_counts.last 
+        end
+        # byebug
+        if tier_1_ranked_drinks.length === 1 
+            # There is an official first place, only 1 drink has first place
+            most_marked_drinks[0] = tier_1_ranked_drinks[0]
+            if three_highest_counts[0] === three_highest_counts[1] 
+                # 2+ drinks tied for second place, pick random ones for index-1 and index-2 of most_marked
+                second_and_third_place = drink_and_count_arr.select{|obj| obj["count"] === three_highest_counts[1]}.shuffle().slice(0,2)
+                most_marked_drinks[1] = second_and_third_place[0]
+                most_marked_drinks[2] = second_and_third_place[1]    
+            else 
+                # 2nd and 3rd place are different
+                # Take 2nd place (index-1) of three_highest_count and set is as most_marked[1]
+                # byebug
+                # most_marked_drinks[1] = three_highest_counts[1]
+                second_place = drink_and_count_arr.select do |obj|
+                    obj["count"] === three_highest_counts[1] 
+                end.shuffle().first
+                most_marked_drinks[1] = second_place
+                #In case 2+ drinks tied for third place, pick random one for index-2 of most_marked
+                third_place = drink_and_count_arr.select do |obj|
+                    obj["count"] === three_highest_counts[0] 
+                end.shuffle().first
+                most_marked_drinks[2] = third_place
+            end
+        elsif tier_1_ranked_drinks.length === 2
+            # 2 drinks tied for first place, set 1st and second place (no need to shuffle)
+            most_marked_drinks[0] = tier_1_ranked_drinks[0]
+            most_marked_drinks[1] = tier_1_ranked_drinks[1]
+            #In case 2+ drinks tied for second place, pick random one for index-2 of most_marked
+            second_place = drink_and_count_arr.select do |ele|
+                    ele["count"] === three_highest_counts[0] 
+                end.shuffle().first
+                most_marked_drinks[2] = second_place
+        end
+    end
+    # [{d=><#>, count => #}{}{}]
+    return most_marked_drinks
+    
+end
+
+
+def most_marked(quality)
+    most_marked_drinks = []
+    drink_and_count_arr = [] #[drink=>drink_obj, count=>FMI count number]
+    Drink.all.each do |drink|
+      counter = 0
+      drink.user_drinks.each do |user_drink|
+          if user_drink[quality] === true
+              counter += 1
+          end
+      end
+      # puts drink.name + " was " + quality + " " + counter.to_s + " times" 
+      drink_and_count_arr.push({"drink" => drink, "count" => counter})
+      
+    end
+    # return drink_and_count_arr
+  
+    three_highest_counts = drink_and_count_arr.map{|obj| obj["count"]}.sort.slice(drink_and_count_arr.length-3,drink_and_count_arr.length-1)
+    # If the three highest counts are the same, three or more drinks tied for first
+    if three_highest_counts.uniq.length === 1
+        # So, set most_marked_drinks to the drinks with this count, then randomize and take 3
+        most_marked_drinks = drink_and_count_arr.select do |obj| 
+            obj["count"] === three_highest_counts.uniq[0]
+        end.shuffle().slice(0,3)
+    else 
+        # Only one or two drinks have first place
+      tier_1_ranked_drinks = drink_and_count_arr.select do |obj|
+        obj["count"] === three_highest_counts.last 
+      end
+        # byebug
+      if tier_1_ranked_drinks.length === 2
+        # 2 drinks tied for first place, set 1st and second place (no need to shuffle)
+        most_marked_drinks[0] = tier_1_ranked_drinks[0]
+        most_marked_drinks[1] = tier_1_ranked_drinks[1]
+        #In case 2+ drinks tied for second place, pick random one for index-2 of most_marked
+        second_place = drink_and_count_arr.select do |ele|
+                ele["count"] === three_highest_counts[0] 
+        end.first
+        most_marked_drinks[2] = second_place
+      elsif tier_1_ranked_drinks.length === 1 
+            # There is an official first place, only 1 drink has first place
+            most_marked_drinks[0] = tier_1_ranked_drinks[0]
+            if three_highest_counts[0] === three_highest_counts[1] 
+                # 2+ drinks tied for second place, pick random ones for index-1 and index-2 of most_marked
+                second_and_third_place = drink_and_count_arr.select{|obj| obj["count"] === three_highest_counts[1]}.shuffle().slice(0,2)
+                most_marked_drinks[1] = second_and_third_place[0]
+                most_marked_drinks[2] = second_and_third_place[1]    
+            else 
+                # 2nd and 3rd place are different
+                # Take 2nd place (index-1) of three_highest_count and set is as most_marked[1]
+                # byebug
+                # most_marked_drinks[1] = three_highest_counts[1]
+                second_place = drink_and_count_arr.select do |obj|
+                    obj["count"] === three_highest_counts[1] 
+                end.shuffle().first
+                most_marked_drinks[1] = second_place
+                #In case 2+ drinks tied for third place, pick random one for index-2 of most_marked
+                third_place = drink_and_count_arr.select do |obj|
+                    obj["count"] === three_highest_counts[0] 
+                end.shuffle().first
+                most_marked_drinks[2] = third_place
+            end
+        end
+    end
+    # [{d=><#>, count => #}{}{}]
+    return most_marked_drinks
+end

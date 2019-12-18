@@ -72,6 +72,7 @@ class UserDrinksController < ApplicationController
           elsif tier_1_ranked_drinks.length === 1 
                 # There is an official first place, only 1 drink has first place
                 most_marked_drinks[0] = tier_1_ranked_drinks[0]
+                # Check for ties in second place
                 if three_highest_counts[0] === three_highest_counts[1] 
                     # 2+ drinks tied for second place, pick random ones for index-1 and index-2 of most_marked
                     second_and_third_place = drink_and_count_arr.select{|obj| obj["count"] === three_highest_counts[1]}.shuffle().slice(0,2)
@@ -84,7 +85,7 @@ class UserDrinksController < ApplicationController
                     # most_marked_drinks[1] = three_highest_counts[1]
                     second_place = drink_and_count_arr.select do |obj|
                         obj["count"] === three_highest_counts[1] 
-                    end.shuffle().first
+                    end.first
                     most_marked_drinks[1] = second_place
                     #In case 2+ drinks tied for third place, pick random one for index-2 of most_marked
                     third_place = drink_and_count_arr.select do |obj|
@@ -272,54 +273,6 @@ end
     #     user_drink.update(favorited: false)
     #     destroy_if_all_false(user_drink)
     # end
-
-    def flag_as_made
-        user_drink = UserDrink.find_by(user_id: FROM_FRONTEND, drink_id: ALSO_FROM_FRONTEND)
-        # If drink exists in UserDrinks already, and is NOT flagged as made already, then flag it as made
-        if already_exists?(user_drink) && user_drink.made != true
-            user_drink.update(made: true)
-        elsif already_exists?(user_drink) && user_drink.made === true
-            # If drink exists, but is already favorited, don't do anything
-            # This shouldn't even be an issue the way this is being set up, but stil
-            return null
-        else
-            # If drink doesn't exist in UserDrinks
-            UserDrink.create(
-                user_id: FROM_FRONTEND,
-                drink_id: ALSO_FROM_FRONTEND,
-                made: true
-            )
-        end
-    end
-
-    def unflag_made
-        user_drink = UserDrink.find_by(user_id: PARAMS_FROM_FRONTEND, drink_id: ALSO_FROM_FRONTEND)
-        user_drink.update(made: false)
-        destroy_if_all_false(user_drink)
-    end
-
-    def flag_as_interested
-        user_drink = UserDrink.find_by(user_id: FROM_FRONTEND, drink_id: ALSO_FROM_FRONTEND)
-        # If drink exists in UserDrinks already, and is NOT flagged as interested, then flag it as interested
-        if already_exists?(user_drink) && user_drink.interested != true
-            user_drink.update(interested: true)
-        elsif already_exists?(user_drink) && user_drink.interested === true
-            return null
-        else
-            # If drink doesn't exist in UserDrinks
-            UserDrink.create(
-                user_id: FROM_FRONTEND,
-                drink_id: ALSO_FROM_FRONTEND,
-                interested: true
-            )
-        end
-    end
-
-    def unflag_interested
-        user_drink = UserDrink.find_by(user_id: PARAMS_FROM_FRONTEND, drink_id: ALSO_FROM_FRONTEND)
-        user_drink.update(interested: false)
-        destroy_if_all_false(user_drink)
-    end
 
     def amount_of_drinks_marked(quality)
         UserDrink.all.select do |ud|

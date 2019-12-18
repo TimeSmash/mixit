@@ -1,4 +1,22 @@
+#card-horiz{
+    background:white;
+    color:black;
+    font-family: 'Josefin Sans', sans-serif;
+    border:5px solid yellow
+    
+}
+
 #card-horiz:hover{
-    background:none;
+    background:white;
     filter: brightness(100%);
+}
+
+#wrapper{
+    margin-top:-1em;
+    height:135em;
+    background-image: url('../images/DrinkClass2.jpg');
+    /* background: black; */
+    background-size:cover;
+    overflow:hidden;
+    color:white;
 }

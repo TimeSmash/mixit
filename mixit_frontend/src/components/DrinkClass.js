@@ -229,6 +229,7 @@ class Drink extends Component{
         // }
         
     return (
+        <div id="wrapper">
             <div className="col s12 m7"style={{fontFamily:"Josefin Sans"}}>
                {this.state.loading ? 
                     <Loader/> :  
@@ -243,7 +244,7 @@ class Drink extends Component{
                 <div>
                 <h2 className="header">{this.props.drinkToShow.name}</h2>
                 
-                <div  id="card-horiz" className="card horizontal" style={{fontFamily:"Josefin Sans",height:"auto",border:"5px solid yellow",paddingBottom:"2%"}}>
+                <div  id="card-horiz" className="card horizontal" style={{paddingBottom:"2%"}}>
                         
                     
                     <div className="card-image">
@@ -299,6 +300,7 @@ class Drink extends Component{
                 </div>
                 </div>
                }
+            </div>
             </div>
         
     )

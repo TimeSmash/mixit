@@ -640,7 +640,7 @@ irish_coffee = Drink.create(
     name: "Irish Coffee",
     alcohols: [whiskey],
     flavors: [coffee, bitter, sweet],
-    types: [digestif, iba_classic],
+    types: [digestif, hot, iba_classic],
     color: brown,
     picture_url: "https://cdn.apartmenttherapy.info/image/fetch/f_auto,q_auto:eco,c_fit,w_760/https%3A%2F%2Fstorage.googleapis.com%2Fgen-atmedia%2F3%2F2012%2F03%2Fa84cba9e15919d13761dd6dbdff13c3c9fe1779d.jpeg",
     picture_credit: "thekitchn.com",
@@ -1002,18 +1002,22 @@ blueberry_daiquiri= Drink.create(
     recipe_url: "https://www.blueberrycouncil.org/blueberry-recipe/blueberry-daiquiri/",
     additional_notes: "Consider garnishing this drink with a sprig of mint to provide color contrast and a little extra taste"
 )
+
+toasted_almond= Drink.create(
+    name: "Toasted Almond",
+    alcohols: [amaretto, coffee_liqueur],
+    flavors: [coffee, creamy, sweet],
+    types: [digestif, easy_to_make],
+    color: brown,
+    picture_url: "https://www.thedrinkkings.com/wp-content/uploads/2014/07/Toasted-Almond-8-630-630x768.jpg",
+    picture_credit: "thedrinkkings.com",
+    recipe: "1 1/2 ounces amaretto
+        1 1/2 ounces Kahlua
+        1 ounce heavy cream",
+    recipe_url: "https://www.thedrinkkings.com/toasted-almond-recipe/",
+    additional_notes: "The Toasted Almond is a great dessert cocktail. Try pairing it with light pastries."
+)
 # = Drink.create(
-#     name: "Rum Martinez",
-#     alcohols: [],
-#     flavors: [],
-#     types: [],
-#     color: ,
-#     picture_url: "",
-#     picture_credit: "",
-#     recipe: "",
-#     recipe_url: "",
-#     additional_notes: ""
-# )= Drink.create(
 #     name: "Rum Martinez",
 #     alcohols: [],
 #     flavors: [],

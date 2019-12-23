@@ -1032,19 +1032,32 @@ air_mail = Drink.create(
             Champagne (or any dry sparkling wine)",
         additional_notes: "The Air Mail can be made with white or gold rum."
     )
-    
-# = Drink.create(
-#     name: "Rum Martinez",
-#     alcohols: [],
-#     flavors: [],
-#     types: [],
-#     color: ,
-#     picture_url: "",
-#     picture_credit: "",
-#     recipe: "",
-#     recipe_url: "",
-#     additional_notes: ""
-# )= Drink.create(
+
+pina_colada= Drink.create(
+    name: "Pina Colada",
+    alcohols: [rum],
+    flavors: [sweet],
+    types: [party, casual],
+    color: white,
+    picture_url: "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2019/6/18/0/KC2109_Pina-Colada_s4x3.jpg.rend.hgtvcom.826.620.suffix/1560899439490.jpeg",
+    picture_credit: "foodnetwork.com",
+    recipe: "1/2 cup ice
+
+1/2 cup diced pineapple, frozen
+
+2 ounces pineapple juice
+
+2 ounces Coco Lopez coconut cream
+
+1 1/2 ounces white rum
+
+1 ounce dark rum
+
+Pineapple slices",
+    recipe_url: "https://www.foodnetwork.com/recipes/pina-colada-recipe0-1956362",
+    additional_notes: "The recipe for this drink is quite varied, often using light, dark, or coconut rum."
+)
+= Drink.create(
 #     name: "Rum Martinez",
 #     alcohols: [],
 #     flavors: [],

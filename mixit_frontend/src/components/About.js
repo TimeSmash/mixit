@@ -31,9 +31,9 @@ class About extends Component {
                             You can also choose to review a drink as well.
                         </p>
                         <br></br>
-                        <p>
+                        {/* <p>
                             We also have an in progress alcohol section, where you can learn more about the alcohols that make up each drink. 
-                        </p>
+                        </p> */}
                         <br></br>
                         <p>
                             We hope that by using this application, your interest in mixology will grow and you will have dozens of new alcoholic experiences ahead of you. 

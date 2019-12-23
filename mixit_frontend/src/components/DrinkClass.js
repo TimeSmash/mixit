@@ -127,6 +127,8 @@ class Drink extends Component{
         if (this.idFromLocation() !== parseInt(this.props.drinkToShow.id)){
             //If the ID from url does not match store.drinkToShow.id, then get the drink/suggestions using id in fetch
             //This part covers if someone tries to get a drink by typing in its id in url
+            // if (this.idFromLocation() === 0){}
+            
             console.log("No match, id of url drink", this.idFromLocation())
             console.log("No match, store drink", parseInt(this.props.drinkToShow.id))
             console.log("reRender fxn triggered, drink url and store no match (get drink and suggestions)")
@@ -146,6 +148,7 @@ class Drink extends Component{
                     return this.state.loading ? this.setState({loading:false}) : null
                 } else {
                     //If you're hitting this, json.status="404" or something, then it means there was a 404, so redirect to 404
+                    //Why when back is hit, id = 0?
                     return this.props.history.push(`/drinks/bad_drink`)
                 }
                 

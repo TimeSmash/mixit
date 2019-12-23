@@ -13,10 +13,12 @@
 
 #wrapper{
     margin-top:-1em;
-    height:135em;
+    min-height:135em;
+    max-height:140em;
     background-image: url('../images/DrinkClass2.jpg');
     /* background: black; */
     background-size:cover;
     overflow:hidden;
     color:white;
+    padding-bottom: 1em;
 }

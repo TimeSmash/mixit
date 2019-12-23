@@ -1017,18 +1017,23 @@ toasted_almond= Drink.create(
     recipe_url: "https://www.thedrinkkings.com/toasted-almond-recipe/",
     additional_notes: "The Toasted Almond is a great dessert cocktail. Try pairing it with light pastries."
 )
+air_mail = Drink.create(
+        name: "Air Mail",
+        alcohols: [rum, champagne],
+        flavors: [semi_sweet],
+        types: [bubbly],
+        color: yellow,
+        picture_url: "https://cdn.liquor.com/wp-content/uploads/2017/10/17112519/air_mail.png",
+        picture_credit: "liquor.com",
+        recipe: "liquor.com",
+        recipe_url: "1 1/2 ounces rum, gold (Appleton or El Dorado)
+            3/4 ounce lime juice
+            scant 3/4 ounce honey syrup (2:1, honey:water)
+            Champagne (or any dry sparkling wine)",
+        additional_notes: "The Air Mail can be made with white or gold rum."
+    )
+    
 # = Drink.create(
-#     name: "Rum Martinez",
-#     alcohols: [],
-#     flavors: [],
-#     types: [],
-#     color: ,
-#     picture_url: "",
-#     picture_credit: "",
-#     recipe: "",
-#     recipe_url: "",
-#     additional_notes: ""
-# )= Drink.create(
 #     name: "Rum Martinez",
 #     alcohols: [],
 #     flavors: [],

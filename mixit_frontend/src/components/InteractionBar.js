@@ -61,12 +61,12 @@ class InteractionBar extends Component {
         .then(json => {
             if (json.does_not_exist) {
                 //do nothing, everything should remain false
-                console.log("UserDrink for user" + localStorage.getItem("username") + "does not exist")
+                console.log("UserDrink for user " + localStorage.getItem("user") + " does not exist")
                 if (this.state.favorited !== false || this.state.made !== false || this.state.interested !== false ){
                     this.setState({favorited: false, made: false, interested: false})
                 }
             } else {
-                console.log("UserDrink for user " + localStorage.getItem("username"),json)
+                console.log("UserDrink for user " + localStorage.getItem("user"),json)
                 if (this.state.favorited !== json.favorited || this.state.made !== json.made || this.state.interested !== json.interested ){
                     this.setState({favorited: json.favorited, made: json.made, interested: json.interested})
                 } else {

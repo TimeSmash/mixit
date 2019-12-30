@@ -45,7 +45,19 @@ class About extends Component {
                         <p>
                             In this section, we will discuss the various aspects of a drink's page.
                         </p>
-                        
+                        <p>
+                            Each drink has various aspects to it. They are:
+                        </p>
+                        <ul>
+                            <li><span className="about-stat">Name</span>: The drink's name</li>
+                            <li><span className="about-stat">Alcohols</span>: The alcohols used to make the drink. Listed with the alcohol of the highest volume first. (In the event there is no prominent alcohol, a random one is listed first).</li>
+                            <li><span className="about-stat">Flavors:</span>: The flavors of the drink, to get a feel of the taste.</li>
+                            <li><span className="about-stat">Types</span>: Various qualities that relate to the drink in some way. For example, difficulty in making, whether it should be served before or after a meal, etc.</li>
+                            <li><span className="about-stat">Color</span>: The color of the drink.</li>
+                            <li><span className="about-stat"></span></li>
+                            <li><span className="about-stat"></span></li>
+                            <li><span className="about-stat"></span></li>
+                        </ul>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 <p>Proin sagittis nisl rhoncus mattictetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat s eget nunc lobortis mattis. Bibendum. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                         <br></br>

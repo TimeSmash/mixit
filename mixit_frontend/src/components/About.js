@@ -48,10 +48,10 @@ class About extends Component {
                         <p>
                             Each drink has various aspects to it. They are:
                         </p>
-                        <ul>
-                            <li><span className="about-stat">Name</span>: The drink's name</li>
+                        <ul>    
+                            <li><span className="about-stat">Name</span>: The drink's name.</li>
                             <li><span className="about-stat">Alcohols</span>: The alcohols used to make the drink. Listed with the alcohol of the highest volume first. (In the event there is no prominent alcohol, a random one is listed first).</li>
-                            <li><span className="about-stat">Flavors:</span>: The flavors of the drink, to get a feel of the taste.</li>
+                            <li><span className="about-stat">Flavors</span>: The flavors of the drink, to get a feel of the taste.</li>
                             <li><span className="about-stat">Types</span>: Various qualities that relate to the drink in some way. For example, difficulty in making, whether it should be served before or after a meal, etc.</li>
                             <li><span className="about-stat">Color</span>: The color of the drink.</li>
                             <li><span className="about-stat"></span></li>
@@ -84,7 +84,7 @@ class About extends Component {
                             </ul>
                 </div>
             </div>
-        );
+        );  
     }
 }
 

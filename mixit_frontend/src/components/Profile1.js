@@ -3,6 +3,7 @@ import {BACKEND_URL} from '../constants'
 import DrinkCard from './DrinkCard' 
 
 class Profile1 extends Component {
+    //since not giving profile editing options, consider renaming this Your Drinks or something similar
     state = { favoritedDrinks: [], madeDrinks:[], interestedDrinks:[], resolved:false }
 
     

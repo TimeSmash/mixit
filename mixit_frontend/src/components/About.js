@@ -6,15 +6,17 @@ class About extends Component {
 
     render() {
         window.scroll(0,0)
+
+        
         return (
             <div className="about">
                 <div className="about-links-container">
                     <span className="about-link-separator">■</span>
-                    <h3 className="about-link"><a href="#overview">Overview</a></h3>
+                    <h3 className="about-link"><span onClick={()=>{window.scrollTo(0,140)}}>Overview</span></h3>
                     <span className="about-link-separator">■</span>
-                    <h3 className="about-link"><a href="#explore">Exploring a Drink</a></h3>
+                    <h3 className="about-link"><span onClick={()=>{window.scrollTo(0,740)}}>Exploring a Drink</span></h3>
                     <span className="about-link-separator">■</span>
-                    <h3 className="about-link"><a href="#utilized-software">Utilized Software</a></h3>
+                    <h3 className="about-link"><span onClick={()=>{window.scrollTo(0,1440)}}>Utilized Software</span></h3>
                     <span className="about-link-separator">■</span>
                 </div>
 
@@ -34,7 +36,6 @@ class About extends Component {
                         {/* <p>
                             We also have an in progress alcohol section, where you can learn more about the alcohols that make up each drink. 
                         </p> */}
-                        <br></br>
                         <p>
                             We hope that by using this application, your interest in mixology will grow and you will have dozens of new alcoholic experiences ahead of you. 
                         </p>
@@ -43,31 +44,26 @@ class About extends Component {
                 <div id="explore" className="about-chunk" >
                     <h3>Exploring a Drink</h3>
                         <p>
-                            In this section, we will discuss the various aspects of a drink's page.
+                            Each drink has various aspects to it. They are displayed when you visit a drink's page. The chart below describes each aspect
                         </p>
-                        <p>
-                            Each drink has various aspects to it. They are:
-                        </p>
-                        <ul>    
-                            <li><span className="about-stat">Name</span>: The drink's name.</li>
-                            <li><span className="about-stat">Alcohols</span>: The alcohols used to make the drink. Listed with the alcohol of the highest volume first. (In the event there is no prominent alcohol, a random one is listed first).</li>
-                            <li><span className="about-stat">Flavors</span>: The flavors of the drink, to get a feel of the taste.</li>
-                            <li><span className="about-stat">Types</span>: Various qualities that relate to the drink in some way. For example, difficulty in making, whether it should be served before or after a meal, etc.</li>
-                            <li><span className="about-stat">Color</span>: The color of the drink.</li>
-                            <li><span className="about-stat"></span></li>
-                            <li><span className="about-stat"></span></li>
-                            <li><span className="about-stat"></span></li>
-                        </ul>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                <p>Proin sagittis nisl rhoncus mattictetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat s eget nunc lobortis mattis. Bibendum. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <div className="drink-breakdown">
+                            <h4>Breakdown of Drink Qualities</h4>
+                            <ul>    
+                                <li><span className="about-stat">Name</span>: The drink's name.</li>
+                                <li><span className="about-stat">Alcohols</span>: The alcohols used to make the drink. Listed with the alcohol of the highest volume first. (In the event there is no prominent alcohol, a random one is listed first).</li>
+                                <li><span className="about-stat">Flavors</span>: The flavors of the drink, to get a feel of the taste.</li>
+                                <li><span className="about-stat">Types</span>: Various qualities that relate to the drink in some way. For example, preparation difficulty, etc.</li>
+                                <li><span className="about-stat">Color</span>: The color of the drink.</li>
+                                <li><span className="about-stat"></span></li>
+                                <li><span className="about-stat"></span></li>
+                                <li><span className="about-stat"></span></li>
+                            </ul>
+                        </div>
+                        <p>After you've marked some drinks as favorited, made, or of interest, go to your Profile to check them out!</p>
                         <br></br>
                 </div>
                 <div id="utilized-software" className="about-chunk" >
                     <h3>Utilized Software</h3>
-                        <p>
-                            This application utilizes the following:
-                        </p>
-                        
                         <h4 className="list-header">Frontend</h4>
                             <ul className="method-list">
                                 <li><span>-</span>React</li>

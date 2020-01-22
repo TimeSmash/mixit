@@ -53,6 +53,7 @@ class Profile1 extends Component {
                 resolved: true}) : null
         })
     }
+    
     render() {
 
         console.log("prof state", this.state)

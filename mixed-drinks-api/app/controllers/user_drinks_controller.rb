@@ -280,7 +280,8 @@ end
     #     destroy_if_all_false(user_drink)
     # end
 
-    def amount_of_drinks_marked(quality)
+    # Keep track of how many times F M I
+    def amount_of_drinks_marked(quality) 
         UserDrink.all.select do |ud|
             ud[quality] === true
         end.length

@@ -1059,17 +1059,32 @@ Pineapple slices",
 )
 
 = Drink.create(
-    name: "Rum Martinez",
-    alcohols: [],
-    flavors: [],
-    types: [],
-    color: ,
-    picture_url: "",
-    picture_credit: "",
-    recipe: "",
-    recipe_url: "",
-    additional_notes: ""
-)= Drink.create(
+    name: "Pomegranate Margarita",
+    alcohols: [tequila, triple_sec],
+    flavors: [sweet, citrus],
+    types: [casual],
+    color: red,
+    picture_url: "https://www.creative-culinary.com/wp-content/uploads/pomegranate-margarita-3.jpg",
+    picture_credit: "creative-culinary.com",
+    recipe: "Lime wedge, plus more for garnish
+
+Salt
+
+Ice
+
+4 ounces white tequila
+
+2 ounces Triple Sec
+
+1/2 cup pomegranate juice
+
+1 lime, juiced (optional)
+
+Club soda",
+    recipe_url: "https://www.foodnetwork.com/recipes/danny-boome/pomegranate-margarita-recipe-1909259",
+    additional_notes: "THe best time to make this drink is September through November, when pomegranates are in season."
+)
+= Drink.create(
 #     name: "Rum Martinez",
 #     alcohols: [],
 #     flavors: [],

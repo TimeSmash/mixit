@@ -33,10 +33,12 @@ class UserDrinksController < ApplicationController
 
     def most_marked(quality)
         most_marked_drinks = []
-        drink_and_count_arr = [] #[drink=>drink_obj, count=>FMI count number]
+        drink_and_count_arr = [] #[{drink=>drink_obj, count=>FMI count number}]
         Drink.all.each do |drink|
+            # First go through all drinks
           counter = 0
           drink.user_drinks.each do |user_drink|
+            # Then go through all that drink's user_drinks
               if user_drink[quality] === true
                   counter += 1
               end
@@ -46,10 +48,11 @@ class UserDrinksController < ApplicationController
           
         end
         # return drink_and_count_arr
-      
+        # Use map to just get counts of each drink, then sort and take last three (highest counts)
         three_highest_counts = drink_and_count_arr.map{|obj| obj["count"]}.sort.slice(drink_and_count_arr.length-3,drink_and_count_arr.length-1)
         # If the three highest counts are the same, three or more drinks tied for first
         if three_highest_counts.uniq.length === 1
+            # All counts tied
             # So, set most_marked_drinks to the drinks with this count, then randomize and take 3
             most_marked_drinks = drink_and_count_arr.select do |obj| 
                 obj["count"] === three_highest_counts.uniq[0]
@@ -80,9 +83,10 @@ class UserDrinksController < ApplicationController
                     most_marked_drinks[2] = second_and_third_place[1]    
                 else 
                     # 2nd and 3rd place are different
-                    # Take 2nd place (index-1) of three_highest_count and set is as most_marked[1]
+                    # Take 2nd place (index-1) of three_highest_count 
                     # byebug
                     # most_marked_drinks[1] = three_highest_counts[1]
+                    # Could use find here instead
                     second_place = drink_and_count_arr.select do |obj|
                         obj["count"] === three_highest_counts[1] 
                     end.first
@@ -207,9 +211,11 @@ end
     end
     
     def get_drinks_from_quality(user, quality)
+        # Seearch user's drinks for particular mark (Fave,made,int)
          user.user_drinks.select do |u_drink|
             u_drink["#{quality}"] === true
         end.map do |fave_user_drink|
+            # Return array to convert UserDrink obj into Drink obj
             Drink.find(fave_user_drink.drink_id)
         end
     end

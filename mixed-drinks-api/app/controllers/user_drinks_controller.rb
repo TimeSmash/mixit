@@ -312,3 +312,46 @@ end
    
 
 end
+
+def capitalized_name(name)
+    prepositions = %w(with and or de but)
+    capital = name.split(" ").map do |word| 
+        if prepositions.include?(word)
+            word
+        else
+            word.capitalize
+        end
+    end.join(" ")
+    return capital
+end
+
+def search_for_drink_with_exact_name(name)
+    # Do NOT capitalize words like and, or, de, with, etc.
+    name_to_search_for = capitalized_name(name)
+    return Drink.find_by(name_to_search_for: name)
+    # Returns nil if nothing
+end
+
+
+def search_by_name(name)
+    name.downcase!
+    search_results = []
+    lowercase_drink_names = Drink.all.map{|d| d.name.downcase}.sort
+    names_a_thru_m = lowercase_drink_names.select{|d| d.name[0].match(/[a-m]/)}
+    names_n_thru_z = lowercase_drink_names.select{|d| d.name[0].match(/[n-z]/)} 
+    
+    # Take first letter of name, see what part of array has drinks beginning with that letter
+    # Then look thru array that has drinks beginning with that letter
+    if (names_a_thru_m.include?(name))
+        
+    elsif (names_n_thru_z.include?(name)){
+        #    something
+    } else {
+        return render json: {message: "We couldn't find anything with the name #{name}. Please try again."} 
+    }
+    if (Drink.find_by(name: name))
+       search_results[0] = Drink.find_by(name: name)
+    end
+    return search_results
+end
+

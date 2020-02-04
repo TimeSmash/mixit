@@ -268,7 +268,7 @@ sake_bomb = Drink.create(
 )
 
 lemon_drop = Drink.create(
-    name: "Lemon Drop (Lemon Drop Martini)",
+    name: "Lemon Drop",
     alcohols: [vodka, triple_sec],
     flavors: [citrus, sweet],
     types: [easy_to_make, easily_classed_up, iba_new],
@@ -1082,7 +1082,7 @@ Ice
 
 Club soda",
     recipe_url: "https://www.foodnetwork.com/recipes/danny-boome/pomegranate-margarita-recipe-1909259",
-    additional_notes: "THe best time to make this drink is September through November, when pomegranates are in season."
+    additional_notes: "The best time to make this drink is September through November, when pomegranates are in season."
 )
 = Drink.create(
 #     name: "Rum Martinez",

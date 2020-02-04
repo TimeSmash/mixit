@@ -314,7 +314,7 @@ end
 end
 
 def capitalized_name(name)
-    prepositions = %w(with and or de but)
+    prepositions = %w(with and or de but of)
     capital = name.split(" ").map do |word| 
         if prepositions.include?(word)
             word
@@ -328,13 +328,21 @@ end
 def search_for_drink_with_exact_name(name)
     # Do NOT capitalize words like and, or, de, with, etc.
     name_to_search_for = capitalized_name(name)
-    return Drink.find_by(name_to_search_for: name_to_search_for)
+    return Drink.find_by(name: name_to_search_for)
     # Returns nil if nothing
 end
 
 def drinks_containing_name(name, drink_name_arr)
     # Go thru all drink names, return the ones that have name included
-    drink_name_arr.filter{|drink_name| drink_name.include?(name)}
+    inc_drink_names = drink_name_arr.filter{|drink_name| drink_name.include?(name)}
+    # From there, capitalize the filtered list
+    drink_names_capitalized = inc_drink_names.map{|idn| capitalized_name(idn)}
+    # Then find Drinks whose names are in capitalized filtered list
+    if drink_names_capitalized.length === 0
+        return nil
+    else
+        return drink_names_capitalized.map{|dnc| Drink.find_by(name: dnc)}
+    end
 end
 
 def search_by_name(name)
@@ -344,22 +352,26 @@ def search_by_name(name)
     names_a_thru_m = lowercase_drink_names.select{|name| name.match(/^[a-m]/)}
     names_n_thru_z = lowercase_drink_names.select{|name| name.match(/^[n-z]/)} 
     
-    if(search_for_drink_with_exact_name(name))
+    if search_for_drink_with_exact_name(name)
         search_results[0] = search_for_drink_with_exact_name(name)
     end
     # Take first letter of name, see what part of array has drinks beginning with that letter
     # Then look thru array that has drinks beginning with that letter
     if name.match(/^[a-m]/)
-        # 
-    elsif (name.match(/^[n-z]/){
-        #    something
-        # See if the name is included in the string anywhere
-    } else {
-        # return render json: {message: "We couldn't find anything with the name #{name}. Please try again."} 
-    }
-    if (Drink.find_by(name: name))
-       search_results[0] = Drink.find_by(name: name)
+        # Name begins with a-m, now look at name and see if included in Drink names
+        if drinks_containing_name(name, names_a_thru_m)
+            # See if the name is included in the string anywhere, if it is get Drink objs with name put in search results
+            drinks_containing_name(name, names_a_thru_m).each{|drink_obj| search_results.push(drink_obj)}
+        end
+    elsif name.match(/^[n-z]/)
+        if drinks_containing_name(name, names_a_thru_m)
+            drinks_containing_name(name, names_n_thru_z).each{|drink_obj| search_results.push(drink_obj)}
+        end
+    else 
+        return render json: {nothing_found_message: "We couldn't find anything with the name #{name}. Please try again."} 
     end
-    return search_results
+    return search_results.compact.uniq
+end
+
 end
 

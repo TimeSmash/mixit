@@ -328,26 +328,34 @@ end
 def search_for_drink_with_exact_name(name)
     # Do NOT capitalize words like and, or, de, with, etc.
     name_to_search_for = capitalized_name(name)
-    return Drink.find_by(name_to_search_for: name)
+    return Drink.find_by(name_to_search_for: name_to_search_for)
     # Returns nil if nothing
 end
 
+def drinks_containing_name(name, drink_name_arr)
+    # Go thru all drink names, return the ones that have name included
+    drink_name_arr.filter{|drink_name| drink_name.include?(name)}
+end
 
 def search_by_name(name)
     name.downcase!
     search_results = []
     lowercase_drink_names = Drink.all.map{|d| d.name.downcase}.sort
-    names_a_thru_m = lowercase_drink_names.select{|d| d.name[0].match(/[a-m]/)}
-    names_n_thru_z = lowercase_drink_names.select{|d| d.name[0].match(/[n-z]/)} 
+    names_a_thru_m = lowercase_drink_names.select{|name| name.match(/^[a-m]/)}
+    names_n_thru_z = lowercase_drink_names.select{|name| name.match(/^[n-z]/)} 
     
+    if(search_for_drink_with_exact_name(name))
+        search_results[0] = search_for_drink_with_exact_name(name)
+    end
     # Take first letter of name, see what part of array has drinks beginning with that letter
     # Then look thru array that has drinks beginning with that letter
-    if (names_a_thru_m.include?(name))
-        
-    elsif (names_n_thru_z.include?(name)){
+    if name.match(/^[a-m]/)
+        # 
+    elsif (name.match(/^[n-z]/){
         #    something
+        # See if the name is included in the string anywhere
     } else {
-        return render json: {message: "We couldn't find anything with the name #{name}. Please try again."} 
+        # return render json: {message: "We couldn't find anything with the name #{name}. Please try again."} 
     }
     if (Drink.find_by(name: name))
        search_results[0] = Drink.find_by(name: name)
